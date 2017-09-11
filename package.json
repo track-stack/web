@@ -14,10 +14,10 @@
     "trackstack": "0.0.1"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.7.1",
-    "trackstack": "file:../framework"
+    "webpack-dev-server": "^2.7.1"
   },
   "engines": {
     "node": "8.4.0",
     "yarn": "0.27.5"
   }
+}

@@ -5063,8 +5063,9 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
-"trackstack@file:../framework":
+trackstack@0.0.1:
   version "0.0.1"
+  resolved "https://registry.yarnpkg.com/trackstack/-/trackstack-0.0.1.tgz#d3179f5a0caca01df62f156d3188e905f7262405"
 
 trim-newlines@^1.0.0:
   version "1.0.0"
