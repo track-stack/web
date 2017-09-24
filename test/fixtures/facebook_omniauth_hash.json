@@ -1,0 +1,21 @@
+{
+    "credentials": {
+        "expires": true,
+        "expires_at": 1511461155,
+        "token": "1029381209381209381209381028"
+    },
+    "extra": {
+        "raw_info": {
+            "email": "person@email.com",
+            "id": "1230489120948120938",
+            "name": "First Last"
+        }
+    },
+    "info": {
+        "email": "person@email.com",
+        "image": "http://graph.facebook.com/v2.6/0213948234/picture",
+        "name": "First Last"
+    },
+    "provider": "facebook",
+    "uid": "120938120398ll"
+}
