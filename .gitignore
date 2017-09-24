@@ -19,6 +19,7 @@
 .byebug_history
 /public/packs-test
 /public/packs
+/public/assets
 /node_modules
 .env
 .sass-cache/
