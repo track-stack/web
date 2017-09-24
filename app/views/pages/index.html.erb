@@ -1,8 +1,9 @@
 <h1>Track Stack</h1>
+
 <% if current_user %>
-  <img src="<%= current_user.image %>">
+  <img src="<%= current_user.image %>" width="100" height="100">
   <%= form_tag destroy_user_session_path, method: :delete do %>
-    <button class="btn btn-default">Log out</button>
+    <button class="btn btn-default" style="margin-top: 10px;">Log out</button>
   <% end %>
 <% else %>
   <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
