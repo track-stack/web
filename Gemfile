@@ -15,6 +15,7 @@ gem 'thin'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'foreman'
+gem 'rails_12factor'
 
 gem 'omniauth-facebook'
 gem 'devise'
