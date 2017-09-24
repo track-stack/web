@@ -16,6 +16,7 @@ gem 'webpacker'
 gem 'foreman'
 
 gem 'omniauth-facebook'
+gem 'devise'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
