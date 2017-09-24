@@ -13,12 +13,13 @@ export default class HomeView extends React.Component {
   render() {
 
     const label = this.props.thingSaid ? (
-      <p> {this.props.thingSaid} </p>) :
+      <p style={{marginTop:30}}> {this.props.thingSaid} </p>) :
       null
 
     return (
-      <div style={{marginTop: 50, marginLeft: 15}}>
+      <div style={{marginTop: 50}} className="form-group">
         <input
+          className="form-control"
           type="text"
           placeholder="Say something!"
           onChange={this.updateStuff}
