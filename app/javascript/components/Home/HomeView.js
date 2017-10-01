@@ -26,8 +26,6 @@ export default class HomeView extends React.Component {
       return <li key={info}>{info}</li>
     });
 
-    console.log(searchResults)
-
     return (
       <div>
         <div style={{marginTop: 50}} className="form-group">

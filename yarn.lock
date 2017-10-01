@@ -5063,9 +5063,9 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
-trackstack@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/trackstack/-/trackstack-0.0.4.tgz#9b1e23e66499b04c98afac62a56062f9183cc14d"
+trackstack@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/trackstack/-/trackstack-0.0.5.tgz#2607f02044cd7998ef42af8dcc890cdc625b0aa0"
   dependencies:
     redux "^3.7.2"
     redux-thunk "^2.2.0"
