@@ -4,27 +4,42 @@ export default class HomeView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {text: ""}
+    this.timer = null;
   }
 
-  updateStuff = (e) => {
-    this.props.saySomething(e.target.value)
+  queryChanged = (e) => {
+    clearTimeout(this.timer);
+
+    var query = e.target.value;
+    this.timer = setTimeout(() => {
+      this.performSearch(query)
+    }, 500)
+  }
+
+  performSearch = query => {
+    this.props.performSearch(query)
   }
 
   render() {
-
-    const label = this.props.thingSaid ? (
-      <p style={{marginTop:30}}> {this.props.thingSaid} </p>) :
-      null
+    const searchResults = this.props.searchResults.map((result, index) => {
+      const info = `${result.name} - ${result.artist}`
+      return <li key={info}>{info}</li>
+    });
 
     return (
-      <div style={{marginTop: 50}} className="form-group">
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Say something!"
-          onChange={this.updateStuff}
-        />
-      {label}
+      <div>
+        <div style={{marginTop: 50}} className="form-group">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Say something!"
+            onChange={this.queryChanged}
+          />
+        </div>
+
+        <ul>
+          {searchResults}
+        </ul>
       </div>
     )
   }

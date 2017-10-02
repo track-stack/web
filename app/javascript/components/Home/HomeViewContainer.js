@@ -3,18 +3,18 @@ import { connect, Provider } from 'react-redux';
 import HomeView from './HomeView';
 import { actions } from 'trackstack';
 
-const { saySomething } = actions;
+const { performSearch } = actions;
 
 const mapStateToProps = (state) => {
   return {
-    thingSaid: state.thingSaid,
+    searchResults: state.searchResults,
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saySomething: (text) => {
-      dispatch(saySomething(text));
+    performSearch: (text) => {
+      dispatch(performSearch(text));
     }
   }
 }

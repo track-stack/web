@@ -13,9 +13,13 @@ gem "sass-rails", "~> 5.0"
 gem "bootstrap-sass"
 gem "thin"
 gem "uglifier", ">= 1.3.0"
-gem "webpacker"
-gem "foreman"
 gem "rails_12factor"
+
+# https://github.com/rails/webpacker
+gem "webpacker"
+
+# https://github.com/ddollar/foreman
+gem "foreman"
 
 gem "omniauth-facebook"
 gem "devise"
