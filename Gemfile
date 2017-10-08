@@ -55,4 +55,7 @@ group :development do
   gem "guard"
   gem "guard-livereload"
   gem "guard-minitest"
+  gem "faraday"
+  gem "dotenv"
+  gem "colorize"
 end
