@@ -10,7 +10,6 @@ const ConnectedComponent = connect(
 
 export default class AppViewContainer extends Component {
   render() {
-    console.log('AppViewContainer: rendering...');
     return (
       <Provider store={store}>
         <ConnectedComponent />

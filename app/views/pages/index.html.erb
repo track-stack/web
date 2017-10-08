@@ -2,12 +2,17 @@
 
 <% if current_user %>
   <img src="<%= current_user.image %>" width="50" height="50" style="display: block;">
-  <button class="btn btn-primary" style="margin-top: 10px;">New Game</button>
+  <a href=<%= new_game_path %> class="btn btn-primary" style="margin-top: 10px;">New Game</a>
   <%= form_tag destroy_user_session_path, method: :delete do %>
     <button class="btn btn-default" style="margin-top: 10px;">Log out</button>
   <% end %>
+
 <% else %>
   <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+    or
+  <% if Rails.env.development? %>
+    <a href="https://developers.facebook.com/checkpoint/test-user-login/101441640615588/">Log in as test user</a>
+  <% end %>
 <% end %>
 
 <div id="root"></div>

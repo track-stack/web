@@ -32,7 +32,7 @@ export default class HomeView extends React.Component {
           <input
             className="form-control"
             type="text"
-            placeholder="Say something!"
+            placeholder="Find friends"
             onChange={this.queryChanged}
           />
         </div>
