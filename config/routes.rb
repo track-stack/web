@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   root to: "pages#index"
 
   resources "games", only: [:new, :show, :create]
+
+  get "/friends", to: "friends#list"
 end
