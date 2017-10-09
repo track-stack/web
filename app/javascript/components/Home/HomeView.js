@@ -27,11 +27,15 @@ export default class HomeView extends React.Component {
 
   render() {
     const friends = this.state.friends.map((friend, idx) => {
-      return (<li key={idx}>{friend.name}</li>)
+      return (
+        <li key={idx}>
+        <img src={friend.picture.data.url} width="30" height="30" />
+        {friend.name}</li>
+    )
     })
 
     return (
-      <div>
+      <div className="friends-list">
         <div style={{marginTop: 30}}>
           <input
             className="form-control"
@@ -40,7 +44,7 @@ export default class HomeView extends React.Component {
             onChange={this.queryChanged}
           />
         </div>
-        <ul>
+        <ul className="list-unstyled">
           {friends}
         </ul>
       </div>

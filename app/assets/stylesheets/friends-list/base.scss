@@ -1,0 +1,18 @@
+.friends-list {
+  ul {
+    background: #f4f4f4;
+
+    li {
+      padding: 15px;
+      font-size: 13px;
+
+      &:hover {
+        background: #f9f9f9;
+      }
+
+      img {
+        margin-right: 15px;
+      }
+    }
+  }
+}
