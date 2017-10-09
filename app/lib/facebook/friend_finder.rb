@@ -1,12 +1,12 @@
 module Facebook
-  class FriendFinder
-    def self.all_for(user:)
+  module FriendFinder
+    def all_friends_for(user:)
       find_friends(user)
     end
 
     private
 
-    def self.find_friends(user)
+    def find_friends(user)
       users = []
 
       find_friends = lambda do |url|
@@ -24,15 +24,15 @@ module Facebook
       users.flatten
     end
 
-    def self.app_id
+    def app_id
       ENV["FACEBOOK_APP_ID"]
     end
 
-    def self.app_access_token
+    def app_access_token
       ENV["FACEBOOK_APP_ACCESS_TOKEN"]
     end
 
-    def self.fetch_friends_url(user)
+    def fetch_friends_url(user)
       "https://graph.facebook.com/v2.10/#{user.uid}/friends?fields=id,name,picture{url}&access_token=#{user.oauth_token}"
     end
   end
