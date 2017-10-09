@@ -6,13 +6,12 @@
   <%= form_tag destroy_user_session_path, method: :delete do %>
     <button class="btn btn-default" style="margin-top: 10px;">Log out</button>
   <% end %>
-
+  <div id="root"></div>
 <% else %>
   <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-    or
   <% if Rails.env.development? %>
+    or
     <a href="https://developers.facebook.com/checkpoint/test-user-login/101441640615588/">Log in as test user</a>
   <% end %>
 <% end %>
 
-<div id="root"></div>

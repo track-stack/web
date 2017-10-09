@@ -15,7 +15,7 @@ module Facebook
 
         users << json["data"]
 
-        find_friends.call(json["paging"]["next"]) if json["paging"]["next"]
+        find_friends.call(json["paging"]["next"]) if json["paging"] && json["paging"]["next"]
       end
 
       first_page_url = fetch_friends_url(user)
