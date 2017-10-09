@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import HomeView from './HomeView';
 import { actions } from 'trackstack';
 
-const { performSearch } = actions;
+const { fetchFriends } = actions;
 
 const mapStateToProps = (state) => {
   return {
-    searchResults: state.searchResults,
+    friends: state.main.friends
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    performSearch: (text) => {
-      dispatch(performSearch(text));
+    fetchFriends: () => {
+      dispatch(fetchFriends());
     }
   }
 }
