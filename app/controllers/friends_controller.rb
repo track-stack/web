@@ -1,5 +1,3 @@
-require "faraday"
-
 class FriendsController < ApplicationController
   include ::Facebook::FriendFinder
 

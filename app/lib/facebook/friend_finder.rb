@@ -1,3 +1,5 @@
+require "faraday"
+
 module Facebook
   module FriendFinder
     def all_friends_for(user:)
