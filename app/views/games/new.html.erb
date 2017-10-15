@@ -1,3 +1,7 @@
-new game!
+<h1>New game!</h1>
 
-<div id="find-friends"></div>
+<div id="root"></div>
+
+<% content_for :javascripts do %>
+  <%= javascript_pack_tag 'games/new' %>
+<% end %>
