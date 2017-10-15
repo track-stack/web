@@ -15,15 +15,16 @@ module Facebook
         response = Faraday.get url
         json = JSON.parse(response.body)
 
-        users << json["data"]
+        users.concat(json["data"])
 
-        find_friends.call(json["paging"]["next"]) if json["paging"] && json["paging"]["next"]
+        has_next_page = json["paging"] && json["paging"]["next"]
+        find_friends.call(json["paging"]["next"]) if has_next_page
       end
 
       first_page_url = fetch_friends_url(user)
       find_friends.call(first_page_url)
 
-      users.flatten
+      users
     end
 
     def app_id
