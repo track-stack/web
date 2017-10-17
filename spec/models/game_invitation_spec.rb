@@ -9,6 +9,10 @@ RSpec.describe GameInvitation, type: :model do
     @accepted_invitation = create(:game_invitation, :accepted, inviter_id: user.id, invitee_id: user_2.id)
   end
 
+  after(:all) do
+    GameInvitation.destroy_all
+  end
+
   context "scope" do
     it "returns only pending invitations" do
       pending_invitations = GameInvitation.pending
@@ -29,9 +33,9 @@ RSpec.describe GameInvitation, type: :model do
 
   context "#accept" do
     it "accepts an invitation" do
-      expect(@pending_invitation.status).to eq("pending")
+      expect(@pending_invitation.status).to eq(0)
       @pending_invitation.accept
-      expect(@pending_invitation.status).to eq("accepted")
+      expect(@pending_invitation.status).to eq(1)
     end
   end
 end

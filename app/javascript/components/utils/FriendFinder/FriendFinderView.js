@@ -29,8 +29,9 @@ export default class FriendFinderView extends React.Component {
     const friends = this.state.friends.map((friend, idx) => {
       return (
         <li key={idx}>
-        <img src={friend.picture.data.url} width="30" height="30" />
-        {friend.name}</li>
+          <img src={friend.picture.data.url} width="30" height="30" />
+          {friend.name}
+        </li>
     )
     })
 
