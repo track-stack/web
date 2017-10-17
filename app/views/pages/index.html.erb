@@ -1,3 +1,5 @@
+<% # view = Pages::IndexView %>
+
 <h1>Track Stack</h1>
 
 <% if current_user %>
@@ -6,6 +8,35 @@
   <%= form_tag destroy_user_session_path, method: :delete do %>
     <button class="btn btn-default" style="margin-top: 10px;">Log out</button>
   <% end %>
+
+  <hr>
+
+  <h4>Pending game invitations</h4>
+
+  <p><strong>Sent:</strong></p>
+  <div class="friends_list">
+    <ul class="list-unstyled">
+      <% view.sent_game_invitations.each do |invitation| %>
+        <li>
+          <img src=<%= invitation.image %> width="30" height="30" />
+          <%= invitation.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <p><strong>Received:</strong></p>
+  <div class="friends_list">
+    <ul class="list-unstyled">
+      <% view.received_game_invitations.each do |invitation| %>
+        <li>
+          <img src=<%= invitation.image %> width="30" height="30" />
+          <%= invitation.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
 <% else %>
   <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
   <% if Rails.env.development? %>
