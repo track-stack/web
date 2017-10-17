@@ -3,6 +3,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
+
+  def game_invitations(status = nil)
+    case status
+    when :received
+      GameInvitation.where("invitee_id = ?", id)
+    when :sent
+      GameInvitation.where("inviter_id = ?", id)
+    else
+      GameInvitation.where("inviter_id = ? or invitee_id = ?", id, id)
+    end
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email || random_email
