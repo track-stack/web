@@ -15,6 +15,8 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require_relative "./auth_helper"
+require_relative "./facebook_api_helper"
+require 'support/factory_girl'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -32,6 +34,7 @@ RSpec.configure do |config|
   end
 
   config.include AuthHelper
+  config.include FacebookApiHelper
 
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.

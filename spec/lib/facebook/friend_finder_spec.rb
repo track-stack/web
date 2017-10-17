@@ -4,9 +4,11 @@ RSpec.describe Facebook::FriendFinder do
   include Facebook::FriendFinder
 
   it "does a thing" do
-    user = User.create
+    user = create(:user, :facebook)
 
-    allow_any_instance_of(Facebook::FriendFinder).to receive(:all_friends_for).and_return([])
-    expect(all_friends_for(user)).to equal([])
+    expected_json = fb_api_json(:friends)
+    allow_any_instance_of(Facebook::FriendFinder).to receive(:fetch_friends).and_return(expected_json)
+
+    expect(all_friends_for(user).count).to equal(9)
   end
 end

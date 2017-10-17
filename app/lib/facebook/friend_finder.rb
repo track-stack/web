@@ -12,8 +12,7 @@ module Facebook
       users = []
 
       find_friends = lambda do |url|
-        response = Faraday.get url
-        json = JSON.parse(response.body)
+        json = fetch_friends(url)
 
         users.concat(json["data"]) if json["data"]
 
@@ -25,6 +24,11 @@ module Facebook
       find_friends.call(first_page_url)
 
       users
+    end
+
+    def fetch_friends(url)
+      response = Faraday.get url
+      JSON.parse(response.body)
     end
 
     def app_id
