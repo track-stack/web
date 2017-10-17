@@ -16,6 +16,7 @@ gem "uglifier", ">= 1.3.0"
 gem "rails_12factor"
 
 # https://github.com/rails/webpacker
+# https://github.com/rails/webpacker/issues/745
 gem "webpacker", github: 'rails/webpacker'
 
 # https://github.com/ddollar/foreman
