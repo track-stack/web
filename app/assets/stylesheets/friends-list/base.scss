@@ -15,4 +15,8 @@
       }
     }
   }
+
+  &.selectable {
+    cursor: pointer;
+  }
 }
