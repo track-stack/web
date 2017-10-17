@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :user do
-    email "email@example.god"
+    sequence(:email) { |n| "email_#{n}@example.god" }
     password "password"
   end
 
   trait :facebook do
-    uid "10210079980532082"
-    oauth_token "EAABz2celF1wBAADMBTpQNNWjTJcY5ceZC2TNTx9T1feMQzp6QxPKJZAf60BAirHhVZAKu4c4SUpGADVxxD29Lm7fIyujgq5B96uSp8alQZCfD4yZCO1rdViclCZBwbh1bzO7kcbG4wcAruKC915WNf9YZC1FbcZC56Xkwx1EDctl7ZA1NJvUPwII5"
+    uid "101441640615588"
+    oauth_token "EAABz2celF1wBAAnS5EcWtMZCZB84HjklyfEoshS7d1WGWZBqzcNuG3e0jGZAZAOWrc2HkDzPS0SXWMfCI4ChZBwdc0qK34HUIJszZCyQjd4grnayKkLl333ZB8JQmjAoBCFEZC150ffpI93DDyiSFXo9wadABZCr0KyGBWldna2XeVylZBlvCH0bSpz"
   end
 end
