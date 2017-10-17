@@ -1,9 +1,0 @@
-example_id                                                            | status | run_time        |
---------------------------------------------------------------------- | ------ | --------------- |
-./spec/controllers/friends_controller_spec.rb[1:1]                    | passed | 0.02357 seconds |
-./spec/controllers/friends_controller_spec.rb[1:2]                    | passed | 0.04913 seconds |
-./spec/controllers/users/omniauth_callbacks_controller_spec.rb[1:1:1] | passed | 0.00902 seconds |
-./spec/controllers/users/omniauth_callbacks_controller_spec.rb[1:1:2] | passed | 0.00983 seconds |
-./spec/controllers/users/omniauth_callbacks_controller_spec.rb[1:2:1] | passed | 0.01996 seconds |
-./spec/lib/facebook/friend_finder_spec.rb[1:1]                        | passed | 0.00652 seconds |
-./spec/models/user_spec.rb[1:1]                                       | passed | 0.00624 seconds |
