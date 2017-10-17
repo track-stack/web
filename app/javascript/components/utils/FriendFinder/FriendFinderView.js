@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class HomeView extends React.Component {
+export default class FriendFinderView extends React.Component {
   constructor(props) {
     super(props)
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HomeView from './HomeView';
 import { actions } from 'trackstack';
+import FriendFinderView from './FriendFinderView';
 
 const { fetchFriends } = actions;
 
@@ -22,13 +22,12 @@ const mapDispatchToProps = (dispatch) => {
 const ConnectedComponent = connect(
   mapStateToProps,
   mapDispatchToProps
-)(HomeView)
+)(FriendFinderView)
 
-export default class HomeViewContainer extends React.Component {
+export default class FriendFinderViewContainer extends React.Component {
   render() {
     return (
       <ConnectedComponent />
     )
   }
 }
-

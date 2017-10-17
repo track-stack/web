@@ -16,7 +16,8 @@ gem "uglifier", ">= 1.3.0"
 gem "rails_12factor"
 
 # https://github.com/rails/webpacker
-gem "webpacker"
+# https://github.com/rails/webpacker/issues/745
+gem "webpacker", github: 'rails/webpacker'
 
 # https://github.com/ddollar/foreman
 gem "foreman"
@@ -33,7 +34,6 @@ gem "jbuilder", "~> 2.5"
 # gem "bcrypt", "~> 3.1.7"
 
 group :test do
-  gem "pry"
   gem "ruby-prof"
 end
 
@@ -41,7 +41,11 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara", "~> 2.13"
   gem "selenium-webdriver"
+  gem "pry"
   gem "rspec-rails"
+  gem "guard-rspec"
+  gem "factory_girl_rails"
+  gem "vcr"
 end
 
 group :development do
@@ -56,4 +60,7 @@ group :development do
   gem "guard"
   gem "guard-livereload"
   gem "guard-minitest"
+  gem "faraday"
+  gem "dotenv"
+  gem "colorize"
 end

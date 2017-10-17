@@ -23,3 +23,5 @@
 /node_modules
 .env
 .sass-cache/
+/spec/casettes
+/spec/examples.txt

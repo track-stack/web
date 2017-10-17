@@ -1,3 +1,3 @@
 /* eslint no-console:0 */
 
-import 'app'
+import 'games/new'

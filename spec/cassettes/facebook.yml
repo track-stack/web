@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/v2.10/101441640615588/friends?access_token=EAABz2celF1wBAAnS5EcWtMZCZB84HjklyfEoshS7d1WGWZBqzcNuG3e0jGZAZAOWrc2HkDzPS0SXWMfCI4ChZBwdc0qK34HUIJszZCyQjd4grnayKkLl333ZB8JQmjAoBCFEZC150ffpI93DDyiSFXo9wadABZCr0KyGBWldna2XeVylZBlvCH0bSpz&fields=id%2Cname%2Cpicture%7Burl%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      access-control-allow-origin:
+      - "*"
+      etag:
+      - '"f3472a253c84fc5dd1f8b60348b63d55b165dc54"'
+      pragma:
+      - no-cache
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      x-fb-rev:
+      - '3376047'
+      content-type:
+      - application/json; charset=UTF-8
+      x-fb-trace-id:
+      - EVNPgT7o/6y
+      facebook-api-version:
+      - v2.10
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      vary:
+      - Accept-Encoding
+      x-fb-debug:
+      - gxFcgjD+fStGxBR8ZO8SR7Gm90sOspqoNaGN6aufMOb2O/vSCdfUJ9N8Mmlfzqu/hSNTzScCcCig6fpinBV16w==
+      date:
+      - Tue, 17 Oct 2017 05:39:52 GMT
+      connection:
+      - close
+      content-length:
+      - '813'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":"111138632976305","name":"Will Albbdjejfdjgf Wongberg","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=0498220bfacef58fe04df5f5c3bf0379&oe=5A75492F"}}},{"id":"110605719696288","name":"Sandra
+        Albbdjehachbi Wisemanescu","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=b5a77c94ba1b6c649a3b051e9db58d61&oe=5A681333"}}},{"id":"111221322968083","name":"Dave
+        Albbdjfdgcihb Romansen","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=0498220bfacef58fe04df5f5c3bf0379&oe=5A75492F"}}},{"id":"108014719956137","name":"Lisa
+        Albbdbhbhjfda Bowersman","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=b5a77c94ba1b6c649a3b051e9db58d61&oe=5A681333"}}},{"id":"108014839956125","name":"Patricia
+        Albbdbhbhjfdb Warmanstein","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=b5a77c94ba1b6c649a3b051e9db58d61&oe=5A681333"}}},{"id":"104538683638117","name":"Will
+        Albbdeieffegh Valtchanovson","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=0498220bfacef58fe04df5f5c3bf0379&oe=5A75492F"}}},{"id":"103707917054888","name":"James
+        Albbdgjciedij Greenewitz","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=0498220bfacef58fe04df5f5c3bf0379&oe=5A75492F"}}},{"id":"102627760496628","name":"Lisa
+        Albbdhbabcigb Seligsteinman","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=b5a77c94ba1b6c649a3b051e9db58d61&oe=5A681333"}}},{"id":"101091773984014","name":"Tom
+        Albbdiegdaibd Sadansky","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=0498220bfacef58fe04df5f5c3bf0379&oe=5A75492F"}}}],"paging":{"cursors":{"before":"QVFIUmJXTnN6T1p2UmhhWjkzWGZAwVHNMeENxMlI3ZAkl6cTZAMdUxXUHkydzF1bV9qR3lOeG8yV254MDFydmpyQnMzcHVGRHVyZA04zNi1sVXVuMFZAiM29WNDJ3","after":"QVFIUnVtcHhhelJaUF9la25VTXZAtVHlWTnJmWkZA2NmR6aGV1T214UDJOZA0VhQXdtTnRjMXJUVVljb1JxbWllQUdaUnJCS0ZAWQ1FLNWstTzFQcGJ6WVdQQ3dB"}},"summary":{"total_count":9}}'
+    http_version: 
+  recorded_at: Tue, 17 Oct 2017 05:39:52 GMT
+recorded_with: VCR 3.0.3
