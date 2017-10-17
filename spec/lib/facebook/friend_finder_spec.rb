@@ -5,10 +5,10 @@ RSpec.describe Facebook::FriendFinder do
 
   it "does a thing" do
     user = create(:user, :facebook)
+    url = send(:fetch_friends_url, user)
 
-    expected_json = fb_api_json(:friends)
-    allow_any_instance_of(Facebook::FriendFinder).to receive(:fetch_friends).and_return(expected_json)
-
-    expect(all_friends_for(user).count).to equal(9)
+    VCR.use_cassette("facebook") do
+      reponse = fetch_friends(url)
+    end
   end
 end

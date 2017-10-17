@@ -42,6 +42,7 @@ group :development, :test do
   gem "selenium-webdriver"
   gem "pry"
   gem "rspec-rails"
+  gem "guard-rspec"
   gem "factory_girl_rails"
   gem "vcr"
 end
