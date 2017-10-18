@@ -10,7 +10,7 @@ module Pages
 
       @sent_game_invites ||= begin
         invitations = user
-          .game_invites
+          .game_invites(:sent)
           .pending
           .joins("INNER JOIN users ON users.id = game_invites.invitee_id")
           .select("users.name, users.image, game_invites.id, game_invites.inviter_id, game_invites.invitee_id")
@@ -23,7 +23,7 @@ module Pages
 
       @received_game_invites ||= begin
         invitations = user
-          .game_invites
+          .game_invites(:received)
           .pending
           .joins("INNER JOIN users ON users.id = game_invites.inviter_id")
           .select("users.name, users.image, game_invites.id, game_invites.inviter_id, game_invites.invitee_id")
