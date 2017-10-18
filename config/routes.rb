@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources "games", only: [:new]
 
   get "/friends", to: "friends#list"
+
+  post "/game_invite", to: "game_invites#create"
 end
