@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe GameInvitation, type: :model do
 
-  before(:each) do
+  before(:all) do
     user = create(:user)
     user_2 = create(:user)
     @pending_invitation = create(:game_invitation, :pending, inviter_id: user.id, invitee_id: user_2.id)
