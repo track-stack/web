@@ -3,6 +3,6 @@ class GameInvite < ApplicationRecord
   scope :accepted, -> { where(status: 1) }
 
   def accept!
-    update_attribute!(:status, 1)
+    update_attributes!(status: 1)
   end
 end

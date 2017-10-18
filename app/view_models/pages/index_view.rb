@@ -13,7 +13,6 @@ module Pages
           .game_invites
           .pending
           .joins("INNER JOIN users ON users.id = game_invites.invitee_id")
-          .where("game_invites.status = 0")
           .select("users.name, users.image, game_invites.id, game_invites.inviter_id, game_invites.invitee_id")
         invitations.select { |invitation| invitation.inviter_id == user.id }
       end
