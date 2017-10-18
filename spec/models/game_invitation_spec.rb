@@ -9,10 +9,6 @@ RSpec.describe GameInvitation, type: :model do
     @accepted_invitation = create(:game_invitation, :accepted, inviter_id: user.id, invitee_id: user_2.id)
   end
 
-  after(:all) do
-    GameInvitation.destroy_all
-  end
-
   context "scope" do
     it "returns only pending invitations" do
       pending_invitations = GameInvitation.pending

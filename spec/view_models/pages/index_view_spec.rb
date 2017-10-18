@@ -8,10 +8,6 @@ RSpec.describe Pages::IndexView, type: :view_model do
     @received_invitation = create(:game_invitation, inviter_id: @user_2.id, invitee_id: @user_1.id)
   end
 
-  after(:all) do
-    GameInvitation.destroy_all
-  end
-
   context "#sent_game_invitations" do
     it "returns pending game invitations sent from the viewer" do
       view_model = Pages::IndexView.new(user: @user_1)
