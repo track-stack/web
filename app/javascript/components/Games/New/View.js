@@ -13,10 +13,9 @@ export default class View extends React.Component {
 
     const invitee = this.props.invitee ? (
       <div className="invite-list">
-        <h4 style={{marginTop: 0}}>Send invitation</h4>
         <div>
-          <img src={this.props.invitee.picture.data.url} width="30" height="30" />
-          <span>{this.props.invitee.name}</span>
+          <img src={this.props.invitee.picture.data.url} />
+          <p>{this.props.invitee.name}</p>
         </div>
         <form action="/game_invite" method="post">
           <div style={{margin: 0, padding: 0, display: "none"}}>
@@ -24,7 +23,7 @@ export default class View extends React.Component {
             <input type="hidden" value="post" name="_method" />
           </div>
           <input name="uid" value={this.props.invitee.id} type="hidden" />
-          <input type="submit" className="btn btn-success" value="Send" />
+          <input type="submit" className="btn btn-success" value="Invite" />
         </form>
       </div>
     ) : null;

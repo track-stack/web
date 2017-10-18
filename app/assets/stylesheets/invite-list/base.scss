@@ -1,15 +1,16 @@
 .invite-list {
-  padding: 15px;
+  padding: 50px 15px;
   border: 1px solid #eee;
+  text-align: center;
   border-radius: 3px;
 
   img {
     display: inline-block;
-    margin-right: 15px;
+    margin-bottom: 10px;
   }
 
   input[type="submit"] {
-    margin-top: 30px;
+    margin-top: 10px;
   }
 }
 
