@@ -4,14 +4,14 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
 
-  def game_invitations(status = nil)
+  def game_invites(status = nil)
     case status
     when :received
-      GameInvitation.where("invitee_id = ?", id)
+      GameInvite.where("invitee_id = ?", id)
     when :sent
-      GameInvitation.where("inviter_id = ?", id)
+      GameInvite.where("inviter_id = ?", id)
     else
-      GameInvitation.where("inviter_id = ? or invitee_id = ?", id, id)
+      GameInvite.where("inviter_id = ? or invitee_id = ?", id, id)
     end
   end
 

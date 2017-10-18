@@ -14,11 +14,11 @@
 
   <h4>Pending invitations:</h4>
 
-  <% if view.sent_game_invitations.any? %>
+  <% if view.sent_game_invites.any? %>
     <p><strong>Sent:</strong></p>
     <div class="friends-list">
       <ul class="list-unstyled">
-        <% view.sent_game_invitations.each do |invitation| %>
+        <% view.sent_game_invites.each do |invitation| %>
           <li>
             <img src=<%= invitation.image %> width="30" height="30" />
             <%= invitation.name %>
@@ -28,11 +28,11 @@
     </div>
   <% end %>
 
-  <% if view.received_game_invitations.any? %>
+  <% if view.received_game_invites.any? %>
     <p><strong>Received:</strong></p>
     <div class="friends-list">
       <ul class="list-unstyled">
-        <% view.received_game_invitations.each do |invitation| %>
+        <% view.received_game_invites.each do |invitation| %>
           <li>
             <img src=<%= invitation.image %> width="30" height="30" />
             <span><%= invitation.name %></span>

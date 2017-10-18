@@ -1,4 +1,4 @@
-class GameInvitation < ApplicationRecord
+class GameInvite < ApplicationRecord
   scope :pending, -> { where(status: 0) }
   scope :accepted, -> { where(status: 1) }
 

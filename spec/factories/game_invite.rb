@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :game_invitation do
+  factory :game_invite do
     inviter_id 1
     invitee_id 1
     status 1
