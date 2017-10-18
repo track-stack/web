@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get "/friends", to: "friends#list"
 
   post "/game_invite", to: "game_invites#create"
+  put "/game_invite/accept", to: "game_invites#accept"
 end

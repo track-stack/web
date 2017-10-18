@@ -35,7 +35,7 @@ RSpec.describe GameInvite, type: :model do
   context "#accept" do
     it "accepts an invitation" do
       expect(@pending_invitation.status).to eq(0)
-      @pending_invitation.accept
+      @pending_invitation.accept!
       expect(@pending_invitation.status).to eq(1)
     end
   end

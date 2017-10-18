@@ -30,4 +30,42 @@ RSpec.describe GameInvitesController, type: :controller do
       expect(response).to redirect_to("/")
     end
   end
+
+  context "#accept" do
+    it "it redirect to root if there's no invite" do
+      user = create(:user, :facebook)
+
+      sign_in user
+      put "accept", { params: { game_invite_id: 1 }}
+
+      expect(flash[:error]).to eq("We couldn't find the invite")
+      expect(response).to redirect_to("/")
+    end
+
+    it "it redirects to root if someone else tries to accept an invite" do
+      user = create(:user, :facebook)
+      user_2 = create(:user, :facebook)
+      invite = create(:game_invite, :pending, inviter_id: user.id, invitee_id: user_2.id)
+
+      sign_in user
+      put "accept", { params: { game_invite_id: invite.id }}
+
+
+      expect(flash[:error]).to eq("You can't accept someone else's invite")
+      expect(response).to redirect_to("/")
+    end
+
+     it "accepts the invitation" do
+      user = create(:user, :facebook)
+      user_2 = create(:user, :facebook)
+      invite = create(:game_invite, :pending, inviter_id: user.id, invitee_id: user_2.id)
+
+      sign_in user_2
+      put "accept", { params: { game_invite_id: invite.id }}
+
+      expect(flash[:error]).to be_nil
+      expect(invite.reload.status).to eq(1)
+      expect(response).to redirect_to("/")
+     end
+  end
 end
