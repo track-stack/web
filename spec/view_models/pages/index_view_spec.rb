@@ -4,8 +4,8 @@ RSpec.describe Pages::IndexView, type: :view_model do
   before(:each) do
     @user_1 = create(:user)
     @user_2 = create(:user)
-    @sent_invitation = create(:game_invite, inviter_id: @user_1.id, invitee_id: @user_2.id)
-    @received_invitation = create(:game_invite, inviter_id: @user_2.id, invitee_id: @user_1.id)
+    @sent_invitation = create(:game_invite, :pending, inviter_id: @user_1.id, invitee_id: @user_2.id)
+    @received_invitation = create(:game_invite, :pending, inviter_id: @user_2.id, invitee_id: @user_1.id)
   end
 
   context "#sent_game_invites" do

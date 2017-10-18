@@ -18,10 +18,10 @@
     <p><strong>Sent:</strong></p>
     <div class="friends-list">
       <ul class="list-unstyled">
-        <% view.sent_game_invites.each do |invitation| %>
+        <% view.sent_game_invites.each do |invite| %>
           <li>
-            <img src=<%= invitation.image %> width="30" height="30" />
-            <%= invitation.name %>
+            <img src=<%= invite.image %> width="30" height="30" />
+            <%= invite.name %>
           </li>
         <% end %>
       </ul>
@@ -32,11 +32,20 @@
     <p><strong>Received:</strong></p>
     <div class="friends-list">
       <ul class="list-unstyled">
-        <% view.received_game_invites.each do |invitation| %>
+        <% view.received_game_invites.each do |invite| %>
           <li>
-            <img src=<%= invitation.image %> width="30" height="30" />
-            <span><%= invitation.name %></span>
-            <button class="btn btn-success float-right">Accept</button>
+            <img src=<%= invite.image %> width="30" height="30" />
+            <span><%= invite.name %></span>
+            <form action="<%= game_invite_accept_path %>" method="post" class="float-right">
+              <div style="margin:0;padding:0;display:none">
+
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <input type="hidden" name="_method" value="put" />
+              </div>
+              <input type="hidden" value="<%= invite.id %>" name="game_invite_id" />
+
+              <input type="submit" class="btn btn-success float-right" value="Accept" />
+            </form>
           </li>
         <% end %>
       </ul>

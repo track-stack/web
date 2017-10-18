@@ -12,7 +12,31 @@ class GameInvitesController < ApplicationController
     end
   end
 
+  def accept
+    unless invite
+      flash[:error] = "The invitation couldn't be found"
+      return redirect_to "/"
+    end
+
+    unless invite.invitee_id == current_user.id
+      flash[:error] = "You can't accept someone else's invite"
+      return redirect_to "/"
+    end
+
+    begin
+      invite.accept!
+      redirect_to "/"
+    rescue
+      flash[:error] = "We weren't able to accept this invite"
+      redirect_to "/"
+    end
+  end
+
   private
+
+  def invite
+    GameInvite.find_by(id: params[:game_invite_id])
+  end
 
   def invitee
     User.find_by(uid: params[:uid])
