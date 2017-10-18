@@ -14,7 +14,7 @@ class GameInvitesController < ApplicationController
 
   def accept
     unless invite
-      flash[:error] = "We couldn't find the invite"
+      flash[:error] = "The invitation couldn't be found"
       return redirect_to "/"
     end
 

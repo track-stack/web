@@ -38,7 +38,7 @@ RSpec.describe GameInvitesController, type: :controller do
       sign_in user
       put "accept", { params: { game_invite_id: 1 }}
 
-      expect(flash[:error]).to eq("We couldn't find the invite")
+      expect(flash[:error]).to eq("The invitation couldn't be found")
       expect(response).to redirect_to("/")
     end
 
