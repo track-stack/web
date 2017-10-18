@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { actions } from 'trackstack';
 import FriendFinderView from './FriendFinderView';
 
-const { fetchFriends } = actions;
+const { fetchFriends, selectGameInvitee } = actions;
 
 const mapStateToProps = (state) => {
   return {
@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchFriends: () => {
       dispatch(fetchFriends());
+    },
+    handleFriendSelected: (friend) => {
+      dispatch(selectGameInvitee(friend))
     }
   }
 }

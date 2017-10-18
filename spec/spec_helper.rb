@@ -26,7 +26,10 @@ RSpec.configure do |config|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
 
+  config.use_transactional_fixtures = true
+
   config.include AuthHelper
+  config.include Devise::Test::ControllerHelpers, :type => :controller
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true

@@ -4,7 +4,7 @@ RSpec.describe Facebook::FriendFinder do
   include Facebook::FriendFinder
 
   it "returns the expected format" do
-    user = build(:user, :facebook)
+    user = build(:user, :facebook, :real)
 
     VCR.use_cassette("facebook") do
       users = find_friends(user)

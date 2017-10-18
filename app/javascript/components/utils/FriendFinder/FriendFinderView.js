@@ -25,26 +25,28 @@ export default class FriendFinderView extends React.Component {
     this.setState({ friends: friends })
   }
 
+  handleClick(friend) {
+    this.props.handleFriendSelected(friend)
+  }
+
   render() {
     const friends = this.state.friends.map((friend, idx) => {
       return (
-        <li key={idx}>
+        <li key={idx} onClick={ () => { this.handleClick(friend) }}>
           <img src={friend.picture.data.url} width="30" height="30" />
           {friend.name}
         </li>
-    )
+      )
     })
 
     return (
-      <div className="friends-list">
-        <div style={{marginTop: 30}}>
-          <input
-            className="form-control"
-            type="text"
-            placeholder="Find friends"
-            onChange={this.queryChanged}
-          />
-        </div>
+      <div className="friends-list selectable">
+        <input
+          className="form-control"
+          type="text"
+          placeholder="Find friends"
+          onChange={this.queryChanged}
+        />
         <ul className="list-unstyled">
           {friends}
         </ul>

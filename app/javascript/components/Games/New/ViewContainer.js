@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { store } from 'trackstack';
-import { FriendFinderViewContainer } from '../../utils'
+import View from './View'
+
+const mapStateToProps = state => {
+  return {
+    invitee: state.main.invitee
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+  }
+}
+
+const ConnectedComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(View)
 
 export default class ViewContainer extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <FriendFinderViewContainer />
+        <ConnectedComponent />
       </Provider>
     )
   }
