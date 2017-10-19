@@ -32,7 +32,7 @@ RSpec.describe GameInvitesController, type: :controller do
   end
 
   context "#accept" do
-    it "it redirect to root if there's no invite" do
+    it "redirect to root if there's no invite" do
       user = create(:user, :facebook)
 
       sign_in user
@@ -42,7 +42,7 @@ RSpec.describe GameInvitesController, type: :controller do
       expect(response).to redirect_to("/")
     end
 
-    it "it redirects to root if someone else tries to accept an invite" do
+    it "redirects to root if someone else tries to accept an invite" do
       user = create(:user, :facebook)
       user_2 = create(:user, :facebook)
       invite = create(:game_invite, :pending, inviter_id: user.id, invitee_id: user_2.id)
@@ -54,7 +54,19 @@ RSpec.describe GameInvitesController, type: :controller do
       expect(response).to redirect_to("/")
     end
 
-     it "accepts the invitation" do
+    it "redirects to root if the invitation has already been accepted" do
+      user = create(:user, :facebook)
+      user_2 = create(:user, :facebook)
+      invite = create(:game_invite, :accepted, inviter_id: user.id, invitee_id: user_2.id)
+
+      sign_in user_2
+      put "accept", { params: { game_invite_id: invite.id }}
+
+      expect(flash[:error]).to eq("This invitation has already been accepted")
+      expect(response).to redirect_to("/")
+    end
+
+    it "accepts the invitation" do
       user = create(:user, :facebook)
       user_2 = create(:user, :facebook)
       invite = create(:game_invite, :pending, inviter_id: user.id, invitee_id: user_2.id)

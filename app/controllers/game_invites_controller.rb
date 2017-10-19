@@ -18,6 +18,11 @@ class GameInvitesController < ApplicationController
       return redirect_to "/"
     end
 
+    unless invite.pending?
+      flash[:error] = "This invitation has already been accepted"
+      return redirect_to "/"
+    end
+
     unless invite.invitee_id == current_user.id
       flash[:error] = "You can't accept someone else's invite"
       return redirect_to "/"
