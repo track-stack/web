@@ -1,5 +1,5 @@
 class GameInvitesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :accept]
 
   def create
     return redirect_to "/games/new" unless invitee
@@ -24,8 +24,8 @@ class GameInvitesController < ApplicationController
     end
 
     begin
-      invite.accept!
-      redirect_to "/"
+      game = Game.from(invite: invite, invitee: current_user)
+      redirect_to game_path(game)
     rescue
       flash[:error] = "We weren't able to accept this invite"
       redirect_to "/"

@@ -50,7 +50,6 @@ RSpec.describe GameInvitesController, type: :controller do
       sign_in user
       put "accept", { params: { game_invite_id: invite.id }}
 
-
       expect(flash[:error]).to eq("You can't accept someone else's invite")
       expect(response).to redirect_to("/")
     end
@@ -60,12 +59,17 @@ RSpec.describe GameInvitesController, type: :controller do
       user_2 = create(:user, :facebook)
       invite = create(:game_invite, :pending, inviter_id: user.id, invitee_id: user_2.id)
 
+      game_count = Game.count
+      user_game_count = UserGame.count
+
       sign_in user_2
       put "accept", { params: { game_invite_id: invite.id }}
 
+      expect(Game.count).to equal(game_count + 1)
+      expect(UserGame.count).to equal(user_game_count + 2)
       expect(flash[:error]).to be_nil
       expect(invite.reload.status).to eq(1)
-      expect(response).to redirect_to("/")
+      expect(response).to redirect_to(game_path(Game.last))
      end
   end
 end
