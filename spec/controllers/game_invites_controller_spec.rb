@@ -66,6 +66,16 @@ RSpec.describe GameInvitesController, type: :controller do
       expect(response).to redirect_to("/")
     end
 
+    it "fails good" do
+      user = create(:user, :facebook)
+      user_2 = create(:user, :facebook)
+      invite = create(:game_invite, :pending, inviter_id: user.id, invitee_id: user_2.id)
+
+      sign_in user_2
+      put "accept", { params: { game_invite_id: invite.id }}
+
+    end
+
     it "accepts the invitation" do
       user = create(:user, :facebook)
       user_2 = create(:user, :facebook)
