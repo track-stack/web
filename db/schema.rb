@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20171019004330) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["status"], name: "index_games_on_status"
