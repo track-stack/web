@@ -3,11 +3,10 @@ import React, { Component } from 'react';
 export default class View extends React.Component {
   constructor(props) {
     super(props)
-    this.props.fetchGame(6)
+    this.props.fetchGame(this.props.gameId)
   }
 
   render() {
-    console.log(this.props)
     const players = !!this.props.game ? this.props.game.players : null;
     const opponents = !!this.props.game ? (
       <div>

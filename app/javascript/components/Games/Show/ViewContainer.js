@@ -7,7 +7,8 @@ const { fetchGame } = actions;
 
 const mapStateToProps = state => {
   return {
-    game: state.main.game
+    game: state.main.game,
+    gameId: window.gameId
   }
 }
 
