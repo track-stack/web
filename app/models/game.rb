@@ -2,6 +2,9 @@ class Game < ApplicationRecord
 
   attr_accessor :players
 
+  has_many :user_games
+  has_many :users, through: :user_games
+
   def self.from(invite:, invitee:)
     ActiveRecord::Base.transaction do
       invite.accept!

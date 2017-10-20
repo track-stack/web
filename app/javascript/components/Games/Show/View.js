@@ -10,9 +10,7 @@ export default class View extends React.Component {
     const players = !!this.props.game ? this.props.game.players : null;
     const opponents = !!this.props.game ? (
       <div>
-        <p>{players.viewer.name}</p>
-        <p>vs.</p>
-        <p>{players.opponent.name}</p>
+        {this.props.game.id}
       </div>
     ) : null;
 
