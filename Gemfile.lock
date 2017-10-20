@@ -106,6 +106,8 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
+    faker (1.8.4)
+      i18n (~> 0.5)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
@@ -322,6 +324,7 @@ DEPENDENCIES
   devise
   dotenv
   factory_girl_rails
+  faker
   faraday
   foreman
   guard

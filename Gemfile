@@ -47,6 +47,7 @@ group :development, :test do
   gem "guard-rspec"
   gem "factory_girl_rails"
   gem "vcr"
+  gem "faker"
 end
 
 group :development do

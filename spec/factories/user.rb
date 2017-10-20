@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :user do
     email { User.random_email }
     password "password"
+    name { Faker::Name.name }
   end
 
   trait :facebook do
