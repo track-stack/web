@@ -1,5 +1,7 @@
 class Game < ApplicationRecord
 
+  attr_accessor :players
+
   def self.from(invite:, invitee:)
     ActiveRecord::Base.transaction do
       invite.accept!

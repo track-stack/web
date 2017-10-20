@@ -2,10 +2,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
-      <p><%= view.user_games[:me].user.name %></p>
-      <p>vs.</p>
-      <p><%= view.user_games[:opponent].user.name %></p>
-    </div>
+    <div id="root"></div>
   </div>
 </div>
+
+<% content_for :javascripts do %>
+  <%= javascript_pack_tag 'games/show' %>
+<% end %>
+
