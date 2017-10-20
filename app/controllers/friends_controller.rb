@@ -6,7 +6,7 @@ class FriendsController < ApplicationController
       friends = all_friends_for(user: current_user)
       render json: { friends: friends }
     else
-      render file: "#{Rails.root}/public/401", layout: false, status: 401, formats: [:html]
+      render_401
     end
   end
 end

@@ -14,17 +14,17 @@ class GameInvitesController < ApplicationController
 
   def accept
     unless invite
-      flash[:error] = "The invitation couldn't be found"
+      flash[:error] = "❌ The invitation couldn't be found"
       return redirect_to "/"
     end
 
     unless invite.pending?
-      flash[:error] = "This invitation has already been accepted"
+      flash[:error] = "❌ This invitation has already been accepted"
       return redirect_to "/"
     end
 
     unless invite.invitee_id == current_user.id
-      flash[:error] = "You can't accept someone else's invite"
+      flash[:error] = "❌ That invite doesn't belong to you"
       return redirect_to "/"
     end
 

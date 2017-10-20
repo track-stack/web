@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe GameInvitesController, type: :controller do
 
   before(:each) do
@@ -38,7 +40,7 @@ RSpec.describe GameInvitesController, type: :controller do
       sign_in user
       put "accept", { params: { game_invite_id: 1 }}
 
-      expect(flash[:error]).to eq("The invitation couldn't be found")
+      expect(flash[:error]).to eq("❌ The invitation couldn't be found")
       expect(response).to redirect_to("/")
     end
 
@@ -50,7 +52,7 @@ RSpec.describe GameInvitesController, type: :controller do
       sign_in user
       put "accept", { params: { game_invite_id: invite.id }}
 
-      expect(flash[:error]).to eq("You can't accept someone else's invite")
+      expect(flash[:error]).to eq("❌ That invite doesn't belong to you")
       expect(response).to redirect_to("/")
     end
 
@@ -62,7 +64,7 @@ RSpec.describe GameInvitesController, type: :controller do
       sign_in user_2
       put "accept", { params: { game_invite_id: invite.id }}
 
-      expect(flash[:error]).to eq("This invitation has already been accepted")
+      expect(flash[:error]).to eq("❌ This invitation has already been accepted")
       expect(response).to redirect_to("/")
     end
 
