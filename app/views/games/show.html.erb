@@ -1,0 +1,11 @@
+<% # view is an instance of Games::ShowView %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <p><%= view.user_games[:me].user.name %></p>
+      <p>vs.</p>
+      <p><%= view.user_games[:opponent].user.name %></p>
+    </div>
+  </div>
+</div>

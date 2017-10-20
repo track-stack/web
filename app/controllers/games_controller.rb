@@ -6,6 +6,8 @@ class GamesController < ApplicationController
   end
 
   def show
+    view = Games::ShowView.new(user: current_user, game: game)
+    render "games/show", locals: { view: view }
   end
 
   private
@@ -21,8 +23,6 @@ class GamesController < ApplicationController
       flash[:error] = "❌ You don't belong in that game"
       return redirect_back(fallback_location: root_url)
     end
-
-    render "games/show"
   end
 
   def game
