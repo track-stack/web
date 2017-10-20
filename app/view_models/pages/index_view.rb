@@ -11,9 +11,10 @@ module Pages
       @user_games ||= begin
         game_ids = user.games.where("user_games.creator = true").pluck(:id)
         UserGame
+          .joins(:game)
           .includes(:user)
           .includes(:game)
-          .where("game_id in (?) and user_id != ?", game_ids, user.id)
+          .where("game_id in (?) and user_id != ? and games.status != 2", game_ids, user.id)
       end
     end
 
@@ -22,7 +23,11 @@ module Pages
 
       @invites ||= begin
         game_ids = user.games.where("user_games.creator = false").pluck(:id)
-        UserGame.includes(:user).includes(:game).joins(:game).where("game_id in (?) and user_id != ? and games.status = 0", game_ids, user.id)
+        UserGame
+          .joins(:game)
+          .includes(:user)
+          .includes(:game)
+          .where("game_id in (?) and user_id != ? and games.status = 0", game_ids, user.id)
       end
     end
 
