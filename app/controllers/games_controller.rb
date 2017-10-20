@@ -7,7 +7,12 @@ class GamesController < ApplicationController
 
   def show
     view = Games::ShowView.new(user: current_user, game: game)
-    render "games/show", locals: { view: view }
+
+    if request.xhr?
+      render json: { game: game.as_json.merge({players: view.user_games.as_json}) }
+    else
+      render "games/show", locals: { view: view }
+    end
   end
 
   private

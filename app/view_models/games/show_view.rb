@@ -11,10 +11,13 @@ module Games
       @user_games ||= begin
         user_games = UserGame.includes(:user).where(game_id: game.id)
         viewer_user_game = user_games.detect { |user_game| user_game.user_id == user.id }
-        {me: viewer_user_game, opponent: (user_games - [viewer_user_game]).first }
+
+        {
+          viewer: viewer_user_game.user,
+          opponent: (user_games - [viewer_user_game]).first.user
+        }
       end
     end
-
 
     private
 
