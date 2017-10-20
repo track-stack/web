@@ -14,6 +14,7 @@ gem "bootstrap-sass"
 gem "thin"
 gem "uglifier", ">= 1.3.0"
 gem "rails_12factor"
+gem "active_model_serializers"
 
 # https://github.com/rails/webpacker
 # https://github.com/rails/webpacker/issues/745
@@ -46,6 +47,7 @@ group :development, :test do
   gem "guard-rspec"
   gem "factory_girl_rails"
   gem "vcr"
+  gem "faker"
 end
 
 group :development do

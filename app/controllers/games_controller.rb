@@ -9,7 +9,7 @@ class GamesController < ApplicationController
     view = Games::ShowView.new(user: current_user, game: game)
 
     if request.xhr?
-      render json: { game: game.as_json.merge({players: view.user_games.as_json}) }
+      render json: { game: GameSerializer.new(game, viewer: current_user) }
     else
       render "games/show", locals: { view: view }
     end
