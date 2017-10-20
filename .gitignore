@@ -25,3 +25,4 @@
 .sass-cache/
 /spec/casettes
 /spec/examples.txt
+*_notes.txt
