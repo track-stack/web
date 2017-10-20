@@ -5,6 +5,17 @@ module Pages
       @user = user
     end
 
+    def user_games
+      return [] unless user
+
+      @user_games ||= begin
+        game_ids = user.games.pluck(:id)
+        UserGame
+          .joins(:user)
+          .where("game_id in (?) and user_id != ?", game_ids, user.id)
+      end
+    end
+
     def sent_game_invites
       return [] unless user
 

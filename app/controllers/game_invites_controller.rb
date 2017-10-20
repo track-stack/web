@@ -1,5 +1,5 @@
 class GameInvitesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :accept]
 
   def create
     return redirect_to "/games/new" unless invitee
@@ -14,18 +14,23 @@ class GameInvitesController < ApplicationController
 
   def accept
     unless invite
-      flash[:error] = "The invitation couldn't be found"
+      flash[:error] = "❌ The invitation couldn't be found"
+      return redirect_to "/"
+    end
+
+    unless invite.pending?
+      flash[:error] = "❌ This invitation has already been accepted"
       return redirect_to "/"
     end
 
     unless invite.invitee_id == current_user.id
-      flash[:error] = "You can't accept someone else's invite"
+      flash[:error] = "❌ That invite doesn't belong to you"
       return redirect_to "/"
     end
 
     begin
-      invite.accept!
-      redirect_to "/"
+      game = Game.from(invite: invite, invitee: current_user)
+      redirect_to game_path(game)
     rescue
       flash[:error] = "We weren't able to accept this invite"
       redirect_to "/"

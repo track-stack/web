@@ -5,4 +5,12 @@ class GameInvite < ApplicationRecord
   def accept!
     update_attributes!(status: 1)
   end
+
+  def pending?
+    status == 0
+  end
+
+  def accepted?
+    status == 1
+  end
 end

@@ -3,6 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
+  has_many :user_games
+  has_many :games, through: :user_games
 
   def game_invites(status = nil)
     case status

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018050134) do
+ActiveRecord::Schema.define(version: 20171019004330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,23 @@ ActiveRecord::Schema.define(version: 20171018050134) do
     t.index ["invitee_id"], name: "index_game_invites_on_invitee_id"
     t.index ["inviter_id"], name: "index_game_invites_on_inviter_id"
     t.index ["status"], name: "index_game_invites_on_status"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_games_on_status"
+  end
+
+  create_table "user_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.boolean "creator", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_user_games_on_game_id"
+    t.index ["user_id"], name: "index_user_games_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -35,4 +35,15 @@ RSpec.describe Pages::IndexView, type: :view_model do
       expect(view_model.received_game_invites).to eq([])
     end
   end
+
+  context "#games" do
+    fit "works" do
+      game = Game.from(invite: @sent_invitation, invitee: @user_2)
+      view_model = Pages::IndexView.new(user: @user_1)
+
+      puts "*" * 80
+      puts view_model.games
+      puts "*" * 80
+    end
+  end
 end
