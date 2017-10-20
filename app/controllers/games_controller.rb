@@ -7,7 +7,13 @@ class GamesController < ApplicationController
 
   def show
     view = Games::ShowView.new(user: current_user, game: game)
-    render "games/show", locals: { view: view }
+
+    if request.xhr?
+      game.players = view.user_games
+      render json: { game: game }
+    else
+      render "games/show", locals: { view: view }
+    end
   end
 
   private
