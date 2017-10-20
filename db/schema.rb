@@ -10,21 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019004330) do
+ActiveRecord::Schema.define(version: 20171020214613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "game_invites", force: :cascade do |t|
-    t.integer "inviter_id", null: false
-    t.integer "invitee_id", null: false
-    t.integer "status", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["invitee_id"], name: "index_game_invites_on_invitee_id"
-    t.index ["inviter_id"], name: "index_game_invites_on_inviter_id"
-    t.index ["status"], name: "index_game_invites_on_status"
-  end
 
   create_table "games", force: :cascade do |t|
     t.integer "status", default: 0

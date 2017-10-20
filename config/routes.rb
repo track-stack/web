@@ -3,10 +3,7 @@ Rails.application.routes.draw do
 
   root to: "pages#index"
 
-  resources "games", only: [:new, :show]
+  resources "games", only: [:new, :show, :create]
 
   get "/friends", to: "friends#list"
-
-  post "/game_invite", to: "game_invites#create"
-  put "/game_invite/accept", to: "game_invites#accept"
 end

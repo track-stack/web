@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :show]
+  before_action :authenticate_user!, only: [:new, :show, :create]
   before_action :validate_viewer_in_game, only: [:show]
 
   def new
@@ -12,6 +12,15 @@ class GamesController < ApplicationController
       render json: { game: GameSerializer.new(game, viewer: current_user) }
     else
       render "games/show", locals: { view: view }
+    end
+  end
+
+  def create
+    if game = Game.from(user: current_user, invitee: invitee)
+      redirect_to game_path(game)
+    else
+      flash[:error] = "There was a problem creating your game 😱"
+      redirect_back fallback_location: "/games/new"
     end
   end
 
@@ -32,5 +41,9 @@ class GamesController < ApplicationController
 
   def game
     @game ||= Game.find_by(id: params[:id])
+  end
+
+  def invitee
+    User.find_by(uid: params[:uid])
   end
 end

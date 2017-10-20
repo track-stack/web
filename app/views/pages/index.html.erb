@@ -10,13 +10,19 @@
 
   <hr>
 
+  <div class="clearfix">
+    <a href=<%= new_game_path %> class="btn btn-primary float-right" style="margin-bottom:10px;">New Game</a>
+    <h4 class="float-left">Games</h4>
+  </div>
   <% if view.user_games.any? %>
-    <h4>Games</h4>
     <div class="friends-list">
       <ul class="list-unstyled">
         <% view.user_games.each do |user_game| %>
           <li>
             <%= user_game.user.name %>
+            <% if user_game.game.pending? %>
+              <small>- waiting</small>
+            <% end %>
             <a href="<%= game_path(user_game.game_id) %>" class="float-right">play</a>
           </li>
         <% end %>
@@ -26,42 +32,17 @@
 
   <hr>
 
-  <a href=<%= new_game_path %> class="btn btn-primary float-right" style="margin-bottom:10px;">New Game</a>
 
-  <h4>Pending invitations:</h4>
+  <h4>Invites:</h4>
 
-  <% if view.sent_game_invites.any? %>
-    <p><strong>Sent:</strong></p>
+  <% if view.invites.any? %>
     <div class="friends-list">
       <ul class="list-unstyled">
-        <% view.sent_game_invites.each do |invite| %>
+        <% view.invites.each do |invite| %>
           <li>
-            <img src=<%= invite.image %> width="30" height="30" />
-            <%= invite.name %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if view.received_game_invites.any? %>
-    <p><strong>Received:</strong></p>
-    <div class="friends-list">
-      <ul class="list-unstyled">
-        <% view.received_game_invites.each do |invite| %>
-          <li>
-            <img src=<%= invite.image %> width="30" height="30" />
-            <span><%= invite.name %></span>
-            <form action="<%= game_invite_accept_path %>" method="post" class="float-right">
-              <div style="margin:0;padding:0;display:none">
-
-                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-                <input type="hidden" name="_method" value="put" />
-              </div>
-              <input type="hidden" value="<%= invite.id %>" name="game_invite_id" />
-
-              <input type="submit" class="btn btn-success float-right" value="Accept" />
-            </form>
+            <img src=<%= invite.user.image %> width="30" height="30" />
+            <%= invite.user.name %>
+            <a href="<%= game_path(invite.game_id) %>" class="btn btn-success float-right">Join</a>
           </li>
         <% end %>
       </ul>
