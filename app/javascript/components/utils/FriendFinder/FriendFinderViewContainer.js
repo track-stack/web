@@ -6,7 +6,6 @@ import FriendFinderView from './FriendFinderView';
 const { fetchFriends, selectGameInvitee } = actions;
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     friends: state.main.friends
   };
