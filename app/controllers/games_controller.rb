@@ -9,10 +9,7 @@ class GamesController < ApplicationController
     view = Games::ShowView.new(user: current_user, game: game)
 
     if request.xhr?
-      serialized_game = GameSerializer.new(game, current_user_id: current_user.id).to_json
-      json_game = JSON.parse(serialized_game)
-
-      render json: { game: json_game}
+      render json: { game: GameSerializer.new(game, viewer: current_user) }
     else
       render "games/show", locals: { view: view }
     end
