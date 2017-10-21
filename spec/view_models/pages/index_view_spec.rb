@@ -42,7 +42,7 @@ RSpec.describe Pages::IndexView, type: :view_model do
       expect(view.invites).to eq([])
     end
 
-    fit "only returns games with > 1 turn" do
+    it "only returns games with > 1 turn" do
       view = Pages::IndexView.new(user: @user)
       expect(view.invites.count).to eq(0)
 
