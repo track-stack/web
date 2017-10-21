@@ -45,7 +45,7 @@ export default class View extends React.Component {
       )
 
       const turns = this.props.game.turns;
-      const disabled = turns[turns.length - 1].user_id === players.viewer.id
+      const disabled = turns.length && turns[turns.length - 1].user_id === players.viewer.id
       const turnListItems = turns.map((turn, index) => {
         return (
           <li key={index}>
