@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171021170448) do
   create_table "turns", force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
-    t.string "guess"
+    t.string "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_turns_on_game_id"
