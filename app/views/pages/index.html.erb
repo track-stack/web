@@ -26,6 +26,7 @@
             <ul class="list-unstyled">
               <% view.user_games.each do |user_game| %>
                 <li>
+                  <img src=<%= user_game.user.image %> width="30" height="30" />
                   <%= user_game.user.name %>
                   <% if user_game.game.pending? %>
                     <small>- waiting</small>
@@ -38,7 +39,6 @@
         <% end %>
 
         <hr>
-
 
         <h4>Invites:</h4>
 
