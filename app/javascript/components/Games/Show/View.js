@@ -27,29 +27,34 @@ export default class View extends React.Component {
   render() {
     const players = !!this.props.game ? this.props.game.players : null;
     const opponents = players ? (
-      <div className="clearfix">
-        <p className="float-left"><strong>{players.viewer.name}</strong></p>
-        <p className="float-right"><strong>{players.opponent.name}</strong></p>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <div style={{marginLeft:8, marginRight: 8}}>
+          <img src={players.viewer.image} width="50" height="50" />
+          <p style={{display: 'none'}} className="float-left"><strong>{players.viewer.name}</strong></p>
+        </div>
+        <p style={{margin: 0}}><strong>VS.</strong></p>
+        <div style={{marginLeft:8, marginRight: 8}}>
+          <img src={players.opponent.image} width="50" height="50" />
+          <p style={{display: 'none'}} className="float-left"><strong>{players.opponent.name}</strong></p>
+        </div>
       </div>
     ) : null;
 
     const turns = this.props.game ? this.props.game.turns : [];
     const turnListItems = turns.map((turn, index) => {
       return (
-        <div className="friends-list">
-          <ul className="list-unstyled">
-            <li>
-              <img src={turn.user_photo} width="30" height="30" />
-              {turn.answer}
-            </li>
-          </ul>
-        </div>
+        <li key={index}>
+          <img src={turn.user_photo} width="30" height="30" />
+          {turn.answer}
+        </li>
       )
     });
     const turnsUI = !!this.props.game ? (
-      <ul className="list-unstyled">
-        {turnListItems}
-      </ul>
+      <div className="friends-list">
+        <ul className="list-unstyled">
+          {turnListItems}
+        </ul>
+      </div>
     ) : null;
 
     return (
