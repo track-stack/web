@@ -27,32 +27,41 @@ export default class View extends React.Component {
   render() {
     const players = !!this.props.game ? this.props.game.players : null;
     const opponents = players ? (
-      <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
-        <p><strong>{players.viewer.name}</strong></p>
-        <p><strong>vs.</strong></p>
-        <p><strong>{players.opponent.name}</strong></p>
+      <div className="clearfix">
+        <p className="float-left"><strong>{players.viewer.name}</strong></p>
+        <p className="float-right"><strong>{players.opponent.name}</strong></p>
       </div>
     ) : null;
 
     const turns = this.props.game ? this.props.game.turns : [];
     const turnListItems = turns.map((turn, index) => {
-      return <p key={index}>{turn.answer}</p>
+      return (
+        <div className="friends-list">
+          <ul className="list-unstyled">
+            <li>
+              <img src={turn.user_photo} width="30" height="30" />
+              {turn.answer}
+            </li>
+          </ul>
+        </div>
+      )
     });
     const turnsUI = !!this.props.game ? (
-      <ul>
+      <ul className="list-unstyled">
         {turnListItems}
       </ul>
     ) : null;
 
     return (
       <div>
-        {opponents}
-        <div className="col-sm-2"></div>
-        <div className="col-sm-8">
+        <div className="col-sm-12">
+          <div style={{paddingTop: 20, paddingBottom: 16}}>
+            {opponents}
+          </div>
           {turnsUI}
-          <div style={{display: 'flex'}}>
-            <input type="text" placeholder="Name a song" style={{flex: 1}} onChange={this.onAnswerChange} />
-            <button className="inactive" onClick={this.validateAndSubmitAnswer}>Go</button>
+          <div style={{display: 'flex'}} className="form-group">
+            <input className="form-control" type="text" placeholder="Name a song" style={{flex: 1}} onChange={this.onAnswerChange} />
+            <button style={{marginLeft: 15}} className="btn btn-success" onClick={this.validateAndSubmitAnswer}>Submit answer</button>
           </div>
         </div>
       </div>
