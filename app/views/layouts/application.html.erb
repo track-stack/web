@@ -11,7 +11,7 @@
   <body>
     <% if flash[:error] %>
       <div class="flash error">
-        <div class="container">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-xs-12">
               <p><strong><%= flash[:error] %></strong></p>
@@ -21,13 +21,7 @@
       </div>
     <% end %>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <%= yield %>
-        </div>
-      </div>
-    </div>
+     <%= yield %>
 
     <%= javascript_include_tag "application" %>
     <%= yield :javascripts %>

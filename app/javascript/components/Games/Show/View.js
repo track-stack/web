@@ -9,10 +9,10 @@ export default class View extends React.Component {
   render() {
     const players = !!this.props.game ? this.props.game.players : null;
     const opponents = players ? (
-      <div>
-        <p>{players.viewer.name}</p>
-        <p>vs</p>
-        <p>{players.opponent.name}</p>
+      <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+        <p><strong>{players.viewer.name}</strong></p>
+        <p><strong>vs.</strong></p>
+        <p><strong>{players.opponent.name}</strong></p>
       </div>
     ) : null;
 
