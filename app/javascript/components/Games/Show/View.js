@@ -25,7 +25,6 @@ export default class View extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const players = !!this.props.game ? this.props.game.players : null;
     const opponents = players ? (
       <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
@@ -35,16 +34,26 @@ export default class View extends React.Component {
       </div>
     ) : null;
 
-    const turns = (<div></div>)
+    const turns = this.props.game ? this.props.game.turns : [];
+    const turnListItems = turns.map((turn, index) => {
+      return <p key={index}>{turn.answer}</p>
+    });
+    const turnsUI = !!this.props.game ? (
+      <ul>
+        {turnListItems}
+      </ul>
+    ) : null;
 
     return (
       <div>
         {opponents}
         <div className="col-sm-2"></div>
-        <div className="col-sm-8" style={{display: 'flex'}}>
-          {turns}
-          <input type="text" placeholder="Name a song" style={{flex: 1}} onChange={this.onAnswerChange} />
-          <button className="inactive" onClick={this.validateAndSubmitAnswer}>Go</button>
+        <div className="col-sm-8">
+          {turnsUI}
+          <div style={{display: 'flex'}}>
+            <input type="text" placeholder="Name a song" style={{flex: 1}} onChange={this.onAnswerChange} />
+            <button className="inactive" onClick={this.validateAndSubmitAnswer}>Go</button>
+          </div>
         </div>
       </div>
     )
