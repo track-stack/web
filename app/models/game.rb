@@ -4,16 +4,24 @@ class Game < ApplicationRecord
   has_many :players, through: :user_games
   has_many :turns
 
+  scope :pending, -> { where(status: 0) }
+  scope :playing, -> { where(status: 1) }
+  scope :ended, -> { where(status: 2) }
+
   def pending?
     status == 0
   end
 
-  def active?
+  def playing?
     status == 1
   end
 
   def ended?
     status == 2
+  end
+
+  def set_playing!
+    update_attributes!({status: 1})
   end
 
   def self.from(user:, invitee:)
