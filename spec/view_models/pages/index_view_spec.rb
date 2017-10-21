@@ -34,6 +34,15 @@ RSpec.describe Pages::IndexView, type: :view_model do
       view = Pages::IndexView.new(user: @user)
       expect(view.user_games.count).to eq(2)
     end
+
+    it "returns any game with a status of 1" do
+      view = Pages::IndexView.new(user: @user)
+      expect(view.user_games.count).to eq(1)
+
+      @opponent_game.update_attribute(:status, 1)
+      view = Pages::IndexView.new(user: @user)
+      expect(view.user_games.count).to eq(2)
+    end
   end
 
   context "#invites" do
