@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  it { should have_many(:turns) }
+
   it "creates a new record" do
     user = User.from_omniauth(auth_hash)
 

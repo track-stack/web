@@ -1,16 +1,15 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :show, :create]
+  before_action :authenticate_user!, only: [:new, :show, :create, :turn]
   before_action :validate_viewer_in_game, only: [:show]
 
   def new
   end
 
   def show
-    view = Games::ShowView.new(user: current_user, game: game)
-
     if request.xhr?
       render json: { game: GameSerializer.new(game, viewer: current_user) }
     else
+      view = Games::ShowView.new(user: current_user, game: game)
       render "games/show", locals: { view: view }
     end
   end
@@ -21,6 +20,16 @@ class GamesController < ApplicationController
     else
       flash[:error] = "There was a problem creating your game 😱"
       redirect_back fallback_location: "/games/new"
+    end
+  end
+
+  def turn
+    turn = Turn.create(user_id: current_user.id, game_id: game.id, answer: params[:answer])
+    if turn.valid?
+      render json: { game: GameSerializer.new(game, viewer: current_user) }
+    else
+      flash[:error] = "❌ Your answer was not submitted. Please try again."
+      return redirect_back(fallback_location: game_path(game))
     end
   end
 
