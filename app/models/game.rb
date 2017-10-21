@@ -20,6 +20,10 @@ class Game < ApplicationRecord
     status == 2
   end
 
+  def set_playing!
+    update_attributes!({status: 1})
+  end
+
   def self.from(user:, invitee:)
     ActiveRecord::Base.transaction do
       game = Game.create
