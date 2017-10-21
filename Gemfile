@@ -45,6 +45,7 @@ group :development, :test do
   gem "pry"
   gem "rspec-rails"
   gem "guard-rspec"
+  gem "shoulda", git: "https://github.com/thoughtbot/shoulda", branch: "master"
   gem "factory_girl_rails"
   gem "vcr"
   gem "faker"

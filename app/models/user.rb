@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :user_games
   has_many :games, through: :user_games
+  has_many :turns
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

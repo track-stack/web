@@ -1,10 +1,15 @@
 require 'rails_helper'
-
 RSpec.describe GamesController, type: :controller do
 
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
     @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+
+    @game = create(:game)
+    @user = create(:user, :facebook)
+    user_2 = create(:user, :facebook)
+    user_game = create(:user_game, user_id: @user.id, game_id: @game.id)
+    user_game_2 = create(:user_game, user_id: user_2.id, game_id: @game.id)
   end
 
   context "show" do
@@ -30,18 +35,40 @@ RSpec.describe GamesController, type: :controller do
     end
 
     it "renders 200" do
-      user = create(:user, :facebook)
-      user_2 = create(:user, :facebook)
-      game = create(:game)
-      user_game = create(:user_game, user_id: user.id, game_id: game.id)
-      user_game_2 = create(:user_game, user_id: user_2.id, game_id: game.id)
-
-      sign_in user
-      get "show", { params: { id: game.id }}
+      sign_in @user
+      get "show", { params: { id: @game.id }}
 
       expect(response.status).to eq(200)
       expect(flash[:error]).to be_nil
     end
+  end
+
+  context "#turn" do
+    it "redirects to game path if turn is invalid" do
+      sign_in @user
+      post "turn", { params: { id: @game.id }}
+
+      expect(response).to redirect_to(game_path(@game))
+    end
+
+    context "when turn is valid"
+      it "renders status 200" do
+        sign_in @user
+        post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres" }}
+
+        expect(response.status).to eq(200)
+      end
+
+      it "creates a Turn with valid associations" do
+        sign_in @user
+
+        expect {
+          post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres" }}
+        }.to change{ Turn.count }.by(1)
+
+        expect(Turn.last.user).to eq(@user)
+        expect(Turn.last.game).to eq(@game)
+      end
   end
 end
 

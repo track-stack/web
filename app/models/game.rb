@@ -2,6 +2,7 @@ class Game < ApplicationRecord
 
   has_many :user_games
   has_many :players, through: :user_games
+  has_many :turns
 
   def pending?
     status == 0

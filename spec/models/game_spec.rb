@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
+  it { should have_many(:turns) }
+
   context "#self.from" do
     it "creates a game" do
       user = create(:user, :facebook)
