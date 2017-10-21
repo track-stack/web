@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :show, :create, :turn]
   before_action :validate_viewer_in_game, only: [:show]
+  skip_before_action :verify_authenticity_token, only: [:turn]
 
   def new
   end
