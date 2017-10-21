@@ -3,7 +3,7 @@ import { Provider, connect } from 'react-redux';
 import { store, actions } from 'trackstack';
 import View from './View'
 
-const { fetchGame } = actions;
+const { fetchGame, submitAnswer } = actions;
 
 const mapStateToProps = state => {
   return {
@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchGame: (gameId) => {
       dispatch(fetchGame(gameId))
+    },
+    submitAnswer: ({gameId, answer}) => {
+      dispatch(submitAnswer({gameId, answer}))
     }
   }
 }

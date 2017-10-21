@@ -19,6 +19,10 @@
   float: right;
 }
 
+.float-left {
+  float: left;
+}
+
 @import "flash";
 @import "friends-list/base";
 @import "invite-list/base";

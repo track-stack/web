@@ -1,6 +1,11 @@
-<h1>New game!</h1>
-
-<div id="root"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>New game!</h1>
+      <div id="root"></div>
+    </div>
+  </div>
+</div>
 
 <% content_for :javascripts do %>
   <%= javascript_pack_tag 'games/new' %>

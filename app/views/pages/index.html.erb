@@ -1,59 +1,69 @@
 <% # view is an instance of Pages::IndexView %>
 
-<h1>Track Stack</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
 
-<% if current_user %>
-  <img src="<%= current_user.image %>" width="50" height="50" style="display: block;">
-  <%= form_tag destroy_user_session_path, method: :delete do %>
-    <button class="btn btn-default" style="margin-top: 10px;">Log out</button>
-  <% end %>
+      <h1>Track Stack</h1>
+      <div class="row">
+        <div id="root"></div>
+      </div>
 
-  <hr>
+      <% if current_user %>
+        <img src="<%= current_user.image %>" width="50" height="50" style="display: block;">
+        <%= form_tag destroy_user_session_path, method: :delete do %>
+          <button class="btn btn-default" style="margin-top: 10px;">Log out</button>
+        <% end %>
 
-  <div class="clearfix">
-    <a href=<%= new_game_path %> class="btn btn-primary float-right" style="margin-bottom:10px;">New Game</a>
-    <h4 class="float-left">Games</h4>
+        <hr>
+
+        <div class="clearfix">
+          <a href=<%= new_game_path %> class="btn btn-primary float-right" style="margin-bottom:10px;">New Game</a>
+          <h4 class="float-left">Games</h4>
+        </div>
+        <% if view.user_games.any? %>
+          <div class="friends-list">
+            <ul class="list-unstyled">
+              <% view.user_games.each do |user_game| %>
+                <li>
+                  <%= user_game.user.name %>
+                  <% if user_game.game.pending? %>
+                    <small>- waiting</small>
+                  <% end %>
+                  <a href="<%= game_path(user_game.game_id) %>" class="float-right">play</a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <hr>
+
+
+        <h4>Invites:</h4>
+
+        <% if view.invites.any? %>
+          <div class="friends-list">
+            <ul class="list-unstyled">
+              <% view.invites.each do |invite| %>
+                <li>
+                  <img src=<%= invite.user.image %> width="30" height="30" />
+                  <%= invite.user.name %>
+                  <a href="<%= game_path(invite.game_id) %>" class="btn btn-success float-right">Join</a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+      <% else %>
+        <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
+        <% if Rails.env.development? %>
+          or
+          <a href="https://developers.facebook.com/checkpoint/test-user-login/101441640615588/" target="_blank">Log in as test user</a>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-  <% if view.user_games.any? %>
-    <div class="friends-list">
-      <ul class="list-unstyled">
-        <% view.user_games.each do |user_game| %>
-          <li>
-            <%= user_game.user.name %>
-            <% if user_game.game.pending? %>
-              <small>- waiting</small>
-            <% end %>
-            <a href="<%= game_path(user_game.game_id) %>" class="float-right">play</a>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <hr>
-
-
-  <h4>Invites:</h4>
-
-  <% if view.invites.any? %>
-    <div class="friends-list">
-      <ul class="list-unstyled">
-        <% view.invites.each do |invite| %>
-          <li>
-            <img src=<%= invite.user.image %> width="30" height="30" />
-            <%= invite.user.name %>
-            <a href="<%= game_path(invite.game_id) %>" class="btn btn-success float-right">Join</a>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<% else %>
-  <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
-  <% if Rails.env.development? %>
-    or
-    <a href="https://developers.facebook.com/checkpoint/test-user-login/101441640615588/" target="_blank">Log in as test user</a>
-  <% end %>
-<% end %>
+</div>
 
