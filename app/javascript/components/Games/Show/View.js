@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 export default class View extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { answer: "" }
+    this.state = { answer: "", fetchGameTimer: setInterval(() => {
+      this.props.fetchGame(this.props.gameId)
+    }, 3000)}
     this.props.fetchGame(this.props.gameId)
 
     this.onAnswerChange = this.onAnswerChange.bind(this)
