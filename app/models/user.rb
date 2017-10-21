@@ -6,17 +6,6 @@ class User < ApplicationRecord
   has_many :user_games
   has_many :games, through: :user_games
 
-  def game_invites(status = nil)
-    case status
-    when :received
-      GameInvite.where("invitee_id = ?", id)
-    when :sent
-      GameInvite.where("inviter_id = ?", id)
-    else
-      GameInvite.where("inviter_id = ? or invitee_id = ?", id, id)
-    end
-  end
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email || random_email

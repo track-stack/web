@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :game do
-    status 1
+    status 0
   end
 end

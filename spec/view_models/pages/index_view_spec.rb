@@ -2,48 +2,50 @@ require "rails_helper"
 
 RSpec.describe Pages::IndexView, type: :view_model do
   before(:each) do
-    @user_1 = create(:user)
-    @user_2 = create(:user)
-    @sent_invitation = create(:game_invite, :pending, inviter_id: @user_1.id, invitee_id: @user_2.id)
-    @received_invitation = create(:game_invite, :pending, inviter_id: @user_2.id, invitee_id: @user_1.id)
+    @user = create(:user, :facebook)
+    @user_2 = create(:user, :facebook)
+
+    @viewer_game = create(:game)
+    create(:user_game, user_id: @user.id, game_id: @viewer_game.id, creator: true)
+    create(:user_game, user_id: @user_2.id, game_id: @viewer_game.id, creator: false)
+
+    @opponent_game = create(:game)
+    create(:user_game, user_id: @user.id, game_id: @opponent_game.id, creator: false)
+    create(:user_game, user_id: @user_2.id, game_id: @opponent_game.id, creator: true)
   end
 
-  context "#sent_game_invites" do
-    it "returns pending game invitations sent from the viewer" do
-      view_model = Pages::IndexView.new(user: @user_1)
-
-      expect(view_model.sent_game_invites).to eq([@sent_invitation])
+  context "#user_games" do
+    it "returns [] if user is anonymous" do
+      view = Pages::IndexView.new(user: nil)
+      expect(view.user_games).to eq([])
     end
 
-    it "returns [] if viewer is anonymous" do
-      view_model = Pages::IndexView.new(user: nil)
-
-      expect(view_model.sent_game_invites).to eq([])
-    end
-  end
-
-  context "#received_game_invites" do
-    it "returns pending game invitations sent from the viewer" do
-      view_model = Pages::IndexView.new(user: @user_1)
-
-      expect(view_model.received_game_invites).to eq([@received_invitation])
+    it "only returns games created by the viewer" do
+      view = Pages::IndexView.new(user: @user)
+      expect(view.user_games.count).to eq(1)
+      expect(view.user_games.map(&:game_id)).to include(@viewer_game.id)
     end
 
-    it "returns [] if viewer is anonymous" do
-      view_model = Pages::IndexView.new(user: nil)
+    it "shows both active and pending games" do
+      active_game = create(:game, status: 1)
+      create(:user_game, user_id: @user.id, game_id: @viewer_game.id, creator: true)
+      create(:user_game, user_id: @user_2.id, game_id: @viewer_game.id, creator: false)
 
-      expect(view_model.received_game_invites).to eq([])
+      view = Pages::IndexView.new(user: @user)
+      expect(view.user_games.count).to eq(2)
     end
   end
 
-  context "#games" do
-    fit "works" do
-      game = Game.from(invite: @sent_invitation, invitee: @user_2)
-      view_model = Pages::IndexView.new(user: @user_1)
+  context "#invites" do
+    it "returns [] if user is anonymous" do
+      view = Pages::IndexView.new(user: nil)
+      expect(view.invites).to eq([])
+    end
 
-      puts "*" * 80
-      puts view_model.games
-      puts "*" * 80
+    it "only returns games not created by the viewer" do
+      view = Pages::IndexView.new(user: @user)
+      expect(view.invites.count).to eq(1)
+      expect(view.invites.map(&:game_id)).to include(@opponent_game.id)
     end
   end
 end

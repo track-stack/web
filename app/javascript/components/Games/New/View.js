@@ -17,13 +17,13 @@ export default class View extends React.Component {
           <img src={this.props.invitee.picture.data.url} />
           <p>{this.props.invitee.name}</p>
         </div>
-        <form action="/game_invite" method="post">
+        <form action="/games" method="post">
           <div style={{margin: 0, padding: 0, display: "none"}}>
             <input type="hidden" value={authenticityToken} name="authenticity_token" />
             <input type="hidden" value="post" name="_method" />
           </div>
           <input name="uid" value={this.props.invitee.id} type="hidden" />
-          <input type="submit" className="btn btn-success" value="Invite" />
+          <input type="submit" className="btn btn-success" value="Play" />
         </form>
       </div>
     ) : null;
