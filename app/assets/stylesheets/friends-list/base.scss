@@ -5,7 +5,9 @@
       padding: 15px;
       background: #f4f4f4;
       font-size: 13px;
+      display: flex;
       margin-bottom: 4px;
+      align-items: center;
 
       &:hover {
         background: #f9f9f9;
@@ -13,6 +15,10 @@
 
       img {
         margin-right: 15px;
+      }
+
+      span {
+        flex: 1
       }
     }
   }

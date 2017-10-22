@@ -9,14 +9,13 @@ module Pages
       return [] unless user
 
       @user_games ||= begin
-        game_ids = user.games.where("user_games.creator = true").pluck(:id)
-        game_ids += user.games.where(status: 1).pluck(:id)
+        game_ids = user.games.where("user_games.creator = true OR games.status = 1").pluck(:id)
 
         UserGame
           .joins(:game)
           .includes(:user)
           .includes(:game)
-          .where("game_id in (?) and user_id != ? and games.status != 2", game_ids.uniq, user.id)
+          .where("game_id IN (?) AND user_id != ? AND games.status != 2", game_ids.uniq, user.id)
       end
     end
 
@@ -27,9 +26,9 @@ module Pages
         game_ids = user.games.where("user_games.creator = false").pluck(:id)
 
         # TODO: turn_count could be cached on Game
-        turns = Turn.where("game_id in (?)", game_ids)
+        turns = Turn.where("game_id IN (?)", game_ids)
           .group("game_id")
-          .select("count(*) as total_count, turns.game_id as game_id")
+          .select("COUNT(*) AS total_count, turns.game_id AS game_id")
         turns = turns.reject { |turn| turn.total_count ==  0 }
         turn_game_ids = turns.map(&:game_id)
 
@@ -37,7 +36,7 @@ module Pages
           .joins(:game)
           .includes(:user)
           .includes(:game)
-          .where("game_id in (?) and user_id != ? and games.status = 0", turn_game_ids, user.id)
+          .where("game_id IN (?) AND user_id != ? AND games.status = 0", turn_game_ids, user.id)
       end
     end
 

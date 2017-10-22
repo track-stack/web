@@ -27,11 +27,8 @@
               <% view.user_games.each do |user_game| %>
                 <li>
                   <img src=<%= user_game.user.image %> width="30" height="30" />
-                  <%= user_game.user.name %>
-                  <% if user_game.game.pending? %>
-                    <small>- waiting</small>
-                  <% end %>
-                  <a href="<%= game_path(user_game.game_id) %>" class="float-right">play</a>
+                  <span><%= user_game.user.name %></span>
+                  <a href="<%= game_path(user_game.game_id) %>" class="float-right btn btn-info">play</a>
                 </li>
               <% end %>
             </ul>
@@ -48,7 +45,7 @@
               <% view.invites.each do |invite| %>
                 <li>
                   <img src=<%= invite.user.image %> width="30" height="30" />
-                  <%= invite.user.name %>
+                  <span><%= invite.user.name %></span>
                   <a href="<%= game_path(invite.game_id) %>" class="btn btn-success float-right">Join</a>
                 </li>
               <% end %>
