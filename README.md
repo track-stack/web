@@ -1,3 +1,5 @@
+<img src="https://circleci.com/gh/track-stack/web.png?circle-token=:circle-token" />
+
 # Track Stack
 
 http://track-stack.herokuapp.com
