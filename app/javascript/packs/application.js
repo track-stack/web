@@ -1,3 +1,3 @@
-/* eslint no-console:0 */
+/*jshint esversion: 6 */
 
 import 'app'

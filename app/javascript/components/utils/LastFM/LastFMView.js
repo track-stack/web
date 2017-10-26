@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 import React, { Component } from 'react';
 
 export default class LastFMView extends React.Component {
