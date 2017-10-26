@@ -25,7 +25,7 @@ class GamesController < ApplicationController
   end
 
   def turn
-    turn = Turn.create(user_id: current_user.id, game_id: game.id, answer: params[:answer])
+    turn = Turn.create(user_id: current_user.id, game_id: game.id, answer: params[:answer], round: round)
     if turn.valid?
       render json: { game: GameSerializer.new(game, viewer: current_user) }
     else
@@ -51,6 +51,12 @@ class GamesController < ApplicationController
 
   def game
     @game ||= Game.find_by(id: params[:id])
+  end
+
+  def round
+    return @round if defined?(@round)
+    @round = Round.find_by(id: params[:round_id]) if params[:round_id]
+    @round ||= game.rounds.last
   end
 
   def invitee
