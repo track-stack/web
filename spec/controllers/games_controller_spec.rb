@@ -6,6 +6,7 @@ RSpec.describe GamesController, type: :controller do
     @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
 
     @game = create(:game)
+    round = create(:round, game: @game)
     @user = create(:user, :facebook)
     user_2 = create(:user, :facebook)
     user_game = create(:user_game, user_id: @user.id, game_id: @game.id)
