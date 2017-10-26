@@ -31,6 +31,17 @@ export default class View extends React.Component {
     this.setState({ answer: "" });
   }
 
+
+  findExactMatches({answer, match}) {
+    const nameRegExp = new RegExp(match.name.toLowerCase())
+    const artistRegExp = new RegExp(match.artist.toLowerCase())
+
+    const nameMatch = answer.toLowerCase().match(nameRegExp) || []
+    const artistMatch = answer.toLowerCase().match(artistRegExp) || []
+
+    return [nameMatch[0], artistMatch[0]]
+  }
+
   render() {
     let UI = null;
 
@@ -53,10 +64,18 @@ export default class View extends React.Component {
       const turns = this.props.game.turns;
       const disabled = false; // turns.length && turns[turns.length - 1].user_id === players.viewer.id
       const turnListItems = turns.map((turn, index) => {
+        const match = turn.match
+        const answer = turn.answer
+        const hasArtistMatch = turn.has_exact_artist_match
+        const hasNameMatch = turn.has_exact_name_match
+        const nameColor = hasNameMatch ? "green" : "red"
+        const artistColor = hasArtistMatch ? "green" : "red"
         return (
           <li key={index}>
             <img src={turn.user_photo} width="30" height="30" />
-            <span>{turn.answer} [<small>matched with: {turn.match.name} by {turn.match.artist}</small>]</span>
+            <strong>{turn.answer}</strong> [ <small>matched with: {turn.match.name} by {turn.match.artist}</small> ]
+            [<small> Name match?: <span style={{color: nameColor}}>{hasArtistMatch.toString()}</span>,
+              Artist match?: <span style={{color: artistColor}}>{turn.has_exact_artist_match.toString()}</span></small>]
           </li>
         )
       });
