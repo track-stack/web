@@ -3,6 +3,7 @@ class Turn < ApplicationRecord
 
   belongs_to :user
   belongs_to :game
+  belongs_to :round
 
   after_create_commit :mark_game_as_playing
 
