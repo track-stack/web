@@ -1,5 +1,4 @@
-<img src="https://circleci.com/gh/track-stack/web.png?circle-token=:circle-token" />
-
+[![CircleCI](https://circleci.com/gh/track-stack/web.svg?style=svg)](https://circleci.com/gh/track-stack/web)
 # Track Stack
 
 http://track-stack.herokuapp.com
