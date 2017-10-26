@@ -46,16 +46,20 @@ RSpec.describe GamesController, type: :controller do
 
   context "#turn" do
     it "redirects to game path if turn is invalid" do
+      match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
+
       sign_in @user
-      post "turn", { params: { id: @game.id }}
+      post "turn", { params: { id: @game.id, match: match, distance: 0 }}
 
       expect(response).to redirect_to(game_path(@game))
     end
 
     context "when turn is valid"
       it "renders status 200" do
+        match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
+
         sign_in @user
-        post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres" }}
+        post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres", match: match, distance: 0 }}
 
         expect(response.status).to eq(200)
       end
@@ -63,8 +67,9 @@ RSpec.describe GamesController, type: :controller do
       it "creates a Turn with valid associations" do
         sign_in @user
 
+        match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
         expect {
-          post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres" }}
+          post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres", distance: 3, match: match }}
         }.to change{ Turn.count }.by(1)
 
         expect(Turn.last.user).to eq(@user)
