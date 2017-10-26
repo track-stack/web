@@ -17,13 +17,18 @@ export default class View extends React.Component {
     this.setState({ answer: value });
   }
 
-  validateAndSubmitAnswer() {
+  validateAndSubmitAnswer(e) {
+    e.preventDefault();
     const {answer} = this.state
 
     // TODO: client side validation
 
     const gameId = this.props.gameId;
     this.props.submitAnswer({gameId, answer})
+
+    // reset input field
+    this.refs.answerField.value = "";
+    this.setState({ answer: "" });
   }
 
   render() {
@@ -45,7 +50,7 @@ export default class View extends React.Component {
       )
 
       const turns = this.props.game.turns;
-      const disabled = turns.length && turns[turns.length - 1].user_id === players.viewer.id
+      const disabled = false; // turns.length && turns[turns.length - 1].user_id === players.viewer.id
       const turnListItems = turns.map((turn, index) => {
         return (
           <li key={index}>
@@ -61,10 +66,26 @@ export default class View extends React.Component {
               {turnListItems}
             </ul>
           </div>
-          <div style={{display: 'flex'}} className="form-group">
-            <input disabled={disabled} className="form-control" type="text" placeholder="Name a song" style={{flex: 1}} onChange={this.onAnswerChange} />
-            <button disabled={disabled} style={{marginLeft: 15}} className="btn btn-success" onClick={this.validateAndSubmitAnswer}>Submit answer</button>
-          </div>
+          <form>
+            <div style={{display: 'flex'}} className="form-group">
+              <input
+                disabled={disabled}
+                className="form-control"
+                type="text"
+                ref="answerField"
+                placeholder="Name a song"
+                style={{flex: 1}}
+                onChange={this.onAnswerChange} />
+
+              <button
+                disabled={disabled}
+                style={{marginLeft: 15}}
+                className="btn btn-success"
+                onClick={this.validateAndSubmitAnswer}>
+                  Submit answer
+              </button>
+            </div>
+          </form>
         </div>
       )
 
