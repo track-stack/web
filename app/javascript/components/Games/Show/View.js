@@ -17,17 +17,23 @@ export default class View extends React.Component {
     this.setState({ answer: value });
   }
 
-  validateAndSubmitAnswer() {
+  validateAndSubmitAnswer(e) {
+    e.preventDefault();
     const {answer} = this.state
 
     // TODO: client side validation
 
     const gameId = this.props.gameId;
     this.props.submitAnswer({gameId, answer})
+
+    // reset input field
+    this.refs.answerField.value = "";
+    this.setState({ answer: "" });
   }
 
   render() {
     let UI = null;
+
     if (this.props.game) {
       const players = this.props.game.players;
       const opponents = (
@@ -47,10 +53,18 @@ export default class View extends React.Component {
       const turns = this.props.game.turns;
       const disabled = turns.length && turns[turns.length - 1].user_id === players.viewer.id
       const turnListItems = turns.map((turn, index) => {
+        const match = turn.match
+        const answer = turn.answer
+        const hasArtistMatch = turn.has_exact_artist_match
+        const hasNameMatch = turn.has_exact_name_match
+        const nameColor = hasNameMatch ? "green" : "red"
+        const artistColor = hasArtistMatch ? "green" : "red"
         return (
           <li key={index}>
             <img src={turn.user_photo} width="30" height="30" />
-            {turn.answer}
+            <strong>{turn.answer}</strong> [ <small>matched with: {turn.match.name} by {turn.match.artist}</small> ]
+            [<small> Name match?: <span style={{color: nameColor}}>{hasArtistMatch.toString()}</span>,
+              Artist match?: <span style={{color: artistColor}}>{turn.has_exact_artist_match.toString()}</span></small>]
           </li>
         )
       });
@@ -61,10 +75,26 @@ export default class View extends React.Component {
               {turnListItems}
             </ul>
           </div>
-          <div style={{display: 'flex'}} className="form-group">
-            <input disabled={disabled} className="form-control" type="text" placeholder="Name a song" style={{flex: 1}} onChange={this.onAnswerChange} />
-            <button disabled={disabled} style={{marginLeft: 15}} className="btn btn-success" onClick={this.validateAndSubmitAnswer}>Submit answer</button>
-          </div>
+          <form>
+            <div style={{display: 'flex'}} className="form-group">
+              <input
+                disabled={disabled}
+                className="form-control"
+                type="text"
+                ref="answerField"
+                placeholder="Name a song"
+                style={{flex: 1}}
+                onChange={this.onAnswerChange} />
+
+              <button
+                disabled={disabled}
+                style={{marginLeft: 15}}
+                className="btn btn-success"
+                onClick={this.validateAndSubmitAnswer}>
+                  Submit answer
+              </button>
+            </div>
+          </form>
         </div>
       )
 

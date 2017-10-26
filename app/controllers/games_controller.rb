@@ -25,7 +25,20 @@ class GamesController < ApplicationController
   end
 
   def turn
-    turn = Turn.create(user_id: current_user.id, game_id: game.id, answer: params[:answer], round: round)
+    match = params[:match]
+    distance = params[:distance]
+    answer = params[:answer]
+    match = sanitize_match(params[:match])
+
+    turn = Turn.create(
+      user_id: current_user.id,
+      game_id: game.id,
+      round: round,
+      answer: params[:answer],
+      match: sanitize_match(params[:match]),
+      distance: params[:distance]
+    )
+
     if turn.valid?
       render json: { game: GameSerializer.new(game, viewer: current_user) }
     else
@@ -35,6 +48,14 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def sanitize_match(match)
+    name = match["name"]
+    artist = match["artist"]
+    image = match["image"].last["#text"]
+
+    { name: name, artist: artist, image: image }
+  end
 
   def validate_viewer_in_game
     unless game
