@@ -55,16 +55,16 @@ export default class View extends React.Component {
       const turnListItems = turns.map((turn, index) => {
         const match = turn.match
         const answer = turn.answer
-        const hasArtistMatch = turn.has_exact_artist_match
         const hasNameMatch = turn.has_exact_name_match
+        const hasArtistMatch = turn.has_exact_artist_match
         const nameColor = hasNameMatch ? "green" : "red"
         const artistColor = hasArtistMatch ? "green" : "red"
         return (
           <li key={index}>
             <img src={turn.user_photo} width="30" height="30" />
             <strong>{turn.answer}</strong> [ <small>matched with: {turn.match.name} by {turn.match.artist}</small> ]
-            [<small> Name match?: <span style={{color: nameColor}}>{hasArtistMatch.toString()}</span>,
-              Artist match?: <span style={{color: artistColor}}>{turn.has_exact_artist_match.toString()}</span></small>]
+            [<small> Name match?: <span style={{color: nameColor}}>{hasNameMatch.toString()}</span>,
+              Artist match?: <span style={{color: artistColor}}>{hasArtistMatch.toString()}</span></small>]
           </li>
         )
       });
