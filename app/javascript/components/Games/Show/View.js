@@ -4,7 +4,7 @@ export default class View extends React.Component {
   constructor(props) {
     super(props)
     this.state = { answer: "", fetchGameTimer: setInterval(() => {
-      this.props.fetchGame(this.props.gameId)
+      // this.props.fetchGame(this.props.gameId)
     }, 3000)}
     this.props.fetchGame(this.props.gameId)
 
@@ -33,6 +33,7 @@ export default class View extends React.Component {
 
   render() {
     let UI = null;
+
     if (this.props.game) {
       const players = this.props.game.players;
       const opponents = (
@@ -55,7 +56,7 @@ export default class View extends React.Component {
         return (
           <li key={index}>
             <img src={turn.user_photo} width="30" height="30" />
-            {turn.answer}
+            <span>{turn.answer} [<small>matched with: {turn.match.name} by {turn.match.artist}</small>]</span>
           </li>
         )
       });
