@@ -4,7 +4,7 @@ export default class View extends React.Component {
   constructor(props) {
     super(props)
     this.state = { answer: "", fetchGameTimer: setInterval(() => {
-      // this.props.fetchGame(this.props.gameId)
+      this.props.fetchGame(this.props.gameId)
     }, 3000)}
     this.props.fetchGame(this.props.gameId)
 
@@ -31,17 +31,6 @@ export default class View extends React.Component {
     this.setState({ answer: "" });
   }
 
-
-  findExactMatches({answer, match}) {
-    const nameRegExp = new RegExp(match.name.toLowerCase())
-    const artistRegExp = new RegExp(match.artist.toLowerCase())
-
-    const nameMatch = answer.toLowerCase().match(nameRegExp) || []
-    const artistMatch = answer.toLowerCase().match(artistRegExp) || []
-
-    return [nameMatch[0], artistMatch[0]]
-  }
-
   render() {
     let UI = null;
 
@@ -62,7 +51,7 @@ export default class View extends React.Component {
       )
 
       const turns = this.props.game.turns;
-      const disabled = false; // turns.length && turns[turns.length - 1].user_id === players.viewer.id
+      const disabled = turns.length && turns[turns.length - 1].user_id === players.viewer.id
       const turnListItems = turns.map((turn, index) => {
         const match = turn.match
         const answer = turn.answer

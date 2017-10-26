@@ -33,10 +33,10 @@ class GamesController < ApplicationController
     turn = Turn.create(
       user_id: current_user.id,
       game_id: game.id,
-      answer: answer,
-      match: match,
-      distance: distance,
-      round: round
+      round: round,
+      answer: params[:answer],
+      match: sanitize_match(params[:match]),
+      distance: params[:distance]
     )
 
     if turn.valid?
