@@ -11,9 +11,12 @@
     "react-redux-router": "^0.0.5",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "trackstack": "^0.0.18"
+    "trackstack": "^0.0.19"
   },
   "devDependencies": {
+    "@types/node": "^8.0.47",
+    "ts-loader": "^3.1.0",
+    "typescript": "^2.5.3",
     "webpack-dev-server": "^2.7.1"
   },
   "engines": {

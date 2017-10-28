@@ -32,7 +32,6 @@ export default class FriendFinderView extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const friends = this.state.friends.map((friend, idx) => {
       return (
         <li key={idx} onClick={ () => { this.handleClick(friend) }}>

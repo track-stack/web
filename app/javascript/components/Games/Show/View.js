@@ -37,6 +37,7 @@ export default class View extends React.Component {
     let UI = null;
 
     if (this.props.game) {
+      console.log(this.props.game)
       const players = this.props.game.players;
       const opponents = (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
@@ -53,17 +54,17 @@ export default class View extends React.Component {
       )
 
       const turns = this.props.game.turns;
-      const disabled = turns.length && turns[turns.length - 1].user_id === players.viewer.id
+      const disabled = turns.length && turns[turns.length - 1].userId === players.viewer.id
       const turnListItems = turns.map((turn, index) => {
         const match = turn.match
         const answer = turn.answer
-        const hasNameMatch = turn.has_exact_name_match
-        const hasArtistMatch = turn.has_exact_artist_match
+        const hasNameMatch = turn.hasExactNameMatch
+        const hasArtistMatch = turn.hasExactArtistMatch
         const nameColor = hasNameMatch ? "green" : "red"
         const artistColor = hasArtistMatch ? "green" : "red"
         return (
           <li key={index}>
-            <img src={turn.user_photo} width="30" height="30" />
+            <img src={turn.userPhoto} width="30" height="30" />
             <strong>{turn.answer}</strong> [ <small>matched with: {turn.match.name} by {turn.match.artist}</small> ]
             [<small> Name match?: <span style={{color: nameColor}}>{hasNameMatch.toString()}</span>,
               Artist match?: <span style={{color: artistColor}}>{hasArtistMatch.toString()}</span></small>]
