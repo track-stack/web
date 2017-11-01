@@ -11,7 +11,7 @@
     "react-redux-router": "^0.0.5",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "trackstack": "^0.0.20"
+    "trackstack": "^0.0.22"
   },
   "devDependencies": {
     "@types/node": "^8.0.47",
@@ -20,7 +20,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "engines": {
-    "node": "8.4.0",
-    "yarn": "0.27.5"
+    "node": "8.8.0",
+    "yarn": "1.2.1"
   }
 }

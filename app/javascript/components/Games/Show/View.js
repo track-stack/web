@@ -37,7 +37,6 @@ export default class View extends React.Component {
     let UI = null;
 
     if (this.props.game) {
-      console.log(this.props.game)
       const players = this.props.game.players;
       const opponents = (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
