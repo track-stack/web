@@ -49,7 +49,7 @@ RSpec.describe GamesController, type: :controller do
       match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
 
       sign_in @user
-      post "turn", { params: { id: @game.id, match: match, distance: 0 }}
+      post "turn", { params: { id: @game.id, match: match }}
 
       expect(response).to redirect_to(game_path(@game))
     end
@@ -59,7 +59,7 @@ RSpec.describe GamesController, type: :controller do
         match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
 
         sign_in @user
-        post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres", match: match, distance: 0 }}
+        post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres", match: match }}
 
         expect(response.status).to eq(200)
       end
@@ -69,7 +69,7 @@ RSpec.describe GamesController, type: :controller do
 
         match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
         expect {
-          post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres", distance: 3, match: match }}
+          post "turn", { params: { id: @game.id, answer: "Concrete Ganesha by Torres", match: match }}
         }.to change{ Turn.count }.by(1)
 
         expect(Turn.last.user).to eq(@user)
