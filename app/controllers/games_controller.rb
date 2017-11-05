@@ -26,7 +26,6 @@ class GamesController < ApplicationController
 
   def turn
     match = params[:match]
-    distance = params[:distance]
     answer = params[:answer]
     match = sanitize_match(params[:match])
 
@@ -35,8 +34,7 @@ class GamesController < ApplicationController
       game_id: game.id,
       round: round,
       answer: params[:answer],
-      match: sanitize_match(params[:match]),
-      distance: params[:distance]
+      match: sanitize_match(params[:match])
     )
 
     if turn.valid?

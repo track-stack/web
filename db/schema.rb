@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026044857) do
+ActiveRecord::Schema.define(version: 20171105161150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,10 +37,8 @@ ActiveRecord::Schema.define(version: 20171026044857) do
     t.datetime "updated_at", null: false
     t.integer "round_id"
     t.json "match"
-    t.integer "distance"
     t.string "exact_name_match"
     t.string "exact_artist_match"
-    t.index ["distance"], name: "index_turns_on_distance"
     t.index ["exact_artist_match"], name: "index_turns_on_exact_artist_match"
     t.index ["exact_name_match"], name: "index_turns_on_exact_name_match"
     t.index ["game_id"], name: "index_turns_on_game_id"
