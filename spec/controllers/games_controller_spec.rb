@@ -6,7 +6,7 @@ RSpec.describe GamesController, type: :controller do
     @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
 
     @game = create(:game)
-    round = create(:round, game: @game)
+    @round = create(:round, game: @game)
     @user = create(:user, :facebook)
     user_2 = create(:user, :facebook)
     user_game = create(:user_game, user_id: @user.id, game_id: @game.id)
@@ -41,6 +41,18 @@ RSpec.describe GamesController, type: :controller do
 
       expect(response.status).to eq(200)
       expect(flash[:error]).to be_nil
+    end
+
+    it "renders game json" do
+      turn = create(:turn, game: @game, user: @user, round: @round)
+      sign_in @user
+      get "show", { params: { id: @game.id }, xhr: true}
+
+      json = JSON.parse(response.body)
+      game = json["game"]
+      rounds = game["rounds"]
+      expect(rounds.count).to equal(1)
+      expect(rounds.first["turns"].count).to equal(1)
     end
   end
 

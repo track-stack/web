@@ -52,7 +52,9 @@ export default class View extends React.Component {
         </div>
       )
 
-      const turns = this.props.game.turns;
+      const turns = this.props.game.rounds.reduce((acc, round) => {
+        return acc.concat(round.turns)
+      }, [])
       const disabled = turns.length && turns[turns.length - 1].userId === players.viewer.id
       const turnListItems = turns.map((turn, index) => {
         const match = turn.match

@@ -1,7 +1,7 @@
 class GameSerializer < ActiveModel::Serializer
   attributes :id, :status, :players
 
-  has_many :turns
+  has_many :rounds
 
   def players
     user_games = UserGame.includes(:user).where(game_id: object.id)
