@@ -26,7 +26,6 @@ RSpec.describe Turn, type: :model do
       user_2 = create(:user, :facebook)
       game = create(:game, status: 0)
       round = create(:round, game: game)
-
       turn = create(:turn,
         game: game,
         user: user,
