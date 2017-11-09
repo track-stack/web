@@ -1,7 +1,5 @@
 class RoundSerializer < ActiveModel::Serializer
-  attributes :game_id, :turn_count
+  attributes :game_id
 
-  def turn_count
-    object.turns.count
-  end
+  has_many :turns
 end

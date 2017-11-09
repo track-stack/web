@@ -43,13 +43,12 @@ RSpec.describe GamesController, type: :controller do
       expect(flash[:error]).to be_nil
     end
 
-    fit "renders game json" do
+    it "renders game json" do
       turn = create(:turn, game: @game, user: @user, round: @round)
       sign_in @user
       get "show", { params: { id: @game.id }, xhr: true}
 
       json = JSON.parse(response.body)
-      binding.pry
       game = json["game"]
       rounds = game["rounds"]
       expect(rounds.count).to equal(1)
