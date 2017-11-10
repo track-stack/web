@@ -35,7 +35,7 @@ RSpec.describe Turn, type: :model do
       )
 
       expect(turn.exact_artist_match).to eq("james taylor")
-      expect(turn.exact_name_match).to eq("something in the way she moves")
+      expect(turn.exact_name_match).to eq("something way she moves")
     end
   end
 
