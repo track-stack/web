@@ -1,6 +1,51 @@
 /*jshint esversion: 6 */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
+class PlayersView extends React.Component {
+  render() {
+    const players = this.props.players
+    return (
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <div style={{marginLeft:8, marginRight: 8}}>
+          <img src={players.viewer.image} width="50" height="50" />
+          <p style={{display: 'none'}} className="float-left"><strong>{players.viewer.name}</strong></p>
+        </div>
+        <p style={{margin: 0}}><strong>VS.</strong></p>
+        <div style={{marginLeft:8, marginRight: 8}}>
+          <img src={players.opponent.image} width="50" height="50" />
+          <p style={{display: 'none'}} className="float-left"><strong>{players.opponent.name}</strong></p>
+        </div>
+      </div>
+    )
+  }
+}
+
+class TurnsListView extends React.Component {
+  render() {
+    const turns = this.props.turns
+    const turnListItems = turns.map((turn, index) => {
+      const match = turn.match
+      const answer = turn.answer
+      const hasNameMatch = turn.hasExactNameMatch
+      const hasArtistMatch = turn.hasExactArtistMatch
+      const nameColor = hasNameMatch ? "green" : "red"
+      const artistColor = hasArtistMatch ? "green" : "red"
+      return (
+        <ul className="list-unstyled">
+          <li key={index}>
+            <img src={turn.userPhoto} width="30" height="30" />
+            <strong>{match.name} - {match.artist}</strong> [ <small>input: {turn.answer}</small> ]
+            [<small> Name match?: <span style={{color: nameColor}}>{hasNameMatch.toString()}</span>,
+              Artist match?: <span style={{color: artistColor}}>{hasArtistMatch.toString()}</span></small>]
+          </li>
+         </ul>
+      )
+    });
+
+    return turnListItems
+  }
+}
 
 export default class View extends React.Component {
   constructor(props) {
@@ -15,8 +60,8 @@ export default class View extends React.Component {
   }
 
   onAnswerChange(e) {
-    const value = e.currentTarget.value;
-    this.setState({ answer: value });
+    const value = e.currentTarget.value
+    this.setState({ answer: value })
   }
 
   validateAndSubmitAnswer(e) {
@@ -29,56 +74,30 @@ export default class View extends React.Component {
     this.props.submitAnswer({gameId, answer})
 
     // reset input field
-    this.refs.answerField.value = "";
-    this.setState({ answer: "" });
+    this.refs.answerField.value = ""
+    this.setState({ answer: "" })
   }
 
   render() {
-    let UI = null;
+    let UI = null
 
     if (this.props.game) {
-      const players = this.props.game.players;
-      const opponents = (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <div style={{marginLeft:8, marginRight: 8}}>
-            <img src={players.viewer.image} width="50" height="50" />
-            <p style={{display: 'none'}} className="float-left"><strong>{players.viewer.name}</strong></p>
-          </div>
-          <p style={{margin: 0}}><strong>VS.</strong></p>
-          <div style={{marginLeft:8, marginRight: 8}}>
-            <img src={players.opponent.image} width="50" height="50" />
-            <p style={{display: 'none'}} className="float-left"><strong>{players.opponent.name}</strong></p>
-          </div>
-        </div>
-      )
 
+      const players = this.props.game.players
       const turns = this.props.game.rounds.reduce((acc, round) => {
         return acc.concat(round.turns)
       }, [])
+
       const disabled = turns.length && turns[turns.length - 1].userId === players.viewer.id
-      const turnListItems = turns.map((turn, index) => {
-        const match = turn.match
-        const answer = turn.answer
-        const hasNameMatch = turn.hasExactNameMatch
-        const hasArtistMatch = turn.hasExactArtistMatch
-        const nameColor = hasNameMatch ? "green" : "red"
-        const artistColor = hasArtistMatch ? "green" : "red"
-        return (
-          <li key={index}>
-            <img src={turn.userPhoto} width="30" height="30" />
-            <strong>{turn.answer}</strong> [ <small>matched with: {turn.match.name} by {turn.match.artist}</small> ]
-            [<small> Name match?: <span style={{color: nameColor}}>{hasNameMatch.toString()}</span>,
-              Artist match?: <span style={{color: artistColor}}>{hasArtistMatch.toString()}</span></small>]
-          </li>
-        )
-      });
-      const turnsUI = (
+
+      UI = (
         <div>
-          <div className="friends-list">
-            <ul className="list-unstyled">
-              {turnListItems}
-            </ul>
+          <div style={{paddingTop: 20, paddingBottom: 16}}>
+            <PlayersView players={players} />
           </div>
+          <div className="friends-list">
+            <TurnsListView turns={turns} />
+          </div> 
           <form>
             <div style={{display: 'flex'}} className="form-group">
               <input
@@ -99,15 +118,6 @@ export default class View extends React.Component {
               </button>
             </div>
           </form>
-        </div>
-      )
-
-      UI = (
-        <div>
-          <div style={{paddingTop: 20, paddingBottom: 16}}>
-            {opponents}
-          </div>
-          {turnsUI}
         </div>
       )
     }

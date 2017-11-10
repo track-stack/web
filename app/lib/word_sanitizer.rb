@@ -1,6 +1,11 @@
 module WordSanitizer
   BLACKLIST = "a|an|and|the|in"
 
+  # Public: Returns a transformed string
+  #
+  # result - the string to transform
+  #
+  # Returns String
   def sanitize_result(result)
     result = result.downcase
 
