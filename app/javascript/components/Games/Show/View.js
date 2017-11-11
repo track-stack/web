@@ -32,18 +32,20 @@ class TurnsListView extends React.Component {
       const nameColor = hasNameMatch ? "green" : "red"
       const artistColor = hasArtistMatch ? "green" : "red"
       return (
-        <ul className="list-unstyled">
-          <li key={index}>
-            <img src={turn.userPhoto} width="30" height="30" />
-            <strong>{match.name} - {match.artist}</strong> [ <small>input: {turn.answer}</small> ]
-            [<small> Name match?: <span style={{color: nameColor}}>{hasNameMatch.toString()}</span>,
-              Artist match?: <span style={{color: artistColor}}>{hasArtistMatch.toString()}</span></small>]
-          </li>
-         </ul>
+        <li key={index}>
+          <img src={turn.userPhoto} width="30" height="30" />
+          <strong>{match.name} - {match.artist}</strong> [ <small>input: {turn.answer}</small> ]
+          [<small> Name match?: <span style={{color: nameColor}}>{hasNameMatch.toString()}</span>,
+            Artist match?: <span style={{color: artistColor}}>{hasArtistMatch.toString()}</span></small>]
+        </li>
       )
     });
 
-    return turnListItems
+    return (
+      <ul className="list-unstyled">
+        {turnListItems}
+      </ul>
+    )
   }
 }
 
@@ -68,10 +70,10 @@ export default class View extends React.Component {
     e.preventDefault();
     const {answer} = this.state
 
-    // TODO: client side validation
-
     const gameId = this.props.gameId;
-    this.props.submitAnswer({gameId, answer})
+
+    const previousAnswer = this.props.game.latestTurn().answer
+    this.props.submitAnswer({gameId, answer, previousAnswer})
 
     // reset input field
     this.refs.answerField.value = ""
@@ -88,7 +90,7 @@ export default class View extends React.Component {
         return acc.concat(round.turns)
       }, [])
 
-      const disabled = turns.length && turns[turns.length - 1].userId === players.viewer.id
+      const disabled = false // turns.length && turns[turns.length - 1].userId === players.viewer.id
 
       UI = (
         <div>

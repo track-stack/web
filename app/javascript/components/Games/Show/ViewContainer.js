@@ -19,8 +19,8 @@ const mapDispatchToProps = dispatch => {
     fetchGame: (gameId) => {
       dispatch(fetchGame(gameId))
     },
-    submitAnswer: ({gameId, answer}) => {
-      dispatch(submitAnswer({gameId, answer}))
+    submitAnswer: ({gameId, answer, previousAnswer}) => {
+      dispatch(submitAnswer({gameId, answer, previousAnswer}))
     }
   }
 }
