@@ -10,6 +10,7 @@ const { fetchGame, submitAnswer } = actions;
 const mapStateToProps = state => {
   return {
     game: state.main.game,
+    error: state.main.error,
     gameId: window.gameId
   }
 }
@@ -19,8 +20,8 @@ const mapDispatchToProps = dispatch => {
     fetchGame: (gameId) => {
       dispatch(fetchGame(gameId))
     },
-    submitAnswer: ({gameId, answer, previousAnswer}) => {
-      dispatch(submitAnswer({gameId, answer, previousAnswer}))
+    submitAnswer: ({gameId, answer, previousTurn}) => {
+      dispatch(submitAnswer({gameId, answer, previousTurn}))
     }
   }
 }

@@ -27,8 +27,8 @@ export default class View extends React.Component {
 
     const gameId = this.props.gameId;
 
-    const previousAnswer = this.props.game.latestTurn().answer
-    this.props.submitAnswer({gameId, answer, previousAnswer})
+    const previousTurn = this.props.game.latestTurn()
+    this.props.submitAnswer({gameId, answer, previousTurn})
 
     // reset input field
     this.refs.answerField.value = ""
@@ -37,6 +37,10 @@ export default class View extends React.Component {
 
   render() {
     let UI = null
+
+    if (this.props.error) {
+      console.log(error)
+    }
 
     if (this.props.game) {
       const players = this.props.game.players
@@ -52,6 +56,9 @@ export default class View extends React.Component {
           <div style={{paddingTop: 20, paddingBottom: 16}}>
             <PlayersView players={players} />
           </div>
+          <div className="friends-list">
+            <TurnsListView turns={turns} />
+          </div> 
           <form>
             <div style={{display: 'flex'}} className="form-group">
               <input
@@ -72,9 +79,6 @@ export default class View extends React.Component {
               </button>
             </div>
           </form>
-          <div className="friends-list">
-            <TurnsListView turns={turns} />
-          </div> 
         </div>
       )
     }

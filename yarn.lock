@@ -5012,6 +5012,10 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
+stem-porter@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/stem-porter/-/stem-porter-0.0.1.tgz#591a8b0d696c34252af593535228430a34de7001"
+
 stream-browserify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.1.tgz#66266ee5f9bdb9940a4e4514cafb43bb71e5c9db"
@@ -5200,13 +5204,14 @@ tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   dependencies:
     punycode "^1.4.1"
 
-trackstack@^0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/trackstack/-/trackstack-0.0.24.tgz#6db7eaa63bea43375f5e207baaf4e0483ac13b7b"
+trackstack@^0.0.26:
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/trackstack/-/trackstack-0.0.26.tgz#b27a23bcf9d13d54af6ebcc0373656dcdb81428b"
   dependencies:
     levenshtein "^1.0.5"
     redux "^3.7.2"
     redux-thunk "^2.2.0"
+    stem-porter "^0.0.1"
 
 trim-newlines@^1.0.0:
   version "1.0.0"
