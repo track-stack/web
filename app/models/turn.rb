@@ -1,4 +1,6 @@
 class Turn < ApplicationRecord
+  include WordSanitizer
+
   validates :answer, presence: true
 
   belongs_to :user
@@ -28,11 +30,13 @@ class Turn < ApplicationRecord
     end
   end
 
+  # Relies on implicit save that occurs right after this method
   def find_exact_matches
-    name = match["name"].downcase
-    artist = match["artist"].downcase
+    name = sanitize_result(match["name"])
+    artist = sanitize_result(match["artist"])
+    sanitized_answer = sanitize_result(answer)
 
-    self.exact_name_match = /#{name}/.match(answer.downcase).to_a.first
-    self.exact_artist_match = /#{artist}/.match(answer.downcase).to_a.first
+    self.exact_name_match = /#{name}/.match(sanitized_answer).to_a.first
+    self.exact_artist_match = /#{artist}/.match(sanitized_answer).to_a.first
   end
 end

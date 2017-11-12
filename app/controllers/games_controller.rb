@@ -39,7 +39,8 @@ class GamesController < ApplicationController
     )
 
     if turn.valid?
-      render json: { game: GameSerializer.new(game, viewer: current_user) }
+      render json: { game: GameSerializer.new(game, viewer: current_user), },
+        include: 'rounds.turns'
     else
       flash[:error] = "❌ Your answer was not submitted. Please try again."
       return redirect_back(fallback_location: game_path(game))
