@@ -49,7 +49,7 @@ export default class View extends React.Component {
       }, [])
 
       // same player can't go twice in a row
-      const disabled = false // turns.length && turns[turns.length - 1].userId === players.viewer.id
+      const disabled = turns.length && turns[turns.length - 1].userId === players.viewer.id
 
       UI = (
         <div>
