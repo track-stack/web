@@ -97,9 +97,6 @@ export default class View extends React.Component {
           <div style={{paddingTop: 20, paddingBottom: 16}}>
             <PlayersView players={players} />
           </div>
-          <div className="friends-list">
-            <TurnsListView turns={turns} />
-          </div> 
           <form>
             <div style={{display: 'flex'}} className="form-group">
               <input
@@ -120,6 +117,9 @@ export default class View extends React.Component {
               </button>
             </div>
           </form>
+          <div className="friends-list">
+            <TurnsListView turns={turns} />
+          </div> 
         </div>
       )
     }
