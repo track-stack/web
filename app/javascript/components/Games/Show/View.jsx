@@ -1,53 +1,8 @@
 /*jshint esversion: 6 */
 
 import React, { Component } from 'react'
-
-class PlayersView extends React.Component {
-  render() {
-    const players = this.props.players
-    return (
-      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <div style={{marginLeft:8, marginRight: 8}}>
-          <img src={players.viewer.image} width="50" height="50" />
-          <p style={{display: 'none'}} className="float-left"><strong>{players.viewer.name}</strong></p>
-        </div>
-        <p style={{margin: 0}}><strong>VS.</strong></p>
-        <div style={{marginLeft:8, marginRight: 8}}>
-          <img src={players.opponent.image} width="50" height="50" />
-          <p style={{display: 'none'}} className="float-left"><strong>{players.opponent.name}</strong></p>
-        </div>
-      </div>
-    )
-  }
-}
-
-class TurnsListView extends React.Component {
-  render() {
-    const turns = this.props.turns
-    const turnListItems = turns.map((turn, index) => {
-      const match = turn.match
-      const answer = turn.answer
-      const hasNameMatch = turn.hasExactNameMatch
-      const hasArtistMatch = turn.hasExactArtistMatch
-      const nameColor = hasNameMatch ? "green" : "red"
-      const artistColor = hasArtistMatch ? "green" : "red"
-      return (
-        <li key={index}>
-          <img src={turn.userPhoto} width="30" height="30" />
-          <strong>{match.name} - {match.artist}</strong> [ <small>input: {turn.answer}</small> ]
-          [<small> Name match?: <span style={{color: nameColor}}>{hasNameMatch.toString()}</span>,
-            Artist match?: <span style={{color: artistColor}}>{hasArtistMatch.toString()}</span></small>]
-        </li>
-      )
-    });
-
-    return (
-      <ul className="list-unstyled">
-        {turnListItems}
-      </ul>
-    )
-  }
-}
+import TurnsListView from './TurnsListView'
+import PlayersView from './PlayersView'
 
 export default class View extends React.Component {
   constructor(props) {
@@ -84,12 +39,12 @@ export default class View extends React.Component {
     let UI = null
 
     if (this.props.game) {
-
       const players = this.props.game.players
       const turns = this.props.game.rounds.reduce((acc, round) => {
         return acc.concat(round.turns)
       }, [])
 
+      // same player can't go twice in a row
       const disabled = false // turns.length && turns[turns.length - 1].userId === players.viewer.id
 
       UI = (
