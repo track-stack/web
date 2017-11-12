@@ -13,6 +13,9 @@ module WordSanitizer
     # to the result like so: (featuring beep and boop...)
     result = result.gsub(/[\(\)\[\]]/, "")
 
+    # remove all . and ' and replace them with ""
+    result = result.gsub(/[.']/, "")
+
     # remove all - or _ and replace them with " "
     result = result.gsub(/[-_]/, " ")
 
