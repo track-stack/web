@@ -71,7 +71,8 @@ class GamesController < ApplicationController
   end
 
   def game
-    @game ||= Game.find_by(id: params[:id])
+    includes = {rounds: [{turns: [:user]}]}
+    @game ||= Game.includes(includes).find_by(id: params[:id])
   end
 
   def round
