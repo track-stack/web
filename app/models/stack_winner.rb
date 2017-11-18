@@ -1,0 +1,2 @@
+class StackWinner < ApplicationRecord
+end
