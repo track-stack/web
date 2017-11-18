@@ -14,7 +14,7 @@ RSpec.describe Pages::IndexView, type: :view_model do
     create(:user_game, user_id: @user.id, game_id: @opponent_game.id, creator: false)
     create(:user_game, user_id: @user_2.id, game_id: @opponent_game.id, creator: true)
 
-    @stack = create(:stack, game: @user_game)
+    @round = create(:round, game: @user_game)
   end
 
   context "#user_games" do
@@ -58,8 +58,8 @@ RSpec.describe Pages::IndexView, type: :view_model do
       view = Pages::IndexView.new(user: @user)
       expect(view.invites.count).to eq(0)
 
-      create(:turn, user: User.bot, game: @opponent_game, stack: @stack)
-      create(:turn, user: @user, game: @opponent_game, stack: @stack)
+      create(:turn, user: User.bot, game: @opponent_game, round: @round)
+      create(:turn, user: @user, game: @opponent_game, round: @round)
 
       view = Pages::IndexView.new(user: @user)
       expect(view.invites.count).to eq(1)
@@ -69,7 +69,7 @@ RSpec.describe Pages::IndexView, type: :view_model do
       view = Pages::IndexView.new(user: @user)
       expect(view.invites.count).to eq(0)
 
-      create(:turn, user: @user, game: @user_game, stack: @stack)
+      create(:turn, user: @user, game: @user_game, round: @round)
 
       view = Pages::IndexView.new(user: @user)
       expect(view.invites.count).to eq(0)

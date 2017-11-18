@@ -6,7 +6,7 @@ class Turn < ApplicationRecord
 
   belongs_to :user
   belongs_to :game
-  belongs_to :stack
+  belongs_to :round
 
   after_create_commit :mark_game_as_playing
   before_create :find_exact_matches
@@ -17,7 +17,7 @@ class Turn < ApplicationRecord
 
   def has_exact_name_match?
     !exact_name_match.nil?
-end
+  end
 
   def self.random
     track = generate_track

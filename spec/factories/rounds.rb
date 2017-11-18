@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :stack do
+  factory :round do
     game_id 1
   end
 end
