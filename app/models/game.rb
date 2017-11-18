@@ -3,7 +3,7 @@ class Game < ApplicationRecord
   has_many :user_games, dependent: :destroy
   has_many :players, through: :user_games
   has_many :turns, dependent: :destroy
-  has_many :rounds, dependent: :destroy
+  has_many :stacks, dependent: :destroy
 
   scope :pending, -> { where(status: 0) }
   scope :playing, -> { where(status: 1) }
@@ -28,7 +28,7 @@ class Game < ApplicationRecord
   def self.from(user:, invitee:)
     ActiveRecord::Base.transaction do
       game = Game.create
-      round = Round.create(game: game)
+      Stack.create(game: game)
       UserGame.create(user_id: user.id, game_id: game.id, creator: true)
       UserGame.create(user_id: invitee.id, game_id: game.id, creator: false)
       game
