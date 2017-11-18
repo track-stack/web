@@ -26,6 +26,20 @@ RSpec.configure do |config|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
 
+  config.before(:each) do
+    bot = create(:user, email: "bot@trackstack.com")
+    stub_const("User::BOT", bot)
+    allow(Turn).to receive(:random) {
+      Turn.new(
+        answer: "I Bet You Look Good on the Dancefloor - Arctic Monkeys",
+        match: {
+          name: "I Bet You Look Good on the Dancefloor - Arctic Monkeys",
+          artist: "Arctic Monkeys"
+        }
+        )
+    }
+  end
+
   config.use_transactional_fixtures = true
 
   config.include AuthHelper

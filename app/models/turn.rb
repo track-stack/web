@@ -19,8 +19,8 @@ class Turn < ApplicationRecord
     !exact_name_match.nil?
   end
 
-  def self.random()
-    track = generate_track()
+  def self.random
+    track = generate_track
     name = track["name"]
     artist = track["artist"]["name"]
     image = track["image"].last["#text"]
@@ -35,7 +35,7 @@ class Turn < ApplicationRecord
   private
 
   def mark_game_as_playing
-    if game.status == 0 && game.turns.count > 1
+    if game.status == 0 && game.turns.count > 2
       begin
         game.set_playing!
       rescue

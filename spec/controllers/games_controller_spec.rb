@@ -45,6 +45,7 @@ RSpec.describe GamesController, type: :controller do
 
     it "renders game json" do
       turn = create(:turn, game: @game, user: @user, round: @round)
+
       sign_in @user
       get "show", { params: { id: @game.id }, xhr: true}
 
@@ -52,7 +53,7 @@ RSpec.describe GamesController, type: :controller do
       game = json["game"]
       rounds = game["rounds"]
       expect(rounds.count).to equal(1)
-      expect(rounds.first["turns"].count).to equal(1)
+      expect(rounds.first["turns"].count).to eq(2)
     end
   end
 
