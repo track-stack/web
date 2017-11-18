@@ -8,7 +8,7 @@ class Round < ApplicationRecord
 
   def generate_turn
     turn = Turn.random()
-    turn.user = User::BOT
+    turn.user = User.bot
     turn.game = self.game
     turn.round = self
     turn.save

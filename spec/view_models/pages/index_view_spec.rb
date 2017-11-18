@@ -58,7 +58,7 @@ RSpec.describe Pages::IndexView, type: :view_model do
       view = Pages::IndexView.new(user: @user)
       expect(view.invites.count).to eq(0)
 
-      create(:turn, user: User::BOT, game: @opponent_game, round: @round)
+      create(:turn, user: User.bot, game: @opponent_game, round: @round)
       create(:turn, user: @user, game: @opponent_game, round: @round)
 
       view = Pages::IndexView.new(user: @user)
