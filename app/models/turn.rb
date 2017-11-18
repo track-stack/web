@@ -17,7 +17,7 @@ class Turn < ApplicationRecord
 
   def has_exact_name_match?
     !exact_name_match.nil?
-end
+  end
 
   def self.random
     track = generate_track

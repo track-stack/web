@@ -38,18 +38,15 @@ export default class View extends React.Component {
   render() {
     let UI = null
 
-
     if (this.props.error) {
       console.log(error)
     }
 
     if (this.props.game) {
       const players = this.props.game.players
-      console.log(this.props.game.stacks[0].turns)
       const turns = this.props.game.stacks.reduce((acc, stack) => {
         return acc.concat(stack.turns)
       }, [])
-
 
       // same player can't go twice in a row
       const disabled = turns.length && turns[turns.length - 1].userId === players.viewer.id

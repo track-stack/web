@@ -43,19 +43,17 @@ RSpec.describe GamesController, type: :controller do
       expect(flash[:error]).to be_nil
     end
 
-    context "json" do
-      it "renders game json" do
-        turn = create(:turn, game: @game, user: @user, stack: @stack)
+    it "renders game json" do
+      turn = create(:turn, game: @game, user: @user, stack: @stack)
 
-        sign_in @user
-        get "show", { params: { id: @game.id }, xhr: true}
+      sign_in @user
+      get "show", { params: { id: @game.id }, xhr: true}
 
-        json = JSON.parse(response.body)
-        game = json["game"]
-        stacks = game["stacks"]
-        expect(stacks.count).to equal(1)
-        expect(stacks.first["turns"].count).to eq(2)
-      end
+      json = JSON.parse(response.body)
+      game = json["game"]
+      stacks = game["stacks"]
+      expect(stacks.count).to equal(1)
+      expect(stacks.first["turns"].count).to eq(2)
     end
   end
 
