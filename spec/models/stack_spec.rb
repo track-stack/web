@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Round, type: :model do
+RSpec.describe Stack, type: :model do
 
   it { should have_many(:turns) }
   it { should belong_to(:game) }
@@ -8,9 +8,9 @@ RSpec.describe Round, type: :model do
   context "#after_create" do
     it "generates a random turn" do
       game = create(:game)
-      round = Round.create(game: game)
+      stack = Stack.create(game: game)
 
-      expect(round.turns.count).to eq(1)
+      expect(stack.turns.count).to eq(1)
     end
   end
 end

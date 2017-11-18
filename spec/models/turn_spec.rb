@@ -3,21 +3,21 @@ require 'rails_helper'
 RSpec.describe Turn, type: :model do
   it { should belong_to(:user) }
   it { should belong_to(:game) }
-  it { should belong_to(:round) }
+  it { should belong_to(:stack) }
 
   context "after_create" do
     it "updates game status" do
       user = create(:user, :facebook)
       user_2 = create(:user, :facebook)
       game = create(:game, status: 0)
-      round = create(:round, game: game)
+      stack = create(:stack, game: game)
 
       expect(game.playing?).to be false
 
-      turn = create(:turn, game: game, user: user, round: round)
+      turn = create(:turn, game: game, user: user, stack: stack)
       expect(game.playing?).to be false
 
-      turn = create(:turn, game: game, user: user_2, round: round)
+      turn = create(:turn, game: game, user: user_2, stack: stack)
       expect(game.playing?).to be true
     end
 
@@ -25,11 +25,11 @@ RSpec.describe Turn, type: :model do
       user = create(:user, :facebook)
       user_2 = create(:user, :facebook)
       game = create(:game, status: 0)
-      round = create(:round, game: game)
+      stack = create(:stack, game: game)
       turn = create(:turn,
         game: game,
         user: user,
-        round: round,
+        stack: stack,
         answer: "something in the way she moves by James Taylor",
         match: { name: "Something in the Way She Moves", artist: "James Taylor" }
       )
@@ -44,12 +44,12 @@ RSpec.describe Turn, type: :model do
       user = create(:user, :facebook)
       user_2 = create(:user, :facebook)
       game = create(:game, status: 0)
-      round = create(:round, game: game)
+      stack = create(:stack, game: game)
 
       turn = create(:turn,
         game: game,
         user: user,
-        round: round,
+        stack: stack,
         answer: "something in the way she moves by James Taylor",
         match: { name: "song", artist: "James Taylor" }
       )
@@ -63,12 +63,12 @@ RSpec.describe Turn, type: :model do
       user = create(:user, :facebook)
       user_2 = create(:user, :facebook)
       game = create(:game, status: 0)
-      round = create(:round, game: game)
+      stack = create(:stack, game: game)
 
       turn = create(:turn,
         game: game,
         user: user,
-        round: round,
+        stack: stack,
         answer: "jumping jack flash by the rolling stones",
         match: { name: "jumping jack flash", artist: "the rolling stones" }
       )

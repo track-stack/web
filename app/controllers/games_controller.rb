@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   def show
     if request.xhr?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
-        include: 'rounds.turns'
+        include: 'stacks.turns'
     else
       view = Games::ShowView.new(user: current_user, game: game)
       render "games/show", locals: { view: view }
@@ -33,14 +33,14 @@ class GamesController < ApplicationController
     turn = Turn.create(
       user_id: current_user.id,
       game_id: game.id,
-      round: round,
+      stack: stack,
       answer: params[:answer],
       match: sanitize_match(params[:match])
     )
 
     if turn.valid?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
-        include: 'rounds.turns'
+        include: 'stacks.turns'
     else
       flash[:error] = "❌ Your answer was not submitted. Please try again."
       return redirect_back(fallback_location: game_path(game))
@@ -71,14 +71,14 @@ class GamesController < ApplicationController
   end
 
   def game
-    includes = {rounds: [{turns: [:user]}]}
+    includes = {stacks: [{turns: [:user]}]}
     @game ||= Game.includes(includes).find_by(id: params[:id])
   end
 
-  def round
-    return @round if defined?(@round)
-    @round = Round.find_by(id: params[:round_id]) if params[:round_id]
-    @round ||= game.rounds.last
+  def stack
+    return @stack if defined?(@stack)
+    @stack = Stack.find_by(id: params[:stack_id]) if params[:stack_id]
+    @stack ||= game.stacks.last
   end
 
   def invitee

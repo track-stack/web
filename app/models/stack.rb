@@ -1,4 +1,4 @@
-class Round < ApplicationRecord
+class Stack < ApplicationRecord
   belongs_to :game
   has_many :turns
 
@@ -10,7 +10,7 @@ class Round < ApplicationRecord
     turn = Turn.random()
     turn.user = User.bot
     turn.game = self.game
-    turn.round = self
+    turn.stack = self
     turn.save
   end
 end
