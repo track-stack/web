@@ -20,8 +20,8 @@ const mapDispatchToProps = dispatch => {
     fetchGame: (gameId) => {
       dispatch(fetchGame(gameId))
     },
-    submitAnswer: ({gameId, answer, previousTurn}) => {
-      dispatch(submitAnswer({gameId, answer, previousTurn}))
+    submitAnswer: (answer, stack) => {
+      dispatch(submitAnswer(answer, stack))
     }
   }
 }

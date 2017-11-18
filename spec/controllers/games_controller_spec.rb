@@ -88,6 +88,20 @@ RSpec.describe GamesController, type: :controller do
         expect(Turn.last.user).to eq(@user)
         expect(Turn.last.game).to eq(@game)
       end
+
+      context "when there is a winner" do
+        it "marks the stack as won and calculates points" do
+          match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
+
+          sign_in @user
+          post "turn", { params: { 
+            id: @game.id, 
+            answer: "Concrete Ganesha by Torres", 
+            match: match,
+            game_over: true
+          }}
+      end
+    end
   end
 end
 

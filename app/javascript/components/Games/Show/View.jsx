@@ -23,12 +23,13 @@ export default class View extends React.Component {
 
   validateAndSubmitAnswer(e) {
     e.preventDefault();
+
     const {answer} = this.state
-
-    const gameId = this.props.gameId;
-
     const previousTurn = this.props.game.latestTurn()
-    this.props.submitAnswer({gameId, answer, previousTurn})
+    const stacks = this.props.game.stacks
+    const latestStack = stacks[stacks.length - 1]
+
+    this.props.submitAnswer(answer, latestStack)
 
     // reset input field
     this.refs.answerField.value = ""

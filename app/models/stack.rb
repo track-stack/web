@@ -4,6 +4,10 @@ class Stack < ApplicationRecord
 
   after_create :generate_turn
 
+  def can_end?
+    turns.count >= 5
+  end
+
   private
 
   def generate_turn

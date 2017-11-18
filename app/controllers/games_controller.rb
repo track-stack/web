@@ -26,7 +26,6 @@ class GamesController < ApplicationController
   end
 
   def turn
-    match = params[:match]
     answer = params[:answer]
     match = sanitize_match(params[:match])
 
