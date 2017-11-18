@@ -1,5 +1,6 @@
 class Turn < ApplicationRecord
   include WordSanitizer
+  extend TrackGenerator
 
   validates :answer, presence: true
 
@@ -16,6 +17,19 @@ class Turn < ApplicationRecord
 
   def has_exact_name_match?
     !exact_name_match.nil?
+  end
+
+  def self.random()
+    track = generate_track()
+    name = track["name"]
+    artist = track["artist"]["name"]
+    image = track["image"].last["#text"]
+    match = {
+      name: name, 
+      artist: artist, 
+      image: image
+    }
+    Turn.new(answer: [name, artist].join(" - "), match: match)
   end
 
   private

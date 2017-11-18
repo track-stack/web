@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :games, through: :user_games
   has_many :turns
 
+  BOT = User.find_by(email: "bot@trackstack.com")
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email || random_email

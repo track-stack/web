@@ -1,9 +1,9 @@
 class Game < ApplicationRecord
 
-  has_many :user_games
+  has_many :user_games, dependent: :destroy
   has_many :players, through: :user_games
-  has_many :turns
-  has_many :rounds
+  has_many :turns, dependent: :destroy
+  has_many :rounds, dependent: :destroy
 
   scope :pending, -> { where(status: 0) }
   scope :playing, -> { where(status: 1) }
