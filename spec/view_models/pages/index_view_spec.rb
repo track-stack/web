@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Pages::IndexView, type: :view_model do
+
   before(:each) do
     @user = create(:user, :facebook)
     @user_2 = create(:user, :facebook)
@@ -53,10 +54,11 @@ RSpec.describe Pages::IndexView, type: :view_model do
       expect(view.invites).to eq([])
     end
 
-    it "only returns games with > 1 turn" do
+    it "only returns games with > 2 turn" do
       view = Pages::IndexView.new(user: @user)
       expect(view.invites.count).to eq(0)
 
+      create(:turn, user: User.bot, game: @opponent_game, round: @round)
       create(:turn, user: @user, game: @opponent_game, round: @round)
 
       view = Pages::IndexView.new(user: @user)

@@ -18,6 +18,10 @@ class User < ApplicationRecord
     end
   end
 
+  def self.bot
+    User.find_by(email: "bot@trackstack.com")  
+  end
+
   private
 
   def self.random_email
