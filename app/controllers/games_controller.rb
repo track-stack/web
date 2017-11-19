@@ -25,17 +25,22 @@ class GamesController < ApplicationController
     end
   end
 
+  # TODO: this method is a mess
   def turn
     answer = params[:answer]
     match = sanitize_match(params[:match])
 
     turn = Turn.create(
-      user_id: current_user.id,
-      game_id: game.id,
+      user: current_user,
+      game: game,
       stack: stack,
       answer: params[:answer],
       match: sanitize_match(params[:match])
     )
+
+    if params[:game_over] && stack.can_end?
+      stack.mark_winner!(current_user)
+    end
 
     if turn.valid?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
