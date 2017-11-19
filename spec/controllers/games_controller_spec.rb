@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe GamesController, type: :controller do
 
   before(:each) do
@@ -13,7 +14,7 @@ RSpec.describe GamesController, type: :controller do
     user_game_2 = create(:user_game, user_id: user_2.id, game_id: @game.id)
   end
 
-  context "show" do
+  context "#show" do
     it "redirects to root if the game isn't found" do
       user = create(:user, :facebook)
 
@@ -67,7 +68,7 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to redirect_to(game_path(@game))
     end
 
-    context "when turn is valid"
+    context "when turn is valid" do
       it "renders status 200" do
         match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
 
@@ -88,6 +89,44 @@ RSpec.describe GamesController, type: :controller do
         expect(Turn.last.user).to eq(@user)
         expect(Turn.last.game).to eq(@game)
       end
+    end
+
+    context "winning" do
+      it "creates a StackWinner record if the stack is over" do
+        5.times { |i| create(:turn, game: @game, stack: @stack, user: @user) }
+
+        match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
+
+        sign_in @user
+        post "turn", { params: { 
+          id: @game.id, 
+          answer: "Concrete Ganesha by Torres", 
+          match: match,
+          game_over: true
+        }}
+
+        @stack.reload
+
+        expect(@stack.ended_at).not_to be(nil)
+        expect(@stack.stack_winners.count).to eq(1)
+      end
+
+      it "doesn't create a StackWinner record if the stack isn't over" do
+        match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
+
+        sign_in @user
+        post "turn", { params: { 
+          id: @game.id, 
+          answer: "Concrete Ganesha by Torres", 
+          match: match,
+          game_over: true
+        }}
+
+        @stack.reload
+
+        expect(@stack.ended_at).to be(nil)
+        expect(@stack.stack_winners.count).to eq(0)
+      end
+    end
   end
 end
-

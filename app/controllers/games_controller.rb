@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   def show
     if request.xhr?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
-        include: 'stacks.turns'
+        include: ['stacks.turns', 'stacks.stack_winners']
     else
       view = Games::ShowView.new(user: current_user, game: game)
       render "games/show", locals: { view: view }
@@ -25,26 +25,35 @@ class GamesController < ApplicationController
     end
   end
 
+  # TODO: this method is a mess
   def turn
-    match = params[:match]
     answer = params[:answer]
     match = sanitize_match(params[:match])
 
     turn = Turn.create(
-      user_id: current_user.id,
-      game_id: game.id,
+      user: current_user,
+      game: game,
       stack: stack,
       answer: params[:answer],
       match: sanitize_match(params[:match])
     )
 
+    if params[:game_over] && stack.can_end?
+      stack.mark_winner!(current_user)
+    end
+
     if turn.valid?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
-        include: 'stacks.turns'
+        include: ['stacks.turns', 'stacks.stack_winners']
     else
       flash[:error] = "❌ Your answer was not submitted. Please try again."
       return redirect_back(fallback_location: game_path(game))
     end
+  end
+
+  def new_stack
+    game.stacks.create
+    redirect_to game_path(game)
   end
 
   private
