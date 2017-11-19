@@ -1,7 +1,7 @@
 class Stack < ApplicationRecord
   belongs_to :game
   has_many :turns
-  has_many :stack_winners
+  has_many :stack_winners, dependent: :destroy
 
   after_create :generate_turn
 
@@ -16,6 +16,10 @@ class Stack < ApplicationRecord
       score: self.turns.count
     ) 
     update_attributes!(ended_at: Time.now)
+  end
+
+  def winner
+    stack_winners.first
   end
 
   private

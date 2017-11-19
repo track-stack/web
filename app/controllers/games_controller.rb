@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   def show
     if request.xhr?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
-        include: 'stacks.turns'
+          include: ['stacks.turns', 'stacks.stack_winners']
     else
       view = Games::ShowView.new(user: current_user, game: game)
       render "games/show", locals: { view: view }

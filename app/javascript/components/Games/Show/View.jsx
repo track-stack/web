@@ -25,7 +25,7 @@ export default class View extends React.Component {
     e.preventDefault();
 
     const {answer} = this.state
-    const previousTurn = this.props.game.latestTurn()
+    const previousTurn = this.props.game.lastTurn()
     const stacks = this.props.game.stacks
     const latestStack = stacks[stacks.length - 1]
 
