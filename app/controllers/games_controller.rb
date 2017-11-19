@@ -9,7 +9,7 @@ class GamesController < ApplicationController
   def show
     if request.xhr?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
-          include: ['stacks.turns', 'stacks.stack_winners']
+        include: ['stacks.turns', 'stacks.stack_winners']
     else
       view = Games::ShowView.new(user: current_user, game: game)
       render "games/show", locals: { view: view }
@@ -44,7 +44,7 @@ class GamesController < ApplicationController
 
     if turn.valid?
       render json: { game: GameSerializer.new(game, viewer: current_user), },
-          include: ['stacks.turns', 'stacks.stack_winners']
+        include: ['stacks.turns', 'stacks.stack_winners']
     else
       flash[:error] = "❌ Your answer was not submitted. Please try again."
       return redirect_back(fallback_location: game_path(game))

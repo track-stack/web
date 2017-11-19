@@ -8,5 +8,4 @@ Rails.application.routes.draw do
   post "games/:id/stacks", to: "games#new_stack"
 
   get "/friends", to: "friends#list"
-
 end

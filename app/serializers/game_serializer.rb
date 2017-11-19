@@ -14,7 +14,6 @@ class GameSerializer < ActiveModel::Serializer
     keys = grouped.keys
     keys.each do |key|
       value = grouped[key]
-      puts value
       grouped[key] = value.reduce(0) { |sum, val| val.score + sum }
     end
 
