@@ -1,8 +1,11 @@
 class StackSerializer < ActiveModel::Serializer
-  attributes :can_end, :game_id, :ended
+  attributes :can_end, :game_id, :ended, :winner
 
   has_many :turns
-  has_many :stack_winners
+
+  def winner
+    object.winner
+  end
 
   def can_end
     object.can_end?
