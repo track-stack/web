@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118235124) do
+ActiveRecord::Schema.define(version: 20171119000516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20171118235124) do
     t.integer "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "ended_at"
+    t.index ["ended_at"], name: "index_stacks_on_ended_at"
     t.index ["game_id"], name: "index_stacks_on_game_id"
   end
 
