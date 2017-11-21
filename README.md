@@ -10,3 +10,4 @@ If asset compilation is failing on deploy, the problem is most likely the `webpa
 ```bash
 $ NODE_ENV=production bundle exec rails webpacker:compile
 ```
+
