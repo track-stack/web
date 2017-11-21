@@ -1,6 +1,6 @@
 class Stack < ApplicationRecord
   belongs_to :game
-  has_many :turns
+  has_many :turns, -> { order("created_at desc") }
   has_many :stack_winners, dependent: :destroy
 
   after_create :generate_turn

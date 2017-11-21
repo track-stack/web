@@ -10,6 +10,16 @@
 
 <% content_for :javascripts do %>
  <script>window.gameId = <%= view.game.id %></script>
-  <%= javascript_pack_tag 'games/show' %>
+ <script>
+   window.Logger = {
+     log: function(html) {
+       var logger = document.getElementById("logger-container");
+       logger.querySelector('pre').innerHTML += html + "<br>"
+       var div = logger.querySelector("div")
+       div.scrollTop = div.scrollHeight
+     }
+   }
+ </script>
+ <%= javascript_pack_tag 'games/show' %>
 <% end %>
 

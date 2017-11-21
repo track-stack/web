@@ -7,13 +7,24 @@ import PlayersView from './PlayersView'
 export default class View extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { answer: "", fetchGameTimer: setInterval(() => {
-      this.props.fetchGame(this.props.gameId)
-    }, 3000)}
+    this.state = { 
+      answer: "", 
+      showLogger: false,
+      fetchGameTimer: setInterval(() => {
+        this.props.fetchGame(this.props.gameId)
+      }, 3000)
+    }
+
     this.props.fetchGame(this.props.gameId)
 
     this.onAnswerChange = this.onAnswerChange.bind(this)
     this.validateAndSubmitAnswer = this.validateAndSubmitAnswer.bind(this)
+    this.toggleLogger = this.toggleLogger.bind(this)
+  }
+
+  toggleLogger() {
+    console.log(this)
+    this.setState({ showLogger: !this.state.showLogger })
   }
 
   onAnswerChange(e) {
@@ -25,7 +36,7 @@ export default class View extends React.Component {
     e.preventDefault();
 
     const {answer} = this.state
-    const previousTurn = this.props.game.lastTurn()
+    const previousTurn = this.props.game.firstTurn()
     const stacks = this.props.game.stacks
     const latestStack = stacks[stacks.length - 1]
 
@@ -48,10 +59,10 @@ export default class View extends React.Component {
 
       const stack = this.props.game.lastStack()
       const turns = stack.turns 
-      const lastTurn = stack.lastTurn()
+      const lastTurn = stack.firstTurn()
 
       // same player can't go twice in a row
-      const disabled = stack.ended || (turns.length && lastTurn.userId === players.viewer.id)
+      const disabled = false // stack.ended || (turns.length && lastTurn.userId === players.viewer.id)
       const gameOver = stack.ended
 
       const authenticityToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -75,9 +86,6 @@ export default class View extends React.Component {
             <PlayersView players={players} />
           </div>
           { gameOverView }
-          <div className="friends-list">
-            <TurnsListView turns={turns} />
-          </div> 
           <form>
             <div style={{display: 'flex'}} className="form-group">
               <input
@@ -98,12 +106,34 @@ export default class View extends React.Component {
               </button>
             </div>
           </form>
+          <div className="friends-list">
+            <TurnsListView turns={turns} />
+          </div> 
         </div>
       )
     }
 
+    const Logger = (
+      <div id="logger-container" className={this.state.showLogger ? "show" : ""}ref={(div) => { this.logger = div }}>
+        <button className="btn" onClick={this.toggleLogger}>
+          {this.state.showLogger ? "hide" : "show"}
+        </button>
+        <div>
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-12">
+                <pre></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+
+    const padding = this.state.showLogger ? 260 : 60
     return (
-      <div>
+      <div style={{paddingTop: padding}}>
+        {Logger}
         <div className="col-sm-12">
          {UI}
         </div>
