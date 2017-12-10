@@ -11,7 +11,7 @@
     "react-redux-router": "^0.0.5",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "trackstack": "^0.0.33"
+    "trackstack": "^0.0.34"
   },
   "devDependencies": {
     "@types/node": "^8.0.47",

@@ -113,27 +113,9 @@ export default class View extends React.Component {
       )
     }
 
-    const Logger = (
-      <div id="logger-container" className={this.state.showLogger ? "show" : ""}ref={(div) => { this.logger = div }}>
-        <button className="btn" onClick={this.toggleLogger}>
-          {this.state.showLogger ? "hide" : "show"}
-        </button>
-        <div>
-          <div className="container">
-            <div className="row">
-              <div className="col-xs-12">
-                <pre></pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-
     const padding = this.state.showLogger ? 260 : 60
     return (
       <div style={{paddingTop: padding}}>
-        {Logger}
         <div className="col-sm-12">
          {UI}
         </div>
