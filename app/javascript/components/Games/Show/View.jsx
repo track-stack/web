@@ -47,12 +47,14 @@ export default class View extends React.Component {
     this.setState({ answer: "" })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.error && nextProps.error) {
+      alert(nextProps.error)
+    }
+  }
+
   render() {
     let UI = null
-
-    if (this.props.error) {
-      console.log(error)
-    }
 
     if (this.props.game) {
       const players = this.props.game.players
