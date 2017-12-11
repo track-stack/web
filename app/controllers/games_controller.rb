@@ -8,6 +8,9 @@ class GamesController < ApplicationController
 
   def show
     if request.xhr?
+      puts "*" * 80
+      puts game.stacks.last.turns.count
+      puts "*" * 80
       render json: { game: GameSerializer.new(game, viewer: current_user), },
         include: ['stacks.turns', 'stacks.stack_winners']
     else
@@ -43,7 +46,10 @@ class GamesController < ApplicationController
     end
 
     if turn.valid?
-      render json: { game: GameSerializer.new(game, viewer: current_user), },
+      puts "*" * 80
+      puts game.stacks.last.turns.count
+      puts "*" * 80
+      render json: { game: GameSerializer.new(game.reload, viewer: current_user), },
         include: ['stacks.turns', 'stacks.stack_winners']
     else
       flash[:error] = "❌ Your answer was not submitted. Please try again."
