@@ -7,9 +7,8 @@ import PlayersView from './PlayersView'
 export default class View extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { 
-      answer: "", 
-      showLogger: false,
+    this.state = {
+      answer: "",
       fetchGameTimer: setInterval(() => {
         this.props.fetchGame(this.props.gameId)
       }, 3000)
@@ -19,12 +18,6 @@ export default class View extends React.Component {
 
     this.onAnswerChange = this.onAnswerChange.bind(this)
     this.validateAndSubmitAnswer = this.validateAndSubmitAnswer.bind(this)
-    this.toggleLogger = this.toggleLogger.bind(this)
-  }
-
-  toggleLogger() {
-    console.log(this)
-    this.setState({ showLogger: !this.state.showLogger })
   }
 
   onAnswerChange(e) {
@@ -60,7 +53,7 @@ export default class View extends React.Component {
       const players = this.props.game.players
 
       const stack = this.props.game.lastStack()
-      const turns = stack.turns 
+      const turns = stack.turns
       const lastTurn = stack.firstTurn()
 
       // same player can't go twice in a row
@@ -110,14 +103,13 @@ export default class View extends React.Component {
           </form>
           <div className="friends-list">
             <TurnsListView turns={turns} />
-          </div> 
+          </div>
         </div>
       )
     }
 
-    const padding = this.state.showLogger ? 260 : 60
     return (
-      <div style={{paddingTop: padding}}>
+      <div>
         <div className="col-sm-12">
          {UI}
         </div>

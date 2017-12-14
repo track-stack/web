@@ -23,6 +23,20 @@
   float: left;
 }
 
+.header {
+  h1 {
+    a {
+      color: black;
+      text-decoration: underline;
+    }
+  }
+
+  .avatar {
+    margin-right: 10px;
+    display: block;
+  }
+}
+
 @import "flash";
 @import "friends-list/base";
 @import "invite-list/base";
