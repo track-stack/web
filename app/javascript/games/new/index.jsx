@@ -4,7 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ViewContainer from '../../components/Games/New/ViewContainer';
 
-ReactDOM.render(
-  <ViewContainer />,
-  document.getElementById('root')
-);
+if (document.getElementById('games-new')) {
+  ReactDOM.render(
+    <ViewContainer />,
+    document.getElementById('games-new')
+  );
+}

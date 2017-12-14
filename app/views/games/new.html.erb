@@ -3,11 +3,11 @@
     <div class="col-xs-12">
       <h2>New game!</h2>
       <p>Find a friend by typing in their name. Select a friend to start a game.</p>
-      <div id="root"></div>
+      <div id="games-new"></div>
     </div>
   </div>
 </div>
 
 <% content_for :javascripts do %>
-  <%= javascript_pack_tag 'games/new' %>
+  <%= javascript_pack_tag 'games/index' %>
 <% end %>
