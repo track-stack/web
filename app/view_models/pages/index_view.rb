@@ -35,7 +35,7 @@ module Pages
         turns = turns.reject { |turn| turn.total_count < 2 }
         turn_game_ids = turns.map(&:game_id)
 
-        # Find all user_games for games not created by the viewer where the status = "pending" 
+        # Find all user_games for games not created by the viewer where the status = "pending"
         # and the turn count > 2 and the user_id != viewer.id
         UserGame
           .joins(:game)

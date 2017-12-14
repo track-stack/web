@@ -21,8 +21,11 @@
                 <li>
                   <img src=<%= user_game.user.image %> width="30" height="30" />
                   <%= user_game.user.name %>
-                  <% if user_game.game.pending? %>
-                    <small>- waiting</small>
+                  <% viewers_turn = user_game.game.turns.last.user_id != current_user.id %>
+                  <% if viewers_turn %>
+                    <small>( your turn )</small>
+                  <% else %>
+                    <small>( their turn )</small>
                   <% end %>
                   <a href="<%= game_path(user_game.game_id) %>" class="float-right">play</a>
                 </li>

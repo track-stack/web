@@ -51,13 +51,12 @@ export default class View extends React.Component {
 
     if (this.props.game) {
       const players = this.props.game.players
-
       const stack = this.props.game.lastStack()
       const turns = stack.turns
       const lastTurn = stack.firstTurn()
 
       // same player can't go twice in a row
-      const disabled = false // stack.ended || (turns.length && lastTurn.userId === players.viewer.id)
+      const disabled = stack.ended || (turns.length && lastTurn.userId === players.viewer.id)
       const gameOver = stack.ended
 
       const authenticityToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
