@@ -37,6 +37,16 @@
   }
 }
 
+.hidden-phone {
+  display: none;
+}
+
+@media (min-width: 375px) {
+  .hidden-phone {
+    display: block;
+  }
+}
+
 @import "flash";
 @import "friends-list/base";
 @import "invite-list/base";

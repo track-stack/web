@@ -32,10 +32,10 @@ export default class View extends React.Component {
 
     return (
       <div className="row">
-        <div className="col-xs-8">
+        <div className="col-sm-8 col-xs-12">
           <FriendFinderViewContainer />
         </div>
-        <div className="col-xs-4">
+        <div className="col-sm-4 col-xs-12">
           {invitee}
         </div>
       </div>
