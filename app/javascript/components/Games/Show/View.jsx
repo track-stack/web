@@ -108,7 +108,7 @@ export default class View extends React.Component {
     }
 
     return (
-      <div>
+      <div className="row">
         <div className="col-sm-12">
          {UI}
         </div>
