@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import HomeView from './HomeView';
 import { actions } from 'trackstack';
 
-const { fetchFriends } = actions;
+const { fetchFriends } = actions.Site;
 
 const mapStateToProps = (state) => {
   return {

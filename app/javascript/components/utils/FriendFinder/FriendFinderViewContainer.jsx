@@ -1,11 +1,9 @@
-/*jshint esversion: 6 */
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from 'trackstack';
 import FriendFinderView from './FriendFinderView';
 
-const { fetchFriends, selectGameInvitee } = actions;
+const { fetchFriends, selectGameInvitee } = actions.Site;
 
 const mapStateToProps = (state) => {
   return {
