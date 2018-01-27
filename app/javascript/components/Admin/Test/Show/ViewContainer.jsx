@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
-import { store } from 'trackstack';
+import { store, actions } from 'trackstack';
 import View from './View'
 
-const mapStateToProps = () => {
-  return {}
+const {reset, submitAnswer} = actions.Admin;
+
+const mapStateToProps = state => {
+  return {
+    steps: state.admin.steps
+  }
 }
 
-const mapDispatchToProps = () => {
-  return {}
+const mapDispatchToProps = dispatch => {
+  return {
+    reset: () => {
+      dispatch(reset())
+    },
+    submitAnswer: (answer) => {
+      dispatch(submitAnswer(answer))
+    },
+  }
 }
 
 const ConnectedComponent = connect(

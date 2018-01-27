@@ -5582,15 +5582,6 @@ tough-cookie@~2.3.0, tough-cookie@~2.3.3:
     redux "^3.7.2"
     redux-thunk "^2.2.0"
     stem-porter "^0.0.1"
-    trackstack "file:../framework"
-
-"trackstack@file:../framework/":
-  version "0.0.37"
-  dependencies:
-    levenshtein "^1.0.5"
-    redux "^3.7.2"
-    redux-thunk "^2.2.0"
-    stem-porter "^0.0.1"
     trackstack "file:../../../Library/Caches/Yarn/v1/framework"
 
 trim-newlines@^1.0.0:
