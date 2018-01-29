@@ -6086,16 +6086,9 @@ tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   dependencies:
     punycode "^1.4.1"
 
-"trackstack@file:../framework":
-  version "0.0.47"
-  dependencies:
-    levenshtein "^1.0.5"
-    redux "^3.7.2"
-    redux-thunk "^2.2.0"
-    stem-porter "^0.0.1"
-
-"trackstack@file:../framework/":
-  version "0.0.47"
+trackstack@^0.0.48:
+  version "0.0.48"
+  resolved "https://registry.yarnpkg.com/trackstack/-/trackstack-0.0.48.tgz#5d596c430e6dc5aa63c5f6accda6cf2385ff4776"
   dependencies:
     levenshtein "^1.0.5"
     redux "^3.7.2"
