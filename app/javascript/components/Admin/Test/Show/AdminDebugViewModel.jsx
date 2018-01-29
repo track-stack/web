@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AttributedStringViewModel from './AttributedStringViewModel'
+import AttributedString from './AttributedString'
 
 export default class AdminDebugStepViewModel extends React.Component {
     steps() {
@@ -9,7 +9,7 @@ export default class AdminDebugStepViewModel extends React.Component {
 
         return (
           <div key={idx} className={indentClass}>
-            <AttributedStringViewModel string={item.key} attributes={item.options} />
+            <AttributedString string={item.key} attributes={item.options} />
           </div>
         )
       })
