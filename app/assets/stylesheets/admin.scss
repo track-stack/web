@@ -49,7 +49,11 @@
 
     &.success {
       background-color: green;
-      color: white
+      color: white;
+    }
+
+    &.input {
+      background-color: #dbbeea;
     }
   }
 
