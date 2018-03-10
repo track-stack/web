@@ -12,4 +12,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/test", to: "test#show"
   end
+
+  namespace :api do
+    namespace :v1 do
+      post "/auth/create", to: "auth#create"
+    end
+  end
 end
