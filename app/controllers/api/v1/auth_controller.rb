@@ -10,9 +10,9 @@ class Api::V1::AuthController < ::Api::ApiController
     end
   end
 
-  private 
+  private
 
-  def fetch_profile 
+  def fetch_profile
     fields = ["picture.width(480)", "email", "first_name", "last_name"]
     if found = graph.get_object('me', fields: fields)
       found.with_indifferent_access
@@ -28,9 +28,9 @@ class Api::V1::AuthController < ::Api::ApiController
     OmniAuth::AuthHash.new({
       uid: profile[:uid],
       provider: "facebook",
-      credentials: { 
+      credentials: {
         token: params[:token] ,
-        expires_at: 1.month.from_now, # Time.at(auth.credentials.expires_at)
+        expires_at: Time.at(params[:expires].to_i)
       },
       info: {
         email: profile[:email],
