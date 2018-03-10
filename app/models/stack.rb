@@ -1,5 +1,6 @@
 class Stack < ApplicationRecord
   belongs_to :game
+
   has_many :turns, -> { order("created_at desc") }
   has_many :stack_winners, dependent: :destroy
 
@@ -14,7 +15,7 @@ class Stack < ApplicationRecord
       user: user,
       stack: self,
       score: self.turns.count
-    ) 
+    )
     update_attributes!(ended_at: Time.now)
   end
 

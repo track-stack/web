@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/v2.10/101441640615588/friends?access_token=EAABz2celF1wBAAnS5EcWtMZCZB84HjklyfEoshS7d1WGWZBqzcNuG3e0jGZAZAOWrc2HkDzPS0SXWMfCI4ChZBwdc0qK34HUIJszZCyQjd4grnayKkLl333ZB8JQmjAoBCFEZC150ffpI93DDyiSFXo9wadABZCr0KyGBWldna2XeVylZBlvCH0bSpz&fields=id%2Cname%2Cpicture%7Burl%7D
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      etag:
+      - '"edd9d5574fca6c943fcc08458923c2726beab8c2"'
+      strict-transport-security:
+      - max-age=15552000; preload
+      x-fb-trace-id:
+      - FlwLE9OiFfl
+      x-fb-rev:
+      - '3712775'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      content-type:
+      - application/json; charset=UTF-8
+      facebook-api-version:
+      - v2.10
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      pragma:
+      - no-cache
+      access-control-allow-origin:
+      - "*"
+      vary:
+      - Accept-Encoding
+      x-fb-debug:
+      - e5SroUMKa9s3+JSwNuytHEex/9qIR9nhgxRm3gEArstj89WcrLZgGSSLF6OdqkaBEPte1u0UJbyg+bFV+s1spQ==
+      date:
+      - Sat, 10 Mar 2018 21:25:13 GMT
+      connection:
+      - close
+      content-length:
+      - '812'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"id":"111138632976305","name":"Will Albbdjejfdjgf Wongberg","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=3f6c91428fc256182541f697d6bb84d3&oe=5B3B0A2F"}}},{"id":"110605719696288","name":"Sandra
+        Albbdjehachbi Wisemanescu","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=63882fb3fcd87e9433dcbb490913a150&oe=5B064733"}}},{"id":"111221322968083","name":"Dave
+        Albbdjfdgcihb Romansen","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=3f6c91428fc256182541f697d6bb84d3&oe=5B3B0A2F"}}},{"id":"108014719956137","name":"Lisa
+        Albbdbhbhjfda Bowersman","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=63882fb3fcd87e9433dcbb490913a150&oe=5B064733"}}},{"id":"108014839956125","name":"Patricia
+        Albbdbhbhjfdb Warmanstein","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=63882fb3fcd87e9433dcbb490913a150&oe=5B064733"}}},{"id":"104538683638117","name":"Will
+        Albbdeieffegh Valtchanovson","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=3f6c91428fc256182541f697d6bb84d3&oe=5B3B0A2F"}}},{"id":"103707917054888","name":"James
+        Albbdgjciedij Greenewitz","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=3f6c91428fc256182541f697d6bb84d3&oe=5B3B0A2F"}}},{"id":"102627760496628","name":"Lisa
+        Albbdhbabcigb Seligsteinman","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/1379841_10150004552801901_469209496895221757_n.jpg?oh=63882fb3fcd87e9433dcbb490913a150&oe=5B064733"}}},{"id":"101091773984014","name":"Tom
+        Albbdiegdaibd Sadansky","picture":{"data":{"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/10354686_10150004552801856_220367501106153455_n.jpg?oh=3f6c91428fc256182541f697d6bb84d3&oe=5B3B0A2F"}}}],"paging":{"cursors":{"before":"QVFIUmJXTnN6T1p2UmhhWjkzWGZAwVHNMeENxMlI3ZAkl6cTZAMdUxXUHkydzF1bV9qR3lOeG8yV254MDFydmpyQnMzcHVGRHVyZA04zNi1sVXVuMFZAiM29WNDJ3","after":"QVFIUnVtcHhhelJaUF9la25VTXZAtVHlWTnJmWkZA2NmR6aGV1T214UDJOZA0VhQXdtTnRjMXJUVVljb1JxbWllQUdaUnJCS0ZAWQ1FLNWstTzFQcGJ6WVdQQ3dB"}},"summary":{"total_count":9}}'
+    http_version: 
+  recorded_at: Sat, 10 Mar 2018 21:25:13 GMT
+recorded_with: VCR 3.0.3
