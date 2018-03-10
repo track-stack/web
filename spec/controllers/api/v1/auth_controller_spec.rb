@@ -9,9 +9,24 @@ RSpec.describe Api::V1::AuthController, type: :controller do
     @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
   end
 
-  it "works" do
-    token = "EAABz2celF1wBABNcgIFTcZBsHSSbf3KPdXfn52AWbcJZC2ZBRZCYsDuT44tHbvMESZCBAelOgJWA2HsfguG3IXsustCJ1bgXebsILxjj4nl0jILui09dYk7bvbQ9ioLmFXlkcz3Aersurls8EDQciIEh0CirphwkIbZCmYS3P0lTEXfP49F3WHZAsVHwWE8wIaGbgwdWDYuZA2pZBRkBHnzEq"
-    post "create", {params: { token: token }}
-    expect(true).to be(true)
+  it "creates a new user" do
+    user = build(:user, :facebook, :real)
+    token = user.oauth_token
+    VCR.use_cassette("facebook_auth") do
+      expect {
+        post "create", {params: { token: token }}
+      }.to change { User.count }.by(1)
+    end
+  end
+
+  it "finds a user if one exists" do
+    user = build(:user, :facebook, :real)
+    token = user.oauth_token
+    VCR.use_cassette("facebook_auth") do
+      post "create", {params: { token: token }}
+      expect {
+        post "create", {params: { token: token }}
+      }.to change { User.count }.by(0)
+    end
   end
 end
