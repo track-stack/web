@@ -15,6 +15,7 @@ gem "thin"
 gem "uglifier", ">= 1.3.0"
 gem "rails_12factor"
 gem "active_model_serializers"
+gem "koala"
 
 # https://github.com/rails/webpacker
 # https://github.com/rails/webpacker/issues/745
@@ -57,9 +58,6 @@ group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
-end
-
-group :development do
   gem "guard"
   gem "guard-livereload"
   gem "guard-minitest"
