@@ -6,7 +6,7 @@ RSpec.describe Facebook::FriendFinder do
   it "returns the expected format" do
     user = build(:user, :facebook, :real)
 
-    VCR.use_cassette("facebook") do
+    VCR.use_cassette("facebook_friends") do
       users = find_friends(user)
 
       expect(users.empty?).to be false
