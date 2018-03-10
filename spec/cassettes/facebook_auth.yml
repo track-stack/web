@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=EAABz2celF1wBAAnS5EcWtMZCZB84HjklyfEoshS7d1WGWZBqzcNuG3e0jGZAZAOWrc2HkDzPS0SXWMfCI4ChZBwdc0qK34HUIJszZCyQjd4grnayKkLl333ZB8JQmjAoBCFEZC150ffpI93DDyiSFXo9wadABZCr0KyGBWldna2XeVylZBlvCH0bSpz&fields=picture.width%28480%29%2Cemail%2Cfirst_name%2Clast_name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      etag:
+      - '"c6a672e7da5b9d27c5ff349f22fca57afab768c8"'
+      strict-transport-security:
+      - max-age=15552000; preload
+      x-fb-trace-id:
+      - F3ZS6z1tebi
+      x-fb-rev:
+      - '3712807'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      content-type:
+      - application/json; charset=UTF-8
+      facebook-api-version:
+      - v2.10
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      pragma:
+      - no-cache
+      access-control-allow-origin:
+      - "*"
+      vary:
+      - Accept-Encoding
+      x-fb-debug:
+      - 4P4aPfU1CEx9zDUG7oo/iEifKSi+zL7vxsgZjAFT6GNfntU0GUA438q/07Kh4/XtIZ+aIdt5q8NjcUFZJsGOoA==
+      date:
+      - Sat, 10 Mar 2018 22:30:58 GMT
+      connection:
+      - close
+      content-length:
+      - '282'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"picture":{"data":{"height":302,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/s480x480\/10354686_10150004552801856_220367501106153455_n.jpg?oh=e664e2c50eb230741c3470ce291e3356&oe=5B4199BC","width":480}},"email":"dctdajreim_1507499739\u0040tfbnw.net","first_name":"Harry","last_name":"Bharambeson","id":"101441640615588"}'
+    http_version: 
+  recorded_at: Sat, 10 Mar 2018 22:30:58 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=EAABz2celF1wBAAnS5EcWtMZCZB84HjklyfEoshS7d1WGWZBqzcNuG3e0jGZAZAOWrc2HkDzPS0SXWMfCI4ChZBwdc0qK34HUIJszZCyQjd4grnayKkLl333ZB8JQmjAoBCFEZC150ffpI93DDyiSFXo9wadABZCr0KyGBWldna2XeVylZBlvCH0bSpz&fields=picture.width%28480%29%2Cemail%2Cfirst_name%2Clast_name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.12.2
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      etag:
+      - '"c6a672e7da5b9d27c5ff349f22fca57afab768c8"'
+      strict-transport-security:
+      - max-age=15552000; preload
+      x-fb-trace-id:
+      - CI5SMWG6oGt
+      x-fb-rev:
+      - '3712807'
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      content-type:
+      - application/json; charset=UTF-8
+      facebook-api-version:
+      - v2.10
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      pragma:
+      - no-cache
+      access-control-allow-origin:
+      - "*"
+      vary:
+      - Accept-Encoding
+      x-fb-debug:
+      - GSSChfJ0XwFZAdjq8R90s+r5mb13D8E8YCDRvIVa52lkxpCLvsTYNYg5F+O66ToKvrnpdw67mf5U7LfzJK4G9Q==
+      date:
+      - Sat, 10 Mar 2018 22:30:58 GMT
+      connection:
+      - close
+      content-length:
+      - '282'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"picture":{"data":{"height":302,"is_silhouette":true,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/s480x480\/10354686_10150004552801856_220367501106153455_n.jpg?oh=e664e2c50eb230741c3470ce291e3356&oe=5B4199BC","width":480}},"email":"dctdajreim_1507499739\u0040tfbnw.net","first_name":"Harry","last_name":"Bharambeson","id":"101441640615588"}'
+    http_version: 
+  recorded_at: Sat, 10 Mar 2018 22:30:58 GMT
+recorded_with: VCR 3.0.3
