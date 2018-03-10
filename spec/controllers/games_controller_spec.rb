@@ -10,8 +10,8 @@ RSpec.describe GamesController, type: :controller do
     @stack = create(:stack, game: @game)
     @user = create(:user, :facebook)
     user_2 = create(:user, :facebook)
-    user_game = create(:user_game, user_id: @user.id, game_id: @game.id)
-    user_game_2 = create(:user_game, user_id: user_2.id, game_id: @game.id)
+    create(:user_game, user_id: @user.id, game_id: @game.id)
+    create(:user_game, user_id: user_2.id, game_id: @game.id)
   end
 
   context "#show" do
@@ -45,7 +45,7 @@ RSpec.describe GamesController, type: :controller do
     end
 
     it "renders game json" do
-      turn = create(:turn, game: @game, user: @user, stack: @stack)
+      create(:turn, game: @game, user: @user, stack: @stack)
 
       sign_in @user
       get "show", { params: { id: @game.id }, xhr: true}
@@ -98,9 +98,9 @@ RSpec.describe GamesController, type: :controller do
         match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
 
         sign_in @user
-        post "turn", { params: { 
-          id: @game.id, 
-          answer: "Concrete Ganesha by Torres", 
+        post "turn", { params: {
+          id: @game.id,
+          answer: "Concrete Ganesha by Torres",
           match: match,
           game_over: true
         }}
@@ -115,9 +115,9 @@ RSpec.describe GamesController, type: :controller do
         match = { name: "Testify", artist: "Rage Against the Machine", image: "http://image.png" }
 
         sign_in @user
-        post "turn", { params: { 
-          id: @game.id, 
-          answer: "Concrete Ganesha by Torres", 
+        post "turn", { params: {
+          id: @game.id,
+          answer: "Concrete Ganesha by Torres",
           match: match,
           game_over: true
         }}

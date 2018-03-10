@@ -36,14 +36,14 @@ RSpec.configure do |config|
           name: "I Bet You Look Good on the Dancefloor - Arctic Monkeys",
           artist: "Arctic Monkeys"
         }
-        )
+      )
     }
   end
 
   config.use_transactional_fixtures = true
 
   config.include AuthHelper
-  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
