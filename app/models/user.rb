@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :games, through: :user_games
   has_many :turns
 
+  has_many :access_tokens, class_name: "Doorkeeper::AccessToken", foreign_key: :resource_owner_id
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email || random_email
