@@ -21,7 +21,12 @@ class User < ApplicationRecord
   end
 
   def self.bot
-    User.find_by(email: "bot@trackstack.com")  
+    User.find_by(email: "bot@trackstack.com")
+  end
+
+  def generate_access_token(app_id)
+    access_tokens.destroy_all
+    access_tokens.create(application_id: app_id)
   end
 
   private
