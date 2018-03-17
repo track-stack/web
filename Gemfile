@@ -16,6 +16,7 @@ gem "uglifier", ">= 1.3.0"
 gem "rails_12factor"
 gem "active_model_serializers"
 gem "koala"
+gem "doorkeeper"
 
 # https://github.com/rails/webpacker
 # https://github.com/rails/webpacker/issues/745
