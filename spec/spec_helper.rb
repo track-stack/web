@@ -15,7 +15,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 ENV["RAILS_ENV"] ||= 'test'
-require 'support/factory_girl'
+require 'support/factory_bot'
 require 'support/vcr_setup'
 require_relative "./auth_helper"
 require File.expand_path("../../config/environment", __FILE__)

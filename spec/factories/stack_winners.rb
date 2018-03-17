@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :stack_winner do
     user_id 1
     stack_id 1
