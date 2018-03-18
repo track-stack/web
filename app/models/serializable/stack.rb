@@ -22,8 +22,8 @@ module Serializable
       stack.can_end?
     end
 
-    def ended
-      stack.ended_at.present?
+    def ended?
+      stack.ended?
     end
 
     private

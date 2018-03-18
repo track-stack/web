@@ -23,6 +23,10 @@ class Stack < ApplicationRecord
     stack_winners.first
   end
 
+  def ended?
+    ended_at.present?
+  end
+
   private
 
   def generate_turn
