@@ -1,6 +1,6 @@
 module Serializable
   class Stack
-    delegate :id, to: :stack
+    delegate :id, :game_id, to: :stack
 
     def initialize(stack)
       @stack = stack
@@ -8,7 +8,8 @@ module Serializable
 
     def turns
       stack.turns.map do |turn|
-        hash = TurnSerializer.new(turn).to_hash
+        serializable = Serializable::Turn.new(turn)
+        hash = TurnSerializer.new(serializable).to_hash
         hash[:data][:attributes]
       end
     end
@@ -17,7 +18,7 @@ module Serializable
       stack.winner
     end
 
-    def can_end
+    def can_end?
       stack.can_end?
     end
 

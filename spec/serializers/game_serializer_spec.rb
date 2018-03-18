@@ -19,12 +19,9 @@ RSpec.describe GameSerializer do
     viewer = game_json[:players][:viewer]
     opponent = game_json[:players][:opponent]
 
-    viewer_attrs = viewer[:data][:attributes]
-    opponent_attrs = opponent[:data][:attributes]
-
-    expect(viewer_attrs[:id]).to eq(user.id)
-    expect(viewer_attrs[:name]).to eq(user.name)
-    expect(opponent_attrs[:id]).to eq(user_2.id)
-    expect(opponent_attrs[:name]).to eq(user_2.name)
+    expect(viewer[:id]).to eq(user.id)
+    expect(viewer[:name]).to eq(user.name)
+    expect(opponent[:id]).to eq(user_2.id)
+    expect(opponent[:name]).to eq(user_2.name)
   end
 end

@@ -21,15 +21,21 @@ module Serializable
         grouped[user_id] = stacks.reduce(0) { |sum, stack| stack.score + sum }
       end
 
+      viewer_hash = UserSerializer.new(viewer_user_game.user).to_hash
+      viewer_attrs = viewer_hash[:data][:attributes]
+      opponent_hash = UserSerializer.new(opponent_user_game.user).to_hash
+      opponent_attrs = opponent_hash[:data][:attributes]
+
       {
-        viewer: UserSerializer.new(viewer_user_game.user).to_hash.merge(score: grouped[viewer.id]),
-        opponent: UserSerializer.new(opponent_user_game.user).to_hash.merge(score: grouped[opponent_user_game.user_id])
+        viewer: viewer_attrs.merge(score: grouped[viewer.id]),
+        opponent: opponent_attrs.merge(score: grouped[opponent_user_game.user_id])
       }
     end
 
     def stacks
       game.stacks.map do |stack|
-        hash = StackSerializer.new(stack).to_hash
+        serializable = Serializable::Stack.new(stack)
+        hash = StackSerializer.new(serializable).to_hash
         hash[:data][:attributes]
       end
     end
