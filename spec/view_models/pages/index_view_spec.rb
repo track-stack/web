@@ -17,34 +17,37 @@ RSpec.describe Pages::IndexView, type: :view_model do
     @stack = create(:stack, game: @user_game)
   end
 
-  context "#user_games" do
+  context "#active_game_previews" do
     it "returns [] if user is anonymous" do
       view = Pages::IndexView.new(user: nil)
-      expect(view.user_games).to eq([])
+      expect(view.active_game_previews).to eq([])
     end
 
     it "only returns games created by the viewer" do
       view = Pages::IndexView.new(user: @user)
-      expect(view.user_games.count).to eq(1)
-      expect(view.user_games.map(&:game_id)).to include(@user_game.id)
+      game_previews = view.active_game_previews
+      expect(game_previews.count).to eq(1)
+
+      game_ids = game_previews.map { |preview| preview.game.id }
+      expect(game_ids).to include(@user_game.id)
     end
 
     it "shows both active and pending games" do
-      active_game = create(:game, status: 1)
+      create(:game, status: 1)
       create(:user_game, user_id: @user.id, game_id: @user_game.id, creator: true)
       create(:user_game, user_id: @user_2.id, game_id: @user_game.id, creator: false)
 
       view = Pages::IndexView.new(user: @user)
-      expect(view.user_games.count).to eq(2)
+      expect(view.active_game_previews.count).to eq(2)
     end
 
-    it "returns any game with a status of 1" do
+    it "returns any participating game with a status of 1" do
       view = Pages::IndexView.new(user: @user)
-      expect(view.user_games.count).to eq(1)
+      expect(view.active_game_previews.count).to eq(1)
 
       @opponent_game.update_attribute(:status, 1)
       view = Pages::IndexView.new(user: @user)
-      expect(view.user_games.count).to eq(2)
+      expect(view.active_game_previews.count).to eq(2)
     end
   end
 
