@@ -1,8 +1,5 @@
-class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :image, :score
+class UserSerializer
+  include FastJsonapi::ObjectSerializer
 
-  def score
-    i_score = @instance_options[:score]
-    i_score ? i_score.to_i : nil
-  end
+  attributes :id, :name, :image
 end

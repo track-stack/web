@@ -1,17 +1,9 @@
-class StackSerializer < ActiveModel::Serializer
-  attributes :can_end, :game_id, :ended, :winner
+class StackSerializer
+  include FastJsonapi::ObjectSerializer
 
-  has_many :turns
-
-  def winner
-    object.winner
-  end
-
-  def can_end
-    object.can_end?
-  end
-
-  def ended
-    object.ended_at.present?
-  end
+  attributes :game_id
+  attribute :winner { |obj| obj.winner }
+  attribute :can_end { |obj| obj.can_end? }
+  attribute :ended { |obj| obj.ended }
+  attribute :turns { |obj| obj.turns }
 end

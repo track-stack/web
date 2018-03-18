@@ -5,20 +5,23 @@ RSpec.describe GameSerializer do
     game = create(:game)
     user = create(:user, :facebook)
     user_2 = create(:user, :facebook)
-    user_game = create(:user_game, game_id: game.id, user_id: user.id)
-    user_game_2 = create(:user_game, game_id: game.id, user_id: user_2.id)
+    create(:user_game, game_id: game.id, user_id: user.id)
+    create(:user_game, game_id: game.id, user_id: user_2.id)
 
-    json = JSON.parse(GameSerializer.new(game, viewer: user).to_json)
+    serializable = Serializable::Game.new(game: game, viewer: user)
 
-    expect(json["id"]).to eq(game.id)
-    expect(json["status"]).to eq(game.status)
+    hash = GameSerializer.new(serializable).to_hash
+    game_json = hash[:data][:attributes]
 
-    viewer = json["players"]["viewer"]
-    opponent = json["players"]["opponent"]
+    expect(game_json[:id]).to eq(game.id)
+    expect(game_json[:status]).to eq(game.status)
 
-    expect(viewer["id"]).to eq(user.id)
-    expect(viewer["name"]).to eq(user.name)
-    expect(opponent["id"]).to eq(user_2.id)
-    expect(opponent["name"]).to eq(user_2.name)
+    viewer = game_json[:players][:viewer]
+    opponent = game_json[:players][:opponent]
+
+    expect(viewer[:id]).to eq(user.id)
+    expect(viewer[:name]).to eq(user.name)
+    expect(opponent[:id]).to eq(user_2.id)
+    expect(opponent[:name]).to eq(user_2.name)
   end
 end
