@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe UserSerializer do
   it "serializes" do
     user = create(:user, :facebook)
-    serialized_user_json = JSON.parse(UserSerializer.new(user).to_json)
+    hash = UserSerializer.new(user, {meta: {score: 10}}).to_hash
+    user_json = hash[:data][:attributes].merge(hash[:meta])
 
-    expect(serialized_user_json.keys).to eq(["id", "name", "image", "score"])
-    expect(serialized_user_json["name"]).to eq(user.name)
-    expect(serialized_user_json["id"]).to eq(user.id)
+    expect(user_json.keys).to eq([:id, :name, :image, :score])
+    expect(user_json[:name]).to eq(user.name)
+    expect(user_json[:id]).to eq(user.id)
   end
 end
