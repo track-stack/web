@@ -1,3 +1,5 @@
+# Serializes an instance of StackWinner
+
 class StackWinnerSerializer
   include FastJsonapi::ObjectSerializer
 

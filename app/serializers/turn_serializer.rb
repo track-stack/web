@@ -1,3 +1,5 @@
+# Serializes an instance of Serializable::Turn
+
 class TurnSerializer
   include FastJsonapi::ObjectSerializer
 

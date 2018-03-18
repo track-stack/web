@@ -1,3 +1,5 @@
+# Serializes an instance of Serializable::Stack
+
 class StackSerializer
   include FastJsonapi::ObjectSerializer
 

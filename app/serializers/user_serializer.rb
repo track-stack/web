@@ -1,3 +1,5 @@
+# Serializes an instance of User
+
 class UserSerializer
   include FastJsonapi::ObjectSerializer
 

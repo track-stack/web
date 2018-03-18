@@ -1,3 +1,5 @@
+# Serializes an instance of Serializable::Game
+
 class GameSerializer
   include FastJsonapi::ObjectSerializer
 
