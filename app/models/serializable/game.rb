@@ -42,6 +42,17 @@ module Serializable
 
     private
 
+    def scores_by_user_id
+      winners = game.stacks.map(&:winner).compact
+      grouped = winners.group_by(&:user_id)
+      user_ids = grouped.keys
+      user_ids.each do |user_id|
+        stacks = grouped[user_id]
+        grouped[user_id] = stacks.reduce(0) { |sum, stack| stack.score + sum }
+      end
+      grouped
+    end
+
     attr_reader :game, :viewer
   end
 end
