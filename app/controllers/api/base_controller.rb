@@ -1,11 +1,7 @@
 module Api
   class BaseController < ::ActionController::Base
-    def whereisthis
-      puts "here"
-    end
-
     def require_application!
-      raise "hell" unless current_application
+      return render file: "public/401.html", status: :unauthorized unless current_application
     end
 
     def current_application
