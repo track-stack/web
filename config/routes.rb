@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   root to: "pages#index"
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post "/auth/create", to: "auth#create"
+      get "/dashboard", to: "dashboard#index"
     end
   end
 end

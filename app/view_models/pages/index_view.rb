@@ -5,18 +5,15 @@ module Pages
       @user = user
     end
 
-    def user_games
+    def active_game_previews
       return [] unless user
 
       @user_games ||= begin
-        game_ids = user.games.where("user_games.creator = true").pluck(:id)
-        game_ids += user.games.where(status: 1).pluck(:id)
+        previews = active_user_game_ids.map do |game_id|
+          DashboardGamePreview.new(viewer: user, game_id: game_id)
+        end
 
-        UserGame
-          .joins(:game)
-          .includes(:user)
-          .includes(:game)
-          .where("game_id in (?) and user_id != ? and games.status != 2", game_ids.uniq, user.id)
+        previews
       end
     end
 
@@ -48,5 +45,11 @@ module Pages
     private
 
     attr_reader :user
+
+    def active_user_game_ids
+      @active_user_games ||= user.games.
+        where("user_games.creator = true or status = 1").
+        pluck(:id)
+    end
   end
 end

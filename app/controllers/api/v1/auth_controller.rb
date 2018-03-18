@@ -1,12 +1,20 @@
-class Api::V1::AuthController < ::Api::ApiController
+class Api::V1::AuthController < ::Api::BaseController
+  before_action only: [:create] do
+    require_application!
+  end
+
   def create
     profile = fetch_profile
     auth = generate_auth_hash(profile)
 
     if user = User.from_omniauth(auth)
-      render json: { id: user.id }
+      token = user.generate_access_token(current_application.id)
+      render json: {
+        user: UserSerializer.new(user),
+        access_token: token.token
+      }
     else
-      raise "what the fuck"
+      render json: { error: user.errors.full_messages.to_sentence }
     end
   end
 
@@ -26,7 +34,7 @@ class Api::V1::AuthController < ::Api::ApiController
 
   def generate_auth_hash(profile)
     OmniAuth::AuthHash.new({
-      uid: profile[:uid],
+      uid: profile[:id],
       provider: "facebook",
       credentials: {
         token: params[:token] ,

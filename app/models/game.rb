@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
 
   has_many :user_games, dependent: :destroy
-  has_many :players, through: :user_games
+  has_many :players, through: :user_games, source: :user
   has_many :turns, dependent: :destroy
   has_many :stacks, dependent: :destroy
 
