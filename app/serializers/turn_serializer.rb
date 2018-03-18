@@ -1,16 +1,17 @@
-class TurnSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :answer, :created_at, :user_photo, :match,  
-    :has_exact_name_match, :has_exact_artist_match,
+class TurnSerializer
+  include FastJsonapi::ObjectSerializer
 
-  def user_photo
+  attributes :id, :user_id, :answer, :created_at, :match
+
+  attribute :user_photo do |object|
     object.user.image
   end
 
-  def has_exact_name_match
+  attribute :has_exact_name_match do |object|
     object.has_exact_name_match?
   end
 
-  def has_exact_artist_match
+  attribute :has_exact_artist_match do |object|
     object.has_exact_artist_match?
   end
 end
