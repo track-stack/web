@@ -11,7 +11,10 @@ module Api
 
         if user = User.from_omniauth(auth)
           token = user.generate_access_token(current_application.id)
-          render json: { access_token: token.token }
+          render json: {
+            user: UserSerializer.new(user),
+            access_token: token.token
+          }
         else
           render json: { error: user.errors.full_messages.to_sentence }
         end
