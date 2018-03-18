@@ -14,7 +14,7 @@ gem "bootstrap-sass"
 gem "thin"
 gem "uglifier", ">= 1.3.0"
 gem "rails_12factor"
-gem "active_model_serializers"
+gem 'fast_jsonapi'
 gem "koala"
 gem "doorkeeper"
 
