@@ -37,6 +37,22 @@ RSpec.describe User, type: :model do
       end
       expect(user.access_tokens.count).to eq(1)
     end
+  end
 
+  context "#active_access_token" do
+    before(:all) do
+      @application = Doorkeeper::Application.create(name: "Test", redirect_uri: "https://test.com")
+    end
+
+    it "returns an access_token if one exists" do
+      user = create(:user)
+      token = Doorkeeper::AccessToken.create(resource_owner_id: user.id, application: @application)
+      expect(user.active_access_token).to eq(token)
+    end
+
+    it "returns nil if there are no active tokens" do
+      user = create(:user)
+      expect(user.active_access_token).to be_nil
+    end
   end
 end

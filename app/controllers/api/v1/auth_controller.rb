@@ -33,7 +33,7 @@ module Api
 
       def generate_auth_hash(profile)
         OmniAuth::AuthHash.new({
-          uid: profile[:uid],
+          uid: profile[:id],
           provider: "facebook",
           credentials: {
             token: params[:token] ,

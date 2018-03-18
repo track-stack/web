@@ -29,6 +29,10 @@ class User < ApplicationRecord
     access_tokens.create(application_id: app_id)
   end
 
+  def active_access_token
+    access_tokens.last
+  end
+
   private
 
   def self.random_email
