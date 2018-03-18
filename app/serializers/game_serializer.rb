@@ -1,11 +1,7 @@
 class GameSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :status
-  attribute :players do |object|
-    object.players
-  end
 
-  attribute :stacks do |object|
-    object.stacks
-  end
+  attributes :id, :status
+  attribute :players { |obj| obj.players }
+  attribute :stacks { |obj| obj.stacks }
 end

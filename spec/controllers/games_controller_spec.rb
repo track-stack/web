@@ -53,6 +53,7 @@ RSpec.describe GamesController, type: :controller do
       json = JSON.parse(response.body)
       game = json["game"]
       stacks = game["stacks"]
+
       expect(stacks.count).to equal(1)
       expect(stacks.first["turns"].count).to eq(2)
     end
