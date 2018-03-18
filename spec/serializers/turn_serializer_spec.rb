@@ -7,7 +7,8 @@ RSpec.describe TurnSerializer do
     stack = create(:stack, game: game)
     turn = create(:turn, user: user, game: game, stack: stack)
 
-    hash = TurnSerializer.new(turn).to_hash
+    serializable = Serializable::Turn.new(turn)
+    hash = TurnSerializer.new(serializable).to_hash
     turn_json = hash[:data][:attributes]
 
     expected_attributes = [:id, :user_id, :answer, :created_at, :match,
