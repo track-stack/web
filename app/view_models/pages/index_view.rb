@@ -9,8 +9,8 @@ module Pages
       return [] unless user
 
       @user_games ||= begin
-        previews = active_user_game_ids.map do |game_id|
-          DashboardGamePreview.new(viewer: user, game_id: game_id)
+        previews = active_user_games.map do |game|
+          DashboardGamePreview.new(viewer: user, game: game)
         end
 
         previews
@@ -45,6 +45,11 @@ module Pages
     private
 
     attr_reader :user
+
+    def active_user_games
+      @active_user_games ||= Game.where(id: active_user_game_ids).
+        includes(:turns, :players)
+    end
 
     def active_user_game_ids
       @active_user_games ||= user.games.

@@ -1,16 +1,14 @@
 class DashboardGamePreview
-  def initialize(viewer:, game_id:)
+  attr_reader :game
+
+  def initialize(viewer:, game:)
     @viewer = viewer
-    @game_id = game_id
+    @game = game
   end
 
   # this exists bc the game is currently 2 player only
   def opponent
     opponents.first
-  end
-
-  def game
-    @game ||= Game.find(game_id)
   end
 
   def viewers_turn
@@ -28,6 +26,6 @@ class DashboardGamePreview
     @opponents ||= game.players.reject { |player| player == viewer }
   end
 
-  attr_reader :viewer, :game_id
+  attr_reader :viewer
 end
 
