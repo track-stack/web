@@ -10,7 +10,7 @@ class Api::V1::AuthController < ::Api::BaseController
     if user = User.from_omniauth(auth)
       token = user.generate_access_token(current_application.id)
       render json: {
-        user: UserSerializer.new(user),
+        user: UserSerializer.new(user).to_hash[:data][:attributes],
         access_token: token.token
       }
     else
