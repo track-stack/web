@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "/auth/create", to: "auth#create"
       get "/dashboard", to: "dashboard#index"
+      get "/games/:id", to: "games#show"
     end
   end
 end
