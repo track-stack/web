@@ -53,7 +53,7 @@ module Pages
 
     def active_user_game_ids
       @active_user_games ||= user.games.
-        where("user_games.creator = true or status = 1").
+        where("user_games.creator = true and status != 2 or status = 1").
         pluck(:id)
     end
   end
