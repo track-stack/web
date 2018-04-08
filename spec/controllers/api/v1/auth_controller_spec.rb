@@ -6,13 +6,6 @@ RSpec.describe Api::V1::AuthController, type: :controller do
     @application = Doorkeeper::Application.create(name: "Test", redirect_uri: "https://example.com")
   end
 
-  before(:each) do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new auth_hash
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
-  end
-
   it "works with a valid token" do
     user = build(:user, :facebook, :real)
     token = user.oauth_token
