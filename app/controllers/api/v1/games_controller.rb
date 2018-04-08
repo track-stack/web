@@ -34,7 +34,6 @@ class Api::V1::GamesController < ::Api::BaseController
 
   private
 
-  def game
   def sanitize_match(match)
     name = match["name"]
     artist = match["artist"]

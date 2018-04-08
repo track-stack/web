@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "/auth/create", to: "auth#create"
       get "/dashboard", to: "dashboard#index"
-      get "/games/:id", to: "games#show"
+      resources "games", only: [:new, :show, :create]
+      post "/games/:id/turn", to: "games#turn"
+      post "games/:id/stacks", to: "games#new_stack"
     end
   end
 end
