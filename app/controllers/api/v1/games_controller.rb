@@ -24,6 +24,7 @@ class Api::V1::GamesController < ::Api::BaseController
     end
 
     if turn.valid?
+      @game.touch
       serializable = Serializable::Game.new(game: @game.reload, viewer: current_user)
       serialized = GameSerializer.new(serializable).to_hash[:data][:attributes]
       render json: { game: serialized }
