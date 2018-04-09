@@ -21,7 +21,7 @@
                 <li>
                   <img src=<%= game_preview.opponent.image %> width="30" height="30" />
                   <%= game_preview.opponent.name %>
-                  <% viewers_turn = game_preview.game.turns.last.user_id != current_user.id %>
+                  <% viewers_turn = game_preview.viewers_turn? %>
                   <% if viewers_turn %>
                     <small>( your turn )</small>
                   <% else %>

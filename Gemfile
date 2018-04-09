@@ -39,6 +39,7 @@ gem "jbuilder", "~> 2.5"
 
 group :test do
   gem "ruby-prof"
+  gem "timecop"
 end
 
 group :development, :test do

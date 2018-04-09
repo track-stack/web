@@ -3,7 +3,7 @@
 class DashboardGamePreviewSerializer
   include FastJsonapi::ObjectSerializer
 
-  attribute :viewers_turn { |obj| obj.viewers_turn }
+  attribute :viewers_turn { |obj| obj.viewers_turn? }
   attribute :status { |obj| obj.game.status }
   attribute :game_id { |obj| obj.game.id }
 

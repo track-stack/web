@@ -11,9 +11,10 @@ class DashboardGamePreview
     opponents.first
   end
 
-  def viewers_turn
+  def viewers_turn?
+    return @viewers_turn if defined?(@viewers_turned)
     last_turn_user_id = game.turns.last.user_id
-    last_turn_user_id != viewer.id && last_turn_user_id != User.bot.id
+    @viewers_turn = last_turn_user_id != viewer.id && last_turn_user_id != User.bot.id
   end
 
   def id
