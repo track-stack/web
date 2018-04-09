@@ -13,7 +13,6 @@ RSpec.describe Api::V1::GamesController, type: :controller do
     opponent = create(:user)
     create(:user_game, game_id: @game.id, user_id: @user.id)
     create(:user_game, game_id: @game.id, user_id: opponent.id)
-
   end
 
   context "#show" do

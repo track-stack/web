@@ -20,6 +20,10 @@ class DashboardGamePreview
     SecureRandom.hex
   end
 
+  def updated_at
+    @game.updated_at
+  end
+
   private
 
   def opponents

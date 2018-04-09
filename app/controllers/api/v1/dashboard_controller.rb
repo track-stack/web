@@ -4,7 +4,10 @@ class Api::V1::DashboardController < ::Api::BaseController
 
   def index
     view_model = ::Pages::IndexView.new(user: current_user)
-    game_previews = view_model.active_game_previews.map do |preview|
+    sorted_previews = view_model.active_game_previews.sort do |a, b|
+      b.updated_at <=> a.updated_at
+    end
+    game_previews = sorted_previews.map do |preview|
       hash = DashboardGamePreviewSerializer.new(preview).to_hash
       hash[:data][:attributes]
     end
