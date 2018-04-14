@@ -2,6 +2,10 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   it { should have_many(:turns) }
+  it { should have_many(:devices) }
+  it { should have_many(:games) }
+  it { should have_many(:user_games) }
+  it { should have_many(:access_tokens) }
 
   context "#from_omniauth" do
     it "creates a new record" do
