@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :turns
 
   has_many :access_tokens, class_name: "Doorkeeper::AccessToken", foreign_key: :resource_owner_id
+  has_many :devices
 
   def self.from_omniauth(auth)
     instance = where(provider: auth.provider, uid: auth.uid).first_or_create
