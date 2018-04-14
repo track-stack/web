@@ -18,10 +18,12 @@ ActiveRecord::Schema.define(version: 20180414013421) do
   create_table "devices", force: :cascade do |t|
     t.string "device_id"
     t.string "apns_token"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["apns_token"], name: "index_devices_on_apns_token"
     t.index ["device_id"], name: "index_devices_on_device_id"
+    t.index ["user_id"], name: "index_devices_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -140,6 +142,7 @@ ActiveRecord::Schema.define(version: 20180414013421) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "devices", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end

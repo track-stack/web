@@ -11,5 +11,7 @@ class CreateDevices < ActiveRecord::Migration[5.1]
     add_index :devices, :device_id
     add_index :devices, :apns_token
     add_index :devices, :user_id
+
+    add_foreign_key :devices, :users
   end
 end
