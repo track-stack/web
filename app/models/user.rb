@@ -38,6 +38,14 @@ class User < ApplicationRecord
     access_tokens.last
   end
 
+  def register_device(token)
+    if device = Device.find_by(apns_token: token)
+      device.touch
+    else
+      devices.create(apns_token: token)
+    end
+  end
+
   private
 
   def self.random_email

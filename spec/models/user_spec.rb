@@ -17,6 +17,39 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context "#register_device" do
+    it "creates a new device" do
+      user = create(:user)
+      expect {
+        user.register_device("1234")
+      }.to change{ Device.count }.by(1)
+      expect(user.devices.count).to be(1)
+    end
+
+     it "doesn't create a device with the same token" do
+       user = create(:user)
+       user.register_device("1234")
+       expect {
+         user.register_device("1234")
+       }.to change{ Device.count }.by(0)
+       expect(user.devices.count).to be(1)
+     end
+
+     it "updates the updated_at to be now" do
+       user = create(:user)
+
+       Timecop.freeze do
+         user.register_device("1234")
+         expect(user.devices.last.updated_at).to eq(Time.zone.now)
+       end
+
+       Timecop.freeze(10.minutes.from_now) do
+         user.register_device("1234")
+         expect(user.devices.last.updated_at).to eq(Time.zone.now)
+       end
+     end
+  end
+
   context "#generate_access_token" do
     before(:all) do
       @application = Doorkeeper::Application.create(name: "Test", redirect_uri: "https://test.com")
