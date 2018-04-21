@@ -21,16 +21,16 @@ RSpec.describe User, type: :model do
     it "creates a new device" do
       user = create(:user)
       expect {
-        user.register_device("1234")
+        user.register_device(expo_token: "1234", device_id: "123")
       }.to change{ Device.count }.by(1)
       expect(user.devices.count).to be(1)
     end
 
      it "doesn't create a device with the same token" do
        user = create(:user)
-       user.register_device("1234")
+       user.register_device(expo_token: "1234", device_id: "432")
        expect {
-         user.register_device("1234")
+         user.register_device(expo_token: "1234", device_id: "8473289")
        }.to change{ Device.count }.by(0)
        expect(user.devices.count).to be(1)
      end

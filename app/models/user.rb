@@ -38,11 +38,11 @@ class User < ApplicationRecord
     access_tokens.last
   end
 
-  def register_device(token)
-    if device = Device.find_by(apns_token: token)
+  def register_device(expo_token:, device_id:)
+    if device = Device.find_by(expo_token: expo_token)
       device.touch
     else
-      devices.create(apns_token: token)
+      devices.create(expo_token: expo_token, device_id: device_id)
     end
   end
 
