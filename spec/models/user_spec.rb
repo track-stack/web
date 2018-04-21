@@ -2,6 +2,10 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   it { should have_many(:turns) }
+  it { should have_many(:devices) }
+  it { should have_many(:games) }
+  it { should have_many(:user_games) }
+  it { should have_many(:access_tokens) }
 
   context "#from_omniauth" do
     it "creates a new record" do
@@ -11,6 +15,25 @@ RSpec.describe User, type: :model do
       expect(user.persisted?).to be true
       expect(user).to be_instance_of User
     end
+  end
+
+  context "#register_device" do
+    it "creates a new device" do
+      user = create(:user)
+      expect {
+        user.register_device("1234")
+      }.to change{ Device.count }.by(1)
+      expect(user.devices.count).to be(1)
+    end
+
+     it "doesn't create a device with the same token" do
+       user = create(:user)
+       user.register_device("1234")
+       expect {
+         user.register_device("1234")
+       }.to change{ Device.count }.by(0)
+       expect(user.devices.count).to be(1)
+     end
   end
 
   context "#generate_access_token" do
