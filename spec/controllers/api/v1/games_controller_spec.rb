@@ -17,8 +17,7 @@ RSpec.describe Api::V1::GamesController, type: :controller do
 
   context "#show" do
     it "renders 404 if the game is not found" do
-      non_existent_id = (Game.last&.id || 0) + 1
-      get "show", { params: { app_id: @app.uid, access_token: @token, id: non_existent_id}}
+      get "show", { params: { app_id: @app.uid, access_token: @token, id: "abc"}}
 
       expect(response.status).to eq(404)
     end
