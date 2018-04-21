@@ -34,20 +34,6 @@ RSpec.describe User, type: :model do
        }.to change{ Device.count }.by(0)
        expect(user.devices.count).to be(1)
      end
-
-     it "updates the updated_at to be now" do
-       user = create(:user)
-
-       Timecop.freeze do
-         user.register_device("1234")
-         expect(user.devices.last.updated_at).to eq(Time.zone.now)
-       end
-
-       Timecop.freeze(10.minutes.from_now) do
-         user.register_device("1234")
-         expect(user.devices.last.updated_at).to eq(Time.zone.now)
-       end
-     end
   end
 
   context "#generate_access_token" do
