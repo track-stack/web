@@ -18,6 +18,7 @@ gem 'fast_jsonapi'
 gem 'yajl-ruby', require: 'yajl'
 gem "koala"
 gem "doorkeeper"
+gem "exponent-server-sdk"
 
 # https://github.com/rails/webpacker
 # https://github.com/rails/webpacker/issues/745
