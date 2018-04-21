@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414013421) do
+ActiveRecord::Schema.define(version: 20180421214347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "devices", force: :cascade do |t|
     t.string "device_id"
-    t.string "apns_token"
+    t.string "expo_token"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["apns_token"], name: "index_devices_on_apns_token"
     t.index ["device_id"], name: "index_devices_on_device_id"
+    t.index ["expo_token"], name: "index_devices_on_expo_token"
     t.index ["user_id"], name: "index_devices_on_user_id"
   end
 
