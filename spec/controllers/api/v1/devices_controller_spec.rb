@@ -11,7 +11,7 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
   context "#register" do
     it "registers a user device if none exist" do
       expect {
-        post "register", { params: { access_token: @token, expo_token: "1234", device_id: "1234" }}
+        post "register", { params: { access_token: @token, expo_token: "1234", device_id: "1234", app_id: @app.uid }}
       }.to change{Device.count}.by(1)
       expect(response.status).to eq(200)
     end
@@ -20,7 +20,7 @@ RSpec.describe Api::V1::DevicesController, type: :controller do
       @user.register_device(expo_token: "1234", device_id: "4321")
 
       expect {
-        post "register", { params: { access_token: @token, expo_token: "1234", device_id: "4321" }}
+        post "register", { params: { access_token: @token, expo_token: "1234", device_id: "4321", app_id: @app.uid }}
       }.to change{Device.count}.by(0)
       expect(response.status).to eq(200)
     end
