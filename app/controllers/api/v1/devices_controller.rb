@@ -1,5 +1,6 @@
 class Api::V1::DevicesController < ::Api::BaseController
   before_action :doorkeeper_authorize!
+  before_action :require_application!
 
   def register
     current_user.register_device(
