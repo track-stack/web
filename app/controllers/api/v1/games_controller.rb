@@ -24,6 +24,12 @@ class Api::V1::GamesController < ::Api::BaseController
     end
 
     if turn.valid?
+      opponent = @game.players.reject { |p| p == current_user }.first
+      Notification::Turn.new(
+        player: current_user,
+        opponent: opponent
+      ).send
+
       @game.touch
       serializable = Serializable::Game.new(game: @game.reload, viewer: current_user)
       serialized = GameSerializer.new(serializable).to_hash[:data][:attributes]

@@ -15,6 +15,10 @@ RSpec.describe Api::V1::GamesController, type: :controller do
     create(:user_game, game_id: @game.id, user_id: opponent.id)
   end
 
+  before(:each) do
+    allow_any_instance_of(Exponent::Push::Client).to receive(:publish).and_return(:true)
+  end
+
   context "#show" do
     it "renders 404 if the game is not found" do
       get "show", { params: { app_id: @app.uid, access_token: @token, id: "abc"}}
@@ -69,73 +73,86 @@ RSpec.describe Api::V1::GamesController, type: :controller do
       expect(json["errors"]).not_to be_empty
     end
 
-  context "when turn is valid" do
-    it "renders status 200" do
-      create(:stack, game: @game)
-      match = { name: "Testify", artist: "Rage Against the Machine",
-                image: "http://image.png" }
-      answer = "Concrete Genesha by Torres"
-      params = { id: @game.id, answer: answer, match: match, app_id: @app.uid,
-                 access_token: @token }
+    context "when turn is valid" do
+      it "renders status 200" do
+        create(:stack, game: @game)
+        match = { name: "Testify", artist: "Rage Against the Machine",
+                  image: "http://image.png" }
+        answer = "Concrete Genesha by Torres"
+        params = { id: @game.id, answer: answer, match: match, app_id: @app.uid,
+                   access_token: @token }
 
-      post "turn", { params: params }
-
-      expect(response.status).to eq(200)
-    end
-
-    it "creates a Turn with valid associations" do
-      create(:stack, game: @game)
-      match = { name: "Testify", artist: "Rage Against the Machine",
-                image: "http://image.png" }
-      answer = "Concrete Genesha by Torres"
-      params = { id: @game.id, answer: answer, match: match, app_id: @app.uid,
-                 access_token: @token }
-
-      expect {
         post "turn", { params: params }
-      }.to change{ Turn.count }.by(1)
 
-      expect(Turn.last.user).to eq(@user)
-      expect(Turn.last.game).to eq(@game)
+        expect(response.status).to eq(200)
+      end
+
+      it "creates a Turn with valid associations" do
+        create(:stack, game: @game)
+        match = { name: "Testify", artist: "Rage Against the Machine",
+                  image: "http://image.png" }
+        answer = "Concrete Genesha by Torres"
+        params = { id: @game.id, answer: answer, match: match, app_id: @app.uid,
+                   access_token: @token }
+
+        expect {
+          post "turn", { params: params }
+        }.to change{ Turn.count }.by(1)
+
+        expect(Turn.last.user).to eq(@user)
+        expect(Turn.last.game).to eq(@game)
+      end
+
+      it "sends a notification" do
+        expect_any_instance_of(Notification::Turn).to receive(:send)
+
+        create(:stack, game: @game)
+        match = { name: "Testify", artist: "Rage Against the Machine",
+                  image: "http://image.png" }
+        answer = "Concrete Genesha by Torres"
+        params = { id: @game.id, answer: answer, match: match, app_id: @app.uid,
+                   access_token: @token }
+
+        post "turn", { params: params }
+      end
     end
-  end
 
-   context "winning" do
-     it "creates a StackWinner record if the stack is over" do
-       stack = create(:stack, game: @game)
-       5.times { |i| create(:turn, game: @game, stack: stack, user: @user) }
+    context "winning" do
+      it "creates a StackWinner record if the stack is over" do
+        stack = create(:stack, game: @game)
+        5.times { |i| create(:turn, game: @game, stack: stack, user: @user) }
 
-       match = { name: "Testify", artist: "Rage Against the Machine",
-                 image: "http://image.png" }
+        match = { name: "Testify", artist: "Rage Against the Machine",
+                  image: "http://image.png" }
 
-       params = { id: @game.id, answer: "Concrete Ganesha by Torres",
-                  match: match, game_over: true, app_id: @app.uid,
-                  access_token: @token }
+        params = { id: @game.id, answer: "Concrete Ganesha by Torres",
+                   match: match, game_over: true, app_id: @app.uid,
+                   access_token: @token }
 
-       post "turn", { params: params }
+        post "turn", { params: params }
 
-       stack.reload
+        stack.reload
 
-       expect(stack.ended_at).not_to be(nil)
-       expect(stack.stack_winners.count).to eq(1)
-     end
+        expect(stack.ended_at).not_to be(nil)
+        expect(stack.stack_winners.count).to eq(1)
+      end
 
-     it "doesn't create a StackWinner record if the stack isn't over" do
-       stack = create(:stack, game: @game)
-       match = { name: "Testify", artist: "Rage Against the Machine",
-                 image: "http://image.png" }
+      it "doesn't create a StackWinner record if the stack isn't over" do
+        stack = create(:stack, game: @game)
+        match = { name: "Testify", artist: "Rage Against the Machine",
+                  image: "http://image.png" }
 
-       params = { id: @game.id, answer: "Concrete Ganesha by Torres",
-                  match: match, game_over: true, app_id: @app.uid,
-                  access_token: @token }
+        params = { id: @game.id, answer: "Concrete Ganesha by Torres",
+                   match: match, game_over: true, app_id: @app.uid,
+                   access_token: @token }
 
-       post "turn", { params: params }
+        post "turn", { params: params }
 
-       stack.reload
+        stack.reload
 
-       expect(stack.ended_at).to be(nil)
-       expect(stack.stack_winners.count).to eq(0)
-     end
-   end
+        expect(stack.ended_at).to be(nil)
+        expect(stack.stack_winners.count).to eq(0)
+      end
+    end
   end
 end
