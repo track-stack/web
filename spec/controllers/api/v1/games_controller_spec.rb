@@ -58,6 +58,14 @@ RSpec.describe Api::V1::GamesController, type: :controller do
     end
   end
 
+  context "#new_stack" do
+    it "creates a new stack" do
+      expect {
+        post "new_stack", { params: { access_token: @token, app_id: @app.uid, id: @game.id}}
+      }.to change{ Stack.count }.by(1)
+    end
+  end
+
   context "#turn" do
     it "renders errors if turn is invalid" do
       match = { name: "Testify", artist: "Rage Against the Machine",

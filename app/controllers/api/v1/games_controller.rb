@@ -1,8 +1,8 @@
 class Api::V1::GamesController < ::Api::BaseController
   before_action :doorkeeper_authorize!
   before_action :require_application!
-  before_action :require_game!, only: [:show, :turn]
-  before_action :require_player_in_game!, only: [:show, :turn]
+  before_action :require_game!, only: [:show, :turn, :new_stack]
+  before_action :require_player_in_game!, only: [:show, :turn, :new_stack]
 
   def show
     serializable = Serializable::Game.new(game: @game, viewer: current_user)
@@ -38,6 +38,14 @@ class Api::V1::GamesController < ::Api::BaseController
       render json: { errors: turn.errors }, status: :bad_request
     end
   end
+
+  def new_stack
+    @game.stacks.create
+    serializable = Serializable::Game.new(game: @game.reload, viewer: current_user)
+    serialized = GameSerializer.new(serializable).to_hash[:data][:attributes]
+    render json: { game: serialized }
+  end
+
 
   private
 

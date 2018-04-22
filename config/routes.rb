@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources "games", only: [:new, :show, :create]
   post "/games/:id/turn", to: "games#turn"
-  post "games/:id/stacks", to: "games#new_stack"
+  post "/games/:id/stacks", to: "games#new_stack"
 
   get "/friends", to: "friends#list"
 
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
       resources "games", only: [:new, :show, :create]
       post "/games/:id/turn", to: "games#turn"
-      post "games/:id/stacks", to: "games#new_stack"
+      post "/games/:id/stacks", to: "games#new_stack"
 
       post "/devices/register", to: "devices#register"
     end
