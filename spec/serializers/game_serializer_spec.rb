@@ -15,6 +15,7 @@ RSpec.describe GameSerializer do
 
     expect(game_json[:id]).to eq(game.id)
     expect(game_json[:status]).to eq(game.status)
+    expect(game_json[:viewers_turn]).to be(false)
 
     viewer = game_json[:players][:viewer]
     opponent = game_json[:players][:opponent]
