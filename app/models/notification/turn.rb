@@ -5,7 +5,9 @@ class Notification::Turn
   end
 
   def send
-    client.publish messages
+    valid = messages.reject { |m| m[:to].nil? }
+    return if valid.empty?
+    client.publish valid
   end
 
   private
