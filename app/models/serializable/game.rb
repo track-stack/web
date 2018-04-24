@@ -32,6 +32,7 @@ module Serializable
 
     def viewers_turn?
       return @viewers_turn if defined?(@viewers_turned)
+      return false unless current_stack
       @viewers_turn = begin
         return true if current_stack.ended?
         return true if game.new? && game.creator == viewer

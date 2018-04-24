@@ -14,6 +14,7 @@ class DashboardGamePreview
   def viewers_turn?
     return @viewers_turn if defined?(@viewers_turned)
     @viewers_turn = begin
+      return false unless current_stack
       return true if current_stack.ended?
       return true if game.new? && game.creator == viewer
       return true if current_stack.new? && viewer_ended_last_stack?

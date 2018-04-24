@@ -30,6 +30,7 @@ RSpec.describe DashboardGamePreview, type: :model do
       game = create(:game)
       create(:user_game, user: viewer, game: game, creator: true)
       create(:user_game, user: create(:user), game: game)
+      create(:stack, game: game)
 
       game_preview = DashboardGamePreview.new(viewer: viewer, game: game)
       expect(game_preview.viewers_turn?).to eq(true)
