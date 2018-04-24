@@ -23,7 +23,7 @@ module Serializable
     end
 
     def stacks
-      @stacks ||= game.stacks.map do |stack|
+      game_stacks.map do |stack|
         serializable = Serializable::Stack.new(stack)
         hash = StackSerializer.new(serializable).to_hash
         hash[:data][:attributes]
@@ -43,8 +43,12 @@ module Serializable
 
     private
 
+    def game_stacks
+      @stacks ||= game.stacks
+    end
+
     def current_stack
-      @current_stack ||= stacks.last
+      @current_stack ||= game_stacks.last
     end
 
     def viewer_ended_last_stack?
@@ -56,7 +60,7 @@ module Serializable
     end
 
     def last_ended_stack_winner
-      @winner ||= stacks.ended.last&.winner
+      @winner ||= game_stacks.ended.last&.winner
     end
 
     def viewer_took_last_turn?
@@ -64,7 +68,7 @@ module Serializable
     end
 
     def scores_by_user_id
-      winners = stacks.map(&:winner).compact
+      winners = game_stacks.map(&:winner).compact
       grouped = winners.group_by(&:user_id)
       user_ids = grouped.keys
       user_ids.each do |user_id|
