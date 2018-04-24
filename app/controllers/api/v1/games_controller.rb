@@ -25,6 +25,7 @@ class Api::V1::GamesController < ::Api::BaseController
 
     if turn.valid?
       opponent = @game.players.reject { |p| p == current_user }.first
+
       Notification::Turn.new(
         player: current_user,
         opponent: opponent

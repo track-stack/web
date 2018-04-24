@@ -13,8 +13,13 @@ class DashboardGamePreview
 
   def viewers_turn?
     return @viewers_turn if defined?(@viewers_turned)
-    last_turn_user_id = game.turns.last.user_id
-    @viewers_turn = last_turn_user_id != viewer.id && last_turn_user_id != User.bot.id
+    @viewers_turn = begin
+      return true if current_stack.ended?
+      return true if game.new? && game.creator == viewer
+      return true if current_stack.new? && viewer_ended_last_stack?
+      return true if !current_stack.new?  && !viewer_took_last_turn?
+      false
+    end
   end
 
   def id
@@ -26,6 +31,26 @@ class DashboardGamePreview
   end
 
   private
+
+  def current_stack
+    @current_stack ||= game.stacks.last
+  end
+
+  def viewer_ended_last_stack?
+    if winner = last_ended_stack_winner
+      winner.user_id == viewer.id
+    else
+      false
+    end
+  end
+
+  def last_ended_stack_winner
+    @winner ||= game.stacks.ended.last&.winner
+  end
+
+  def viewer_took_last_turn?
+    current_stack.turns.last.user_id == viewer.id
+  end
 
   def opponents
     @opponents ||= game.players.reject { |player| player == viewer }

@@ -25,6 +25,14 @@ class Game < ApplicationRecord
     update_attributes!({status: 1})
   end
 
+  def new?
+    (players.map(&:id) & turns.map(&:user_id).uniq).empty?
+  end
+
+  def creator
+    user_games.where(creator: true).first&.user
+  end
+
   def self.from(user:, invitee:)
     ActiveRecord::Base.transaction do
       game = Game.create

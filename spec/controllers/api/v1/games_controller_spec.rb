@@ -111,6 +111,24 @@ RSpec.describe Api::V1::GamesController, type: :controller do
         expect(Turn.last.game).to eq(@game)
       end
 
+      it "updates the game to Time.now" do
+        create(:stack, game: @game)
+        match = { name: "Testify", artist: "Rage Against the Machine",
+                  image: "http://image.png" }
+        answer = "Concrete Genesha by Torres"
+        params = { id: @game.id, answer: answer, match: match, app_id: @app.uid,
+                   access_token: @token }
+
+        @game.update_attribute(:updated_at, 10.days.ago)
+
+        now = Time.zone.now
+        Timecop.freeze(now) do
+          post "turn", { params: params }
+
+          expect(@game.reload.updated_at).to eq(now)
+        end
+      end
+
       it "sends a notification" do
         expect_any_instance_of(Notification::Turn).to receive(:send)
 
