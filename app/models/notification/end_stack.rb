@@ -1,15 +1,16 @@
 module Notification
-  class Turn < Base
-    def initialize(player:, opponent:)
+  class EndStack < Base
+    def initialize(player:, opponent:, turn:)
       @player = player
       @opponent = opponent
+      @turn = turn
     end
 
     def messages
       opponent.devices.map do |device|
         {
           to: device.expo_token,
-          body: "Your turn against #{player.name}",
+          body: "#{player.name} ended the stack with #{turn.answer}",
           sound: "default"
         }
       end
@@ -17,6 +18,6 @@ module Notification
 
     private
 
-    attr_reader :player, :opponent
+    attr_reader :player, :opponent, :turn
   end
 end

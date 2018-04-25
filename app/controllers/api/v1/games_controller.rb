@@ -19,17 +19,18 @@ class Api::V1::GamesController < ::Api::BaseController
       match: sanitize_match(params[:match])
     )
 
-    if params[:game_over] && stack.can_end?
-      stack.mark_winner!(current_user)
-    end
-
     if turn.valid?
       opponent = @game.players.reject { |p| p == current_user }.first
 
-      Notification::Turn.new(
-        player: current_user,
-        opponent: opponent
-      ).send
+      if params[:game_over] && stack.can_end?
+        stack.mark_winner!(current_user)
+      else
+        Notification::Turn.new(
+          player: current_user,
+          opponent: opponent
+        ).send
+      end
+
 
       @game.touch
       serializable = Serializable::Game.new(game: @game.reload, viewer: current_user)
