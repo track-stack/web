@@ -3,11 +3,21 @@ class Api::V1::GamesController < ::Api::BaseController
   before_action :require_application!
   before_action :require_game!, only: [:show, :turn, :new_stack]
   before_action :require_player_in_game!, only: [:show, :turn, :new_stack]
+  before_action :require_invitee, only: [:create]
 
   def show
     serializable = Serializable::Game.new(game: @game, viewer: current_user)
     serialized = GameSerializer.new(serializable).to_hash[:data][:attributes]
     render json: { game: serialized }
+  end
+
+  def create
+    if game = Game.from(user: current_user, invitee: invitee)
+      redirect_to game_path(game)
+    else
+      flash[:error] = "There was a problem creating your game 😱"
+      redirect_back fallback_location: "/games/new"
+    end
   end
 
   def turn
@@ -76,5 +86,13 @@ class Api::V1::GamesController < ::Api::BaseController
     unless @game.user_games.map(&:user_id).include? current_user.id
       return render_404
     end
+  end
+
+  def require_invitee
+    return render_404 unless invitee
+  end
+
+  def invitee
+    @invitee ||= User.find_by(uid: params[:uid])
   end
 end

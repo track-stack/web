@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       post "/games/:id/stacks", to: "games#new_stack"
 
       post "/devices/register", to: "devices#register"
+
+      get "/friends/list", to: "friends#list"
     end
   end
 end
