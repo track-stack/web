@@ -46,7 +46,7 @@ RSpec.describe Api::V1::GamesController, type: :controller do
       stack = create(:stack, game: @game)
       create(:turn, game: @game, user: @user, stack: stack)
 
-      params = { id: @game.id, app_id: @app.uid, access_token: @token  }
+      params = { id: @game.id, app_id: @app.uid, access_token: @token }
       get "show", { params: params }
 
       json = JSON.parse(response.body)
@@ -55,6 +55,27 @@ RSpec.describe Api::V1::GamesController, type: :controller do
 
       expect(stacks.count).to equal(1)
       expect(stacks.first["turns"].count).to eq(2)
+    end
+  end
+
+  context "#create" do
+    it "create a new game" do
+      invitee = create(:user, :facebook)
+      params = { app_id: @app.uid, access_token: @token, uid: invitee.uid }
+
+      expect {
+        post "create", { params: params }
+      }.to change{ Game.count }.by(1)
+    end
+
+    it "requires a valid invitee" do
+      params = { app_id: @app.uid, access_token: @token, uid: "123" }
+
+      expect {
+        post "create", { params: params }
+      }.to change{ Game.count }.by(0)
+
+      expect(response.status).to eq(404)
     end
   end
 

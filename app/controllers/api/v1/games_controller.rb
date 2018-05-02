@@ -13,7 +13,9 @@ class Api::V1::GamesController < ::Api::BaseController
 
   def create
     if game = Game.from(user: current_user, invitee: invitee)
-      redirect_to game_path(game)
+      serializable = Serializable::Game.new(game: game, viewer: current_user)
+      serialized = GameSerializer.new(serializable).to_hash[:data][:attributes]
+      render json: { game: serialized }
     else
       flash[:error] = "There was a problem creating your game 😱"
       redirect_back fallback_location: "/games/new"
