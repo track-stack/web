@@ -51,8 +51,6 @@ module Pages
         includes(:turns, :players)
     end
 
-    # Games that are not 'finished' and I am the creator
-    # Games that are 'playing' and I am not the creator
     def active_user_game_ids
       @active_user_games ||= user.games.
         where("user_games.creator = true and status != 2 or status = 1").
