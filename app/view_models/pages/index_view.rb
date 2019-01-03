@@ -9,11 +9,9 @@ module Pages
       return [] unless user
 
       @user_games ||= begin
-        previews = active_user_games.map do |game|
+        active_user_games.map do |game|
           DashboardGamePreview.new(viewer: user, game: game)
         end
-
-        previews
       end
     end
 

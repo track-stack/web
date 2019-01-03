@@ -13,9 +13,16 @@ class Api::V1::DashboardController < ::Api::BaseController
       end
     end
 
+    invite_previews = view_model.invites.map do |invite|
+      DashboardGamePreview.new(viewer: current_user, game: invite.game)
+    end
+
     render json: {
       active_game_previews: formatted_previews,
-      invites: view_model.invites
+      invites: invite_previews.map do |preview|
+        hash = DashboardGamePreviewSerializer.new(preview).to_hash
+        hash[:data][:attributes]
+      end
     }
   end
 
