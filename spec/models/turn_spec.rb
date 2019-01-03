@@ -15,9 +15,6 @@ RSpec.describe Turn, type: :model do
       expect(game.playing?).to be false
 
       turn = create(:turn, game: game, user: user, stack: stack)
-      expect(game.playing?).to be false
-
-      turn = create(:turn, game: game, user: user_2, stack: stack)
       expect(game.playing?).to be true
     end
 

@@ -25,8 +25,8 @@ class Turn < ApplicationRecord
     artist = track["artist"]["name"]
     image = track["image"].last["#text"]
     match = {
-      name: name, 
-      artist: artist, 
+      name: name,
+      artist: artist,
       image: image
     }
     Turn.new(answer: [name, artist].join(" - "), match: match)
@@ -35,7 +35,7 @@ class Turn < ApplicationRecord
   private
 
   def mark_game_as_playing
-    if game.status == 0 && game.turns.count > 2
+    if game.status == 0 && game.turns.count > 1
       begin
         game.set_playing!
       rescue
